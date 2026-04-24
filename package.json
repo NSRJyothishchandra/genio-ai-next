@@ -5,9 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build",
+    "cap:build": "next build && npx cap sync",
+    "cap:android": "next build && npx cap sync && npx cap open android",
+    "cap:ios": "next build && npx cap sync && npx cap open ios"
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/cli": "^8.3.1",
+    "@capacitor/core": "^8.3.1",
+    "@capacitor/ios": "^8.3.1",
+    "canvas": "^3.2.3",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"

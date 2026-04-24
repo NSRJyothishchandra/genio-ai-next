@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(rm:*)",
+      "Bash(netstat -ano)",
+      "Bash(mkdir:*)",
+      "Bash(npx tsc:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd:*)",
+      "Bash(npm run:*)",
+      "Bash(echo \"Started PID: $!\")",
+      "Bash(echo \"PID: $!\" sleep 8)",
+      "Bash(powershell:*)",
+      "Bash(echo \"Started: $!\")",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}

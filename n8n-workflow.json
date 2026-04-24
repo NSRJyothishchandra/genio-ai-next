@@ -1,0 +1,219 @@
+{
+  "name": "Genio AI – All Automations",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "genio-action",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "genio-action-webhook"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": false, "typeValidation": "loose" },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.action_type }}",
+                    "rightValue": "fill_timesheet",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Timesheet"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "switch-node-0001",
+      "name": "Route Action",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "append",
+        "workbookId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_WORKBOOK_ID",
+          "mode": "id"
+        },
+        "worksheetId": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date":        "={{ $json.body.form_data.date }}",
+            "Employee":    "={{ $json.body.user_name }}",
+            "Email":       "={{ $json.body.user_email }}",
+            "Project":     "={{ $json.body.form_data.project }}",
+            "Hours":       "={{ $json.body.form_data.hours }}",
+            "Description": "={{ $json.body.form_data.description }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Date",        "displayName": "Date",        "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" },
+            { "id": "Employee",    "displayName": "Employee",    "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" },
+            { "id": "Email",       "displayName": "Email",       "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" },
+            { "id": "Project",     "displayName": "Project",     "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" },
+            { "id": "Hours",       "displayName": "Hours",       "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" },
+            { "id": "Description", "displayName": "Description", "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string" }
+          ]
+        }
+      },
+      "id": "excel-node-0001",
+      "name": "Append Timesheet Row",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [720, 100],
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "REPLACE_WITH_YOUR_MICROSOFT_CREDENTIAL_ID",
+          "name": "Microsoft Excel OAuth2"
+        }
+      },
+      "notes": "SETUP REQUIRED:\n1. Add Microsoft 365 OAuth2 credentials in n8n\n2. Replace REPLACE_WITH_WORKBOOK_ID with your OneDrive file ID\n   (Open the file in OneDrive → Details pane → copy the ID, or use the file browser in this node)\n   OneDrive link: https://1drv.ms/x/c/77ddc9c9e315f12a/IQDST4yOPnkbTIHCx01vRhdFATmq0qk0BaJBcv9C3q_gQHY\n3. Ensure your Excel sheet has columns: Date, Employee, Email, Project, Hours, Description"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Timesheet updated successfully!\", \"submitted_at\": \"{{ $('Webhook').item.json.body.timestamp }}\" }"
+      },
+      "id": "ts-respond-0001",
+      "name": "Timesheet Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [960, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ─────────────────────────────────────────────────────────────────────\n// Genio AI – Email Formatter  (includes birthday card + timesheet routing)\n// ─────────────────────────────────────────────────────────────────────\n\nconst body = $input.first().json.body || $input.first().json;\n\nconst actionType  = body.action_type  || 'unknown';\nconst userName    = body.user_name    || 'Unknown User';\nconst userEmail   = body.user_email   || 'unknown@company.com';\nconst rawTime     = body.timestamp    || new Date().toISOString();\nconst data        = body.form_data    || {};\nconst appOrigin   = body.app_origin   || '';\n\n// ── Format timestamp ──────────────────────────────────────────────────\nconst timestamp = new Date(rawTime).toLocaleString('en-IN', {\n  timeZone: 'Asia/Kolkata',\n  year: 'numeric', month: 'long', day: 'numeric',\n  hour: '2-digit', minute: '2-digit'\n});\n\n// ── Destination email addresses ───────────────────────────────────────\n// TODO: Replace these with your actual team email addresses\nconst HR_EMAIL         = 'hr@company.com';\nconst IT_EMAIL         = 'it-support@company.com';\nconst ADMIN_EMAIL      = 'admin@company.com';\nconst COMPLIANCE_EMAIL = 'compliance@company.com';\nconst FEEDBACK_EMAIL   = 'feedback@company.com';\n\n// ── Build HTML table from form data ───────────────────────────────────\nfunction formatTable(fields) {\n  return Object.entries(fields)\n    .filter(([, v]) => v && String(v).trim())\n    .map(([k, v]) => {\n      const label = k.replace(/_/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      return `\n        <tr>\n          <td style=\"padding:10px 16px;font-weight:600;color:#555;background:#f8f9fc;border:1px solid #e8ecf0;width:190px;vertical-align:top;font-size:13px\">${label}</td>\n          <td style=\"padding:10px 16px;color:#333;border:1px solid #e8ecf0;font-size:13px\">${v}</td>\n        </tr>`;\n    }).join('');\n}\n\n// ── Build full HTML email ─────────────────────────────────────────────\nfunction buildEmail(icon, title, intro, fields, footerNote, urgencyBadge) {\n  const tableFields = {\n    ...fields,\n    'Employee Name':  userName,\n    'Employee Email': userEmail,\n    'Submitted At':   timestamp\n  };\n  const tableHTML = formatTable(tableFields);\n  const urgencyHTML = urgencyBadge\n    ? `<div style=\"display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:${urgencyBadge.bg};color:${urgencyBadge.color};margin-bottom:16px\">${urgencyBadge.label}</div>`\n    : '';\n  const footerHTML = footerNote\n    ? `<div style=\"margin-top:20px;padding:14px 16px;background:#f0ecff;border-left:4px solid #6c47ff;border-radius:0 8px 8px 0;font-size:13px;color:#4f30d4\">${footerNote}</div>`\n    : '';\n\n  return `\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"UTF-8\"></head>\n<body style=\"margin:0;padding:20px;background:#f0f2f5;font-family:Segoe UI,Arial,sans-serif\">\n  <div style=\"max-width:600px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.12)\">\n\n    <!-- Header -->\n    <div style=\"background:linear-gradient(135deg,#6c47ff,#00c2a8);padding:28px 32px;color:white\">\n      <div style=\"font-size:36px;margin-bottom:10px\">${icon}</div>\n      <h1 style=\"margin:0 0 6px;font-size:22px;font-weight:700\">${title}</h1>\n      <p style=\"margin:0;opacity:0.85;font-size:13px\">Genio AI Workspace Assistant · Bonfiglioli</p>\n    </div>\n\n    <!-- Body -->\n    <div style=\"padding:28px 32px;background:#ffffff\">\n      ${urgencyHTML}\n      <p style=\"color:#444;margin:0 0 20px;font-size:14px;line-height:1.6\">${intro}</p>\n      <table style=\"border-collapse:collapse;width:100%\">${tableHTML}</table>\n      ${footerHTML}\n    </div>\n\n    <!-- Footer -->\n    <div style=\"padding:18px 32px;background:#f8f9fc;border-top:1px solid #e8ecf0;text-align:center\">\n      <p style=\"color:#999;font-size:12px;margin:0\">This email was sent automatically via <strong>Genio AI</strong> · Powered by Bonfiglioli</p>\n      <p style=\"color:#bbb;font-size:11px;margin:4px 0 0\">Do not reply to this email · Contact the sender directly</p>\n    </div>\n  </div>\n</body>\n</html>`;\n}\n\n// ── Urgency badge helper ──────────────────────────────────────────────\nfunction urgencyBadge(urgency) {\n  if (!urgency) return null;\n  const u = urgency.toLowerCase();\n  if (u.includes('critical') || u.includes('emergency')) return { label: '🚨 ' + urgency, bg: '#fde8e8', color: '#c0392b' };\n  if (u.includes('urgent') || u.includes('high'))        return { label: '⚠️ ' + urgency, bg: '#fff3cd', color: '#856404' };\n  return null;\n}\n\n// ── Route by action type ──────────────────────────────────────────────\nlet subject, toEmail, htmlBody, confirmationNote;\n\nswitch (actionType) {\n\n  case 'birthday_card': {\n    const recipientName  = data.recipient_name  || 'Colleague';\n    const recipientEmail = data.recipient_email || userEmail;\n    const personalMsg    = data.message         || '';\n    const imageUrl       = appOrigin ? `${appOrigin}/bday%20card.jpg` : '';\n\n    subject = `🎂 Happy Birthday, ${recipientName}! — from ${userName}`;\n    toEmail = recipientEmail;\n\n    const imgBlock = imageUrl\n      ? `<div style=\"text-align:center;margin:24px 0\">\n           <img src=\"${imageUrl}\" alt=\"Birthday Card\" style=\"max-width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.18)\" />\n         </div>`\n      : '';\n    const msgBlock = personalMsg\n      ? `<div style=\"margin:20px 0;padding:16px 20px;background:#fff9f0;border-left:4px solid #ffb347;border-radius:0 8px 8px 0;font-size:14px;color:#555;font-style:italic;line-height:1.6\">\n           \"${personalMsg}\"\n         </div>`\n      : '';\n\n    htmlBody = `<!DOCTYPE html><html><head><meta charset=\"UTF-8\"></head>\n<body style=\"margin:0;padding:20px;background:#f0f2f5;font-family:Segoe UI,Arial,sans-serif\">\n  <div style=\"max-width:600px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.12)\">\n    <div style=\"background:linear-gradient(135deg,#ff6b6b,#feca57);padding:32px;color:white;text-align:center\">\n      <div style=\"font-size:56px;margin-bottom:10px\">🎂</div>\n      <h1 style=\"margin:0 0 8px;font-size:28px;font-weight:700\">Happy Birthday, ${recipientName}!</h1>\n      <p style=\"margin:0;opacity:.9;font-size:14px\">A birthday wish from <strong>${userName}</strong></p>\n    </div>\n    <div style=\"padding:28px 32px;background:#fff\">\n      ${imgBlock}\n      <p style=\"color:#444;font-size:16px;text-align:center;line-height:1.8;margin:0 0 16px\">\n        🎉 Wishing you a fantastic birthday full of joy, laughter, and everything you deserve!\n      </p>\n      ${msgBlock}\n      <p style=\"color:#bbb;font-size:12px;text-align:center;margin:24px 0 0\">\n        Sent by <strong>${userName}</strong> via <strong>Genio AI · Bonfiglioli</strong>\n      </p>\n    </div>\n  </div>\n</body></html>`;\n\n    confirmationNote = `Your birthday card has been sent to <strong>${recipientName}</strong> at ${recipientEmail}.`;\n    break;\n  }\n\n  case 'apply_leave':\n    subject = `📅 Leave Request: ${data.leave_type || 'Leave'} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '📅', 'Leave Application',\n      `<strong>${userName}</strong> has submitted a leave request via Genio AI. Please review and approve or reject accordingly.`,\n      data,\n      `Please reply directly to <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a> with your decision.`,\n      urgencyBadge(data.urgency)\n    );\n    confirmationNote = `Your leave request (${data.leave_type || 'Leave'}) from ${data.start_date || '?'} to ${data.end_date || '?'} has been submitted to HR.`;\n    break;\n\n  case 'it_ticket':\n    subject = `🛠️ IT Ticket [${data.priority || 'Medium'}]: ${data.subject || 'Support Request'} — ${userName}`;\n    toEmail = IT_EMAIL;\n    htmlBody = buildEmail(\n      '🛠️', 'IT Support Ticket',\n      `<strong>${userName}</strong> has raised an IT support ticket. Please assign and resolve within your SLA.`,\n      data,\n      `Contact employee: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      urgencyBadge(data.priority)\n    );\n    confirmationNote = `Your IT ticket \"${data.subject || 'Support Request'}\" [${data.priority || 'Medium'} priority] has been submitted to the IT team.`;\n    break;\n\n  case 'access_request':\n    subject = `🔑 Access Request: ${data.system_name || 'System'} — ${userName}`;\n    toEmail = IT_EMAIL;\n    htmlBody = buildEmail(\n      '🔑', 'System Access Request',\n      `<strong>${userName}</strong> has requested access to a system or application. Please verify and provision accordingly.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your access request for ${data.system_name || 'the system'} has been submitted to the IT team.`;\n    break;\n\n  case 'software_request':\n    subject = `💻 Software Request: ${data.software_name || 'Software'} — ${userName}`;\n    toEmail = IT_EMAIL;\n    htmlBody = buildEmail(\n      '💻', 'Software / License Request',\n      `<strong>${userName}</strong> has requested a software license or installation. Please review and procure if approved.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your software request for ${data.software_name || 'the software'} has been submitted to the IT team.`;\n    break;\n\n  case 'book_room':\n    subject = `🏢 Room Booking: ${data.room || 'Meeting Room'} on ${data.date || 'TBD'} — ${userName}`;\n    toEmail = ADMIN_EMAIL;\n    htmlBody = buildEmail(\n      '🏢', 'Meeting Room Booking',\n      `<strong>${userName}</strong> has requested a meeting room booking. Please confirm availability and respond.`,\n      data,\n      `Please confirm or suggest an alternative and reply to <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>.`,\n      null\n    );\n    confirmationNote = `Your room booking request for ${data.room || 'the meeting room'} on ${data.date || 'the requested date'} has been submitted to Admin.`;\n    break;\n\n  case 'travel_request':\n    subject = `✈️ Travel Request: ${data.destination || 'Travel'} — ${userName}`;\n    toEmail = ADMIN_EMAIL;\n    htmlBody = buildEmail(\n      '✈️', 'Business Travel Request',\n      `<strong>${userName}</strong> has submitted a business travel request for approval. Please arrange travel and accommodation.`,\n      data,\n      `Contact employee for travel documents: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your travel request to ${data.destination || 'your destination'} has been submitted to Admin.`;\n    break;\n\n  case 'office_supplies':\n    subject = `📦 Office Supplies Request — ${userName}`;\n    toEmail = ADMIN_EMAIL;\n    htmlBody = buildEmail(\n      '📦', 'Office Supplies Request',\n      `<strong>${userName}</strong> has requested office supplies. Please process and arrange delivery.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      urgencyBadge(data.urgency)\n    );\n    confirmationNote = `Your office supplies request has been submitted to Admin.`;\n    break;\n\n  case 'facilities':\n    subject = `🔧 Facilities: ${data.issue_type || 'Issue'} at ${data.location || 'Unknown Location'} — ${data.urgency || 'Normal'}`;\n    toEmail = ADMIN_EMAIL;\n    htmlBody = buildEmail(\n      '🔧', 'Facilities / Maintenance Request',\n      `<strong>${userName}</strong> has reported a facilities issue that requires attention. Please attend promptly.`,\n      data,\n      `Contact employee: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      urgencyBadge(data.urgency)\n    );\n    confirmationNote = `Your facilities request (${data.issue_type || 'Maintenance'} at ${data.location || 'the location'}) has been submitted.`;\n    break;\n\n  case 'training_request':\n    subject = `🎓 Training Request: ${data.course_name || 'Training'} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '🎓', 'Training / Learning Request',\n      `<strong>${userName}</strong> has requested a training or learning program. Please review and approve.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your training request for \"${data.course_name || 'the course'}\" has been submitted to HR.`;\n    break;\n\n  case 'compliance_query':\n    subject = `⚖️ Compliance Query: ${data.topic || 'Compliance'} — ${userName}`;\n    toEmail = COMPLIANCE_EMAIL;\n    htmlBody = buildEmail(\n      '⚖️', 'Compliance / Legal Query',\n      `<strong>${userName}</strong> has submitted a compliance or legal query. Please respond within 2 business days.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      urgencyBadge(data.urgency)\n    );\n    confirmationNote = `Your compliance query about \"${data.topic || 'compliance'}\" has been submitted.`;\n    break;\n\n  case 'submit_feedback':\n    subject = `💬 Feedback: ${data.feedback_type || 'Feedback'} — ${userName}`;\n    toEmail = FEEDBACK_EMAIL;\n    htmlBody = buildEmail(\n      '💬', 'Employee Feedback',\n      `<strong>${userName}</strong> has submitted feedback via Genio AI. Please review and action as appropriate.`,\n      data,\n      null,\n      null\n    );\n    confirmationNote = `Your feedback has been submitted. Thank you for sharing!`;\n    break;\n\n  case 'payroll_query':\n    subject = `💵 Payroll Query: ${data.query_type || 'Query'} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '💵', 'Payroll Query',\n      `<strong>${userName}</strong> has a payroll query that needs attention. Please review and respond within 2 business days.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your payroll query (${data.query_type || 'Query'}) has been submitted to HR/Finance.`;\n    break;\n\n  case 'benefits':\n    subject = `🎁 Benefits Query: ${data.benefit_type || 'Benefits'} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '🎁', 'Employee Benefits Query',\n      `<strong>${userName}</strong> has a question about employee benefits. Please respond.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your benefits query about ${data.benefit_type || 'benefits'} has been submitted to HR.`;\n    break;\n\n  case 'hr_policies':\n    subject = `📋 HR Policy Query: ${data.policy_area || 'HR Policy'} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '📋', 'HR Policy Query',\n      `<strong>${userName}</strong> has a question about HR policies. Please respond directly.`,\n      data,\n      `Contact: <a href=\"mailto:${userEmail}\" style=\"color:#6c47ff\">${userEmail}</a>`,\n      null\n    );\n    confirmationNote = `Your HR policy query about \"${data.policy_area || 'policies'}\" has been submitted.`;\n    break;\n\n  default:\n    subject = `Genio AI Request: ${actionType.replace(/_/g, ' ')} — ${userName}`;\n    toEmail = HR_EMAIL;\n    htmlBody = buildEmail(\n      '📋', 'Workspace Request',\n      `<strong>${userName}</strong> has submitted a request via Genio AI.`,\n      { action_type: actionType, ...data },\n      null,\n      null\n    );\n    confirmationNote = `Your request has been submitted successfully.`;\n}\n\n// ── Build confirmation email to user ──────────────────────────────────\nconst confirmSubject = `✅ Request Confirmed: ${subject.replace(/^[^a-zA-Z]+/, '')}`;\nconst confirmHtml = `\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"UTF-8\"></head>\n<body style=\"margin:0;padding:20px;background:#f0f2f5;font-family:Segoe UI,Arial,sans-serif\">\n  <div style=\"max-width:520px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.12)\">\n    <div style=\"background:linear-gradient(135deg,#6c47ff,#00c2a8);padding:28px 32px;color:white\">\n      <div style=\"font-size:36px;margin-bottom:10px\">✅</div>\n      <h1 style=\"margin:0 0 6px;font-size:20px;font-weight:700\">Request Submitted!</h1>\n      <p style=\"margin:0;opacity:0.85;font-size:13px\">Genio AI · Bonfiglioli</p>\n    </div>\n    <div style=\"padding:28px 32px;background:#fff\">\n      <p style=\"color:#333;font-size:15px\">Hi <strong>${userName}</strong>,</p>\n      <p style=\"color:#555;font-size:14px;line-height:1.6\">${confirmationNote}</p>\n      <div style=\"margin:20px 0;padding:16px;background:#f0ecff;border-radius:10px\">\n        <p style=\"margin:0;font-size:13px;color:#6c47ff\">⏱ You will receive a response from the relevant team shortly.</p>\n      </div>\n      <table style=\"border-collapse:collapse;width:100%\">\n        <tr>\n          <td style=\"padding:8px 12px;font-weight:600;color:#555;background:#f8f9fc;border:1px solid #e8ecf0;font-size:13px\">Request Type</td>\n          <td style=\"padding:8px 12px;color:#333;border:1px solid #e8ecf0;font-size:13px\">${actionType.replace(/_/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase())}</td>\n        </tr>\n        <tr>\n          <td style=\"padding:8px 12px;font-weight:600;color:#555;background:#f8f9fc;border:1px solid #e8ecf0;font-size:13px\">Submitted At</td>\n          <td style=\"padding:8px 12px;color:#333;border:1px solid #e8ecf0;font-size:13px\">${timestamp}</td>\n        </tr>\n      </table>\n    </div>\n    <div style=\"padding:16px 32px;background:#f8f9fc;border-top:1px solid #e8ecf0;text-align:center\">\n      <p style=\"color:#999;font-size:12px;margin:0\">Automated by <strong>Genio AI</strong> · Bonfiglioli</p>\n    </div>\n  </div>\n</body>\n</html>`;\n\nreturn [{\n  json: {\n    subject,\n    toEmail,\n    htmlBody,\n    confirmSubject,\n    confirmHtml,\n    userEmail,\n    userName,\n    actionType,\n    timestamp\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0002-0002-0002-000000000002",
+      "name": "Format Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 380]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.toEmail }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.htmlBody }}",
+        "options": {
+          "ccList": "={{ $json.userEmail }}",
+          "replyTo": "={{ $json.userEmail }}"
+        }
+      },
+      "id": "a1b2c3d4-0003-0003-0003-000000000003",
+      "name": "Send to Team",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [960, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Format Email').item.json.userEmail }}",
+        "subject": "={{ $('Format Email').item.json.confirmSubject }}",
+        "emailType": "html",
+        "message": "={{ $('Format Email').item.json.confirmHtml }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0004-0004-0004-000000000004",
+      "name": "Send Confirmation to User",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [960, 460],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Request submitted successfully! Emails have been sent.\",\n  \"action_type\": \"{{ $('Format Email').item.json.actionType }}\",\n  \"submitted_at\": \"{{ $('Format Email').item.json.timestamp }}\"\n}"
+      },
+      "id": "a1b2c3d4-0005-0005-0005-000000000005",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1200, 380]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [{ "node": "Route Action", "type": "main", "index": 0 }]
+      ]
+    },
+    "Route Action": {
+      "main": [
+        [{ "node": "Append Timesheet Row", "type": "main", "index": 0 }],
+        [{ "node": "Format Email",         "type": "main", "index": 0 }]
+      ]
+    },
+    "Append Timesheet Row": {
+      "main": [
+        [{ "node": "Timesheet Respond", "type": "main", "index": 0 }]
+      ]
+    },
+    "Format Email": {
+      "main": [
+        [
+          { "node": "Send to Team",              "type": "main", "index": 0 },
+          { "node": "Send Confirmation to User", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Send to Team": {
+      "main": [
+        [{ "node": "Respond to Webhook", "type": "main", "index": 0 }]
+      ]
+    },
+    "Send Confirmation to User": {
+      "main": [
+        [{ "node": "Respond to Webhook", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["genio-ai", "automation", "email", "timesheet", "birthday"],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-20T00:00:00.000Z",
+  "versionId": "genio-ai-v2"
+}

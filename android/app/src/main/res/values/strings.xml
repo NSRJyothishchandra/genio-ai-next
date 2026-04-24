@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Genio AI</string>
+    <string name="title_activity_main">Genio AI</string>
+    <string name="package_name">com.bonfiglioli.genioai</string>
+    <string name="custom_url_scheme">com.bonfiglioli.genioai</string>
+</resources>
