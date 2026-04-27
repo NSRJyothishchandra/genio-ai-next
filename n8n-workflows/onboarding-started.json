@@ -1,0 +1,164 @@
+{
+  "name": "Projecta HR — Onboarding Started (AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "projecta-onboarding",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-onboarding",
+      "name": "Onboarding Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "projecta-onboarding-webhook"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/employees",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Content-Type", "value": "application/json" }]
+        },
+        "options": {}
+      },
+      "id": "node-get-employee",
+      "name": "Get Employee Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=A new employee has joined Projecta. Write a warm, personalized welcome email.\n\nEmployee Details:\n- Name: {{ $('Onboarding Webhook').item.json.body.employeeName }}\n- Position: {{ $('Onboarding Webhook').item.json.body.position }}\n- Start Date: {{ $('Onboarding Webhook').item.json.body.startDate }}\n- Department: {{ $('Onboarding Webhook').item.json.body.department ?? 'Engineering' }}\n\nInclude:\n1. Warm welcome from the Projecta team\n2. Brief overview of next steps (IT setup, team introductions, first week schedule)\n3. HR contact information\n4. Encouraging closing\n\nKeep it professional but friendly. Format as HTML email body.",
+        "options": {}
+      },
+      "id": "node-ai-welcome",
+      "name": "AI: Write Welcome Email",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [720, 200]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-5",
+        "options": { "maxTokens": 1000, "temperature": 0.7 }
+      },
+      "id": "node-claude-onboarding",
+      "name": "Claude AI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [720, 420],
+      "credentials": { "anthropicApi": { "id": "anthropic-creds", "name": "Anthropic account" } }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate a document checklist request for a new employee.\n\nEmployee: {{ $('Onboarding Webhook').item.json.body.employeeName }}\nPosition: {{ $('Onboarding Webhook').item.json.body.position }}\n\nList the required documents:\n1. Aadhaar Card (front & back)\n2. PAN Card\n3. Bank Account Details\n4. Passport size photos (2)\n5. Previous employer relieving letter\n6. Educational certificates\n7. Address proof\n\nWrite a professional, friendly email asking them to submit these documents within 3 working days. Include upload instructions for the HR portal.",
+        "options": {}
+      },
+      "id": "node-ai-documents",
+      "name": "AI: Document Request Email",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [720, 600]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "={{ $('Onboarding Webhook').item.json.body.email }}",
+        "subject": "🎉 Welcome to Projecta, {{ $('Onboarding Webhook').item.json.body.employeeName }}!",
+        "emailFormat": "html",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-send-welcome-email",
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 200],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "={{ $('Onboarding Webhook').item.json.body.email }}",
+        "subject": "📄 Document Submission Required — Projecta HR",
+        "emailFormat": "html",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-send-doc-email",
+      "name": "Send Document Request Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 600],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/onboarding",
+        "sendHeaders": true,
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "employeeId", "value": "={{ $('Onboarding Webhook').item.json.body.employeeId }}" },
+            { "name": "checklist", "value": "={\"welcomeEmailSent\": true, \"documentRequestSent\": true}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-update-onboarding",
+      "name": "Update Onboarding Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"success\": true, \"message\": \"Onboarding initiated for {{ $('Onboarding Webhook').item.json.body.employeeName }}\"}",
+        "options": {}
+      },
+      "id": "node-respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 300]
+    }
+  ],
+  "connections": {
+    "Onboarding Webhook": {
+      "main": [
+        [
+          { "node": "Get Employee Data", "type": "main", "index": 0 },
+          { "node": "AI: Write Welcome Email", "type": "main", "index": 0 },
+          { "node": "AI: Document Request Email", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Claude AI": {
+      "ai_languageModel": [
+        [
+          { "node": "AI: Write Welcome Email", "type": "ai_languageModel", "index": 0 },
+          { "node": "AI: Document Request Email", "type": "ai_languageModel", "index": 0 }
+        ]
+      ]
+    },
+    "AI: Write Welcome Email": { "main": [[{ "node": "Send Welcome Email", "type": "main", "index": 0 }]] },
+    "AI: Document Request Email": { "main": [[{ "node": "Send Document Request Email", "type": "main", "index": 0 }]] },
+    "Send Welcome Email": { "main": [[{ "node": "Update Onboarding Status", "type": "main", "index": 0 }]] },
+    "Send Document Request Email": { "main": [[{ "node": "Update Onboarding Status", "type": "main", "index": 0 }]] },
+    "Update Onboarding Status": { "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "id": "projecta-onboarding-workflow",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": [{ "name": "Projecta HR" }, { "name": "Onboarding" }, { "name": "AI" }]
+}

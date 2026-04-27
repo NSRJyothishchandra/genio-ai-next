@@ -1,0 +1,77 @@
+[
+  {
+    "employeeId": "EMP763",
+    "name": "Demo Onboard User",
+    "email": "demo.onboard@test.com",
+    "dob": "2001-05-12",
+    "position": "HR Intern",
+    "dateOfJoining": "2026-04-22",
+    "status": "in_progress",
+    "checklist": {
+      "photo": false,
+      "aadhaar": false,
+      "pan": false,
+      "bankDetails": false,
+      "offerLetterSigned": false,
+      "ndaSigned": false,
+      "backgroundVerification": false,
+      "itSetup": false,
+      "welcomeEmailSent": true
+    },
+    "documents": [],
+    "photoUrl": null,
+    "createdAt": "2026-04-21T19:47:58.744Z",
+    "updatedAt": "2026-04-21T19:47:58.744Z",
+    "notes": ""
+  },
+  {
+    "employeeId": "EMP442666",
+    "name": "chandra",
+    "email": "narayana.jyothish@gmail.com",
+    "dob": "2000-03-22",
+    "position": "Software Engineer",
+    "dateOfJoining": "2026-04-03",
+    "status": "in_progress",
+    "checklist": {
+      "photo": true,
+      "aadhaar": false,
+      "pan": false,
+      "bankDetails": false,
+      "offerLetterSigned": false,
+      "ndaSigned": false,
+      "backgroundVerification": false,
+      "itSetup": false,
+      "welcomeEmailSent": true
+    },
+    "documents": [],
+    "photoUrl": "/employee-photos/EMP442666.png",
+    "createdAt": "2026-04-22T12:56:45.571Z",
+    "updatedAt": "2026-04-22T13:07:59.197Z",
+    "notes": ""
+  },
+  {
+    "employeeId": "EMP442667",
+    "name": "sravan",
+    "email": "testbonfiglioli@gmail.com",
+    "dob": "1998-04-22",
+    "position": "Software Engineer",
+    "dateOfJoining": "2026-04-02",
+    "status": "in_progress",
+    "checklist": {
+      "photo": false,
+      "aadhaar": false,
+      "pan": false,
+      "bankDetails": false,
+      "offerLetterSigned": false,
+      "ndaSigned": false,
+      "backgroundVerification": false,
+      "itSetup": false,
+      "welcomeEmailSent": true
+    },
+    "documents": [],
+    "photoUrl": null,
+    "createdAt": "2026-04-22T13:36:41.918Z",
+    "updatedAt": "2026-04-22T13:36:41.919Z",
+    "notes": ""
+  }
+]

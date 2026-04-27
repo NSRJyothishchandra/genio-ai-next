@@ -1,0 +1,182 @@
+{
+  "name": "Projecta HR — Timesheet Reminder & Auto-Fill (AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            { "field": "weeks", "weeksInterval": 1, "triggerAtDay": [5], "triggerAtHour": 16 }
+          ]
+        }
+      },
+      "id": "node-schedule-timesheet",
+      "name": "Every Friday 4 PM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/timesheet",
+        "options": {}
+      },
+      "id": "node-get-timesheet",
+      "name": "Get Timesheet Entries",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/employees",
+        "options": {}
+      },
+      "id": "node-get-employees",
+      "name": "Get All Employees",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Find employees who haven't submitted timesheets this week\nconst timesheetData = $('Get Timesheet Entries').item.json;\nconst employees = $('Get All Employees').item.json.employees;\nconst entries = timesheetData.entries || [];\n\nconst thisWeekStart = new Date();\nthisWeekStart.setDate(thisWeekStart.getDate() - thisWeekStart.getDay());\nthisWeekStart.setHours(0, 0, 0, 0);\n\nconst submittedIds = new Set(\n  entries\n    .filter(e => new Date(e.date) >= thisWeekStart)\n    .map(e => e.employeeId)\n);\n\nconst missing = employees.filter(emp => !submittedIds.has(emp.id));\nreturn missing.map(emp => ({ json: emp }));"
+      },
+      "id": "node-find-missing",
+      "name": "Find Missing Timesheets",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "has-missing",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEmpty" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if-missing",
+      "name": "Any Missing?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [960, 400]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a friendly but firm timesheet reminder email for:\n\nEmployee: {{ $json.name }}\nPosition: {{ $json.position }}\nWeek: {{ new Date().toLocaleDateString('en-IN', {weekday:'long', year:'numeric', month:'long', day:'numeric'}) }}\n\nRemind them to:\n1. Log this week's hours in the Projecta HR system\n2. Include project codes and task descriptions\n3. Submit by end of day today (Friday)\n\nTone: professional, brief, not scolding. Include the portal link: {{$env.PROJECTA_APP_URL}}/timesheet",
+        "options": {}
+      },
+      "id": "node-ai-reminder",
+      "name": "AI: Write Reminder Email",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "model": "claude-haiku-4-5-20251001",
+        "options": { "maxTokens": 400, "temperature": 0.5 }
+      },
+      "id": "node-claude-timesheet",
+      "name": "Claude Haiku (Fast)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [1200, 500],
+      "credentials": { "anthropicApi": { "id": "anthropic-creds", "name": "Anthropic account" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "={{ $('Find Missing Timesheets').item.json.email }}",
+        "subject": "⏰ Timesheet Reminder — Please Submit by Today, {{ $json.name }}",
+        "emailFormat": "html",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-send-reminder",
+      "name": "Send Reminder Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1440, 300],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "projecta-timesheet-submitted",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-timesheet-webhook",
+      "name": "Timesheet Submitted Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 600],
+      "webhookId": "projecta-timesheet-webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this timesheet submission and provide a brief summary:\n\nEmployee: {{ $json.body.employeeName }}\nDate: {{ $json.body.date }}\nTasks: {{ JSON.stringify($json.body.entries) }}\n\nProvide:\n1. Total hours worked\n2. Key projects worked on\n3. Any concerns (over/under hours)\n4. Brief manager summary (2-3 sentences)\n\nBe concise and data-driven.",
+        "options": {}
+      },
+      "id": "node-ai-analyze",
+      "name": "AI: Analyze Timesheet",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [480, 700]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"success\": true, \"analyzed\": true}",
+        "options": {}
+      },
+      "id": "node-timesheet-respond",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 700]
+    }
+  ],
+  "connections": {
+    "Every Friday 4 PM": {
+      "main": [
+        [
+          { "node": "Get Timesheet Entries", "type": "main", "index": 0 },
+          { "node": "Get All Employees", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Get Timesheet Entries": { "main": [[{ "node": "Find Missing Timesheets", "type": "main", "index": 0 }]] },
+    "Get All Employees": { "main": [[{ "node": "Find Missing Timesheets", "type": "main", "index": 0 }]] },
+    "Find Missing Timesheets": { "main": [[{ "node": "Any Missing?", "type": "main", "index": 0 }]] },
+    "Any Missing?": { "main": [[{ "node": "AI: Write Reminder Email", "type": "main", "index": 0 }], []] },
+    "Claude Haiku (Fast)": {
+      "ai_languageModel": [
+        [
+          { "node": "AI: Write Reminder Email", "type": "ai_languageModel", "index": 0 },
+          { "node": "AI: Analyze Timesheet", "type": "ai_languageModel", "index": 0 }
+        ]
+      ]
+    },
+    "AI: Write Reminder Email": { "main": [[{ "node": "Send Reminder Email", "type": "main", "index": 0 }]] },
+    "Timesheet Submitted Webhook": { "main": [[{ "node": "AI: Analyze Timesheet", "type": "main", "index": 0 }]] },
+    "AI: Analyze Timesheet": { "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "id": "projecta-timesheet-workflow",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": [{ "name": "Projecta HR" }, { "name": "Timesheet" }, { "name": "AI" }]
+}

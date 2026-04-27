@@ -1,0 +1,140 @@
+{
+  "name": "Projecta HR — Document Request (AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "projecta-document-request",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-doc-webhook",
+      "name": "Document Request Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "projecta-document-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body;\nconst docMap = {\n  aadhaar: { name: 'Aadhaar Card', desc: 'Front and back scan/photo', required: true },\n  pan: { name: 'PAN Card', desc: 'Clear scan/photo', required: true },\n  bank: { name: 'Bank Account Details', desc: 'Cancelled cheque or passbook first page', required: true },\n  photo: { name: 'Passport Photos', desc: '2 recent passport-size photographs', required: true },\n  offer_letter: { name: 'Offer Letter Acceptance', desc: 'Signed copy of offer letter', required: true },\n  relieving: { name: 'Relieving Letter', desc: 'From previous employer (if applicable)', required: false },\n  education: { name: 'Education Certificates', desc: 'Highest qualification certificate', required: true },\n  address_proof: { name: 'Address Proof', desc: 'Utility bill or rental agreement', required: false },\n  nda: { name: 'NDA / Non-Disclosure Agreement', desc: 'Signed NDA form', required: true },\n};\n\nconst requestedDocs = body.documents || Object.keys(docMap);\nconst docList = requestedDocs.map(d => docMap[d]).filter(Boolean);\n\nreturn [{\n  json: {\n    employeeId: body.employeeId,\n    employeeName: body.employeeName,\n    email: body.email,\n    position: body.position,\n    documents: docList,\n    deadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN'),\n    portalUrl: process.env.PROJECTA_APP_URL + '/onboarding/' + body.employeeId\n  }\n}];"
+      },
+      "id": "node-prepare-docs",
+      "name": "Prepare Document List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a professional, friendly document submission request email.\n\nEmployee: {{ $json.employeeName }}\nPosition: {{ $json.position }}\nDeadline: {{ $json.deadline }}\nPortal: {{ $json.portalUrl }}\n\nRequired Documents:\n{{ $json.documents.filter(d => d.required).map((d, i) => `${i+1}. ${d.name} — ${d.desc}`).join('\\n') }}\n\nOptional Documents (submit if available):\n{{ $json.documents.filter(d => !d.required).map(d => `• ${d.name} — ${d.desc}`).join('\\n') }}\n\nInstructions:\n- Upload clear scans or photos (PDF or JPG)\n- Max file size: 5MB per document\n- Submit via the HR portal link above\n- Contact hr@projecta.com for any questions\n\nFormat as a professional HTML email with a document checklist table.",
+        "options": {}
+      },
+      "id": "node-ai-doc-email",
+      "name": "AI: Write Document Request",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-5",
+        "options": { "maxTokens": 800, "temperature": 0.4 }
+      },
+      "id": "node-claude-docs",
+      "name": "Claude AI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [720, 500],
+      "credentials": { "anthropicApi": { "id": "anthropic-creds", "name": "Anthropic account" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "={{ $('Prepare Document List').item.json.email }}",
+        "subject": "📄 Action Required: Document Submission — Projecta HR Onboarding",
+        "emailFormat": "html",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-send-doc-request",
+      "name": "Send Document Request",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 300],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "days", "daysInterval": 2 }]
+        }
+      },
+      "id": "node-followup-schedule",
+      "name": "Follow-up After 2 Days",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 600]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/onboarding",
+        "options": {}
+      },
+      "id": "node-check-docs",
+      "name": "Check Document Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 600]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "docs-incomplete",
+              "leftValue": "={{ $json.pendingDocuments }}",
+              "rightValue": 0,
+              "operator": { "type": "number", "operation": "gt" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if-incomplete",
+      "name": "Documents Incomplete?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 600]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"success\": true, \"emailSent\": true, \"employee\": \"{{ $('Prepare Document List').item.json.employeeName }}\"}",
+        "options": {}
+      },
+      "id": "node-doc-respond",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1200, 300]
+    }
+  ],
+  "connections": {
+    "Document Request Webhook": { "main": [[{ "node": "Prepare Document List", "type": "main", "index": 0 }]] },
+    "Prepare Document List": { "main": [[{ "node": "AI: Write Document Request", "type": "main", "index": 0 }]] },
+    "Claude AI": { "ai_languageModel": [[{ "node": "AI: Write Document Request", "type": "ai_languageModel", "index": 0 }]] },
+    "AI: Write Document Request": { "main": [[{ "node": "Send Document Request", "type": "main", "index": 0 }]] },
+    "Send Document Request": { "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]] },
+    "Follow-up After 2 Days": { "main": [[{ "node": "Check Document Status", "type": "main", "index": 0 }]] },
+    "Check Document Status": { "main": [[{ "node": "Documents Incomplete?", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "id": "projecta-document-workflow",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": [{ "name": "Projecta HR" }, { "name": "Documents" }, { "name": "AI" }]
+}

@@ -1,0 +1,171 @@
+{
+  "name": "Projecta HR — Employee Added (AI Onboarding Agent)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "projecta-employee-added",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-employee-webhook",
+      "name": "Employee Added Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "projecta-employee-added-webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "emp-name", "name": "employeeName", "value": "={{ $json.body.name }}", "type": "string" },
+            { "id": "emp-email", "name": "email", "value": "={{ $json.body.email }}", "type": "string" },
+            { "id": "emp-position", "name": "position", "value": "={{ $json.body.position }}", "type": "string" },
+            { "id": "emp-id", "name": "employeeId", "value": "={{ $json.body.id }}", "type": "string" },
+            { "id": "emp-join", "name": "dateOfJoining", "value": "={{ $json.body.dateOfJoining }}", "type": "string" },
+            { "id": "emp-dept", "name": "department", "value": "={{ $json.body.department ?? 'Engineering' }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-extract-employee",
+      "name": "Extract Employee Info",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an HR onboarding AI agent for Projecta. A new employee has joined.\n\nEmployee Details:\n- Name: {{ $json.employeeName }}\n- Employee ID: {{ $json.employeeId }}\n- Position: {{ $json.position }}\n- Department: {{ $json.department }}\n- Joining Date: {{ $json.dateOfJoining }}\n- Email: {{ $json.email }}\n\nYour tasks:\n1. Draft a comprehensive first-day schedule\n2. Create a 30-60-90 day onboarding plan\n3. List the IT setup requirements (laptop, email, software access)\n4. Generate a buddy system recommendation\n5. Draft the announcement email to the team\n\nProvide each section clearly separated. Be specific to their role as {{ $json.position }}.",
+        "options": {}
+      },
+      "id": "node-ai-onboarding-plan",
+      "name": "AI: Create Onboarding Plan",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [720, 200]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-5",
+        "options": { "maxTokens": 2000, "temperature": 0.6 }
+      },
+      "id": "node-claude-employee",
+      "name": "Claude Sonnet (Main)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [720, 420],
+      "credentials": { "anthropicApi": { "id": "anthropic-creds", "name": "Anthropic account" } }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a friendly team announcement email for:\n\nNew Joiner: {{ $('Extract Employee Info').item.json.employeeName }}\nRole: {{ $('Extract Employee Info').item.json.position }}\nDepartment: {{ $('Extract Employee Info').item.json.department }}\nStart Date: {{ $('Extract Employee Info').item.json.dateOfJoining }}\n\nKeep it enthusiastic, welcoming, and brief (3-4 sentences). Include their role and department. Sign off as 'The Projecta HR Team'.",
+        "options": {}
+      },
+      "id": "node-ai-announcement",
+      "name": "AI: Team Announcement",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [720, 600]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "={{ $('Extract Employee Info').item.json.email }}",
+        "subject": "🎉 Your Projecta Onboarding Plan — {{ $('Extract Employee Info').item.json.employeeName }}",
+        "emailFormat": "html",
+        "message": "=<h2>Welcome to Projecta, {{ $('Extract Employee Info').item.json.employeeName }}!</h2><p>Here is your personalized onboarding plan:</p><pre style='font-family:sans-serif;white-space:pre-wrap'>{{ $json.output }}</pre><br><p>Best regards,<br>Projecta HR Team</p>",
+        "options": {}
+      },
+      "id": "node-send-plan",
+      "name": "Send Onboarding Plan",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 200],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "fromEmail": "hr@projecta.com",
+        "toEmail": "team@projecta.com",
+        "subject": "👋 New Team Member: {{ $('Extract Employee Info').item.json.employeeName }} joins as {{ $('Extract Employee Info').item.json.position }}",
+        "emailFormat": "html",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-send-announcement",
+      "name": "Announce to Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 600],
+      "credentials": { "smtp": { "id": "smtp-creds", "name": "SMTP account" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PROJECTA_APP_URL}}/api/n8n/webhook",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "x-webhook-secret", "value": "={{ $env.N8N_WEBHOOK_SECRET }}" }]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "event", "value": "onboarding_document_uploaded" },
+            { "name": "data", "value": "={\"employeeId\": \"{{ $('Extract Employee Info').item.json.employeeId }}\", \"checklist\": {\"onboardingPlanSent\": true, \"teamAnnouncementSent\": true}}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-update-hr",
+      "name": "Update HR System",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"success\": true, \"employee\": \"{{ $('Extract Employee Info').item.json.employeeName }}\", \"actions\": [\"onboarding_plan_sent\", \"team_announced\", \"hr_updated\"]}",
+        "options": {}
+      },
+      "id": "node-employee-respond",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 400]
+    }
+  ],
+  "connections": {
+    "Employee Added Webhook": { "main": [[{ "node": "Extract Employee Info", "type": "main", "index": 0 }]] },
+    "Extract Employee Info": {
+      "main": [
+        [
+          { "node": "AI: Create Onboarding Plan", "type": "main", "index": 0 },
+          { "node": "AI: Team Announcement", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Claude Sonnet (Main)": {
+      "ai_languageModel": [
+        [
+          { "node": "AI: Create Onboarding Plan", "type": "ai_languageModel", "index": 0 },
+          { "node": "AI: Team Announcement", "type": "ai_languageModel", "index": 0 }
+        ]
+      ]
+    },
+    "AI: Create Onboarding Plan": { "main": [[{ "node": "Send Onboarding Plan", "type": "main", "index": 0 }]] },
+    "AI: Team Announcement": { "main": [[{ "node": "Announce to Team", "type": "main", "index": 0 }]] },
+    "Send Onboarding Plan": { "main": [[{ "node": "Update HR System", "type": "main", "index": 0 }]] },
+    "Announce to Team": { "main": [[{ "node": "Update HR System", "type": "main", "index": 0 }]] },
+    "Update HR System": { "main": [[{ "node": "Respond Success", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "id": "projecta-employee-added-workflow",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": [{ "name": "Projecta HR" }, { "name": "Employee" }, { "name": "AI" }]
+}

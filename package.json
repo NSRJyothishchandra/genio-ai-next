@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start --port 3001",
+    "tracker": "node scripts/activity-tracker.js",
+    "dev:full": "start npm run tracker && next dev --port 3001"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
+    "@types/nodemailer": "^8.0.0",
     "next": "16.2.4",
+    "nodemailer": "^8.0.5",
+    "playwright-core": "^1.59.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20",

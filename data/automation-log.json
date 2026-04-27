@@ -1,0 +1,362 @@
+[
+  {
+    "id": "AUTO-1777294271028",
+    "action": "exit_process",
+    "title": "Exit Process Automation",
+    "summary": "No active exit cases",
+    "status": "completed",
+    "details": [
+      "Exit checklist is idle until a resignation or offboarding request appears."
+    ],
+    "createdAt": "2026-04-27T12:51:11.028Z"
+  },
+  {
+    "id": "AUTO-1777191275686",
+    "action": "absence_summary",
+    "title": "Auto Absence Summary",
+    "summary": "56 checked in, 0 on leave, 0 absent",
+    "status": "completed",
+    "details": [
+      "Checked in: 56",
+      "Approved leave: 0",
+      "Absent without approved leave: 0"
+    ],
+    "createdAt": "2026-04-26T08:14:35.686Z"
+  },
+  {
+    "id": "AUTO-1777191226867",
+    "action": "exit_process",
+    "title": "Exit Process Automation",
+    "summary": "No active exit cases",
+    "status": "completed",
+    "details": [
+      "Exit checklist is idle until a resignation or offboarding request appears."
+    ],
+    "createdAt": "2026-04-26T08:13:46.867Z"
+  },
+  {
+    "id": "AUTO-1777191226832",
+    "action": "probation_reminder",
+    "title": "Probation Reminder",
+    "summary": "No probation reminders today",
+    "status": "completed",
+    "details": [
+      "No 30/60/90-day probation milestones today."
+    ],
+    "createdAt": "2026-04-26T08:13:46.832Z"
+  },
+  {
+    "id": "AUTO-1777191226796",
+    "action": "festival_mailer",
+    "title": "Festival / Event Mailer",
+    "summary": "May Day draft ready for 56 employees",
+    "status": "completed",
+    "details": [
+      "Upcoming event: May Day",
+      "Planned send date: 2026-05-01",
+      "Recipient count: 56"
+    ],
+    "createdAt": "2026-04-26T08:13:46.796Z"
+  },
+  {
+    "id": "AUTO-1777191226756",
+    "action": "monthly_hr_report",
+    "title": "Monthly HR Report",
+    "summary": "4 requests, 3 onboarding cases, 56 active employees",
+    "status": "completed",
+    "details": [
+      "Requests this month: 4",
+      "Approved requests: 3",
+      "Rejected requests: 0",
+      "Onboarding cases started this month: 3",
+      "Total employees tracked: 56"
+    ],
+    "createdAt": "2026-04-26T08:13:46.756Z"
+  },
+  {
+    "id": "AUTO-1777191226716",
+    "action": "attendance_correction",
+    "title": "Attendance Correction Automation",
+    "summary": "No pending attendance corrections",
+    "status": "completed",
+    "details": [
+      "No attendance correction backlog."
+    ],
+    "createdAt": "2026-04-26T08:13:46.716Z"
+  },
+  {
+    "id": "AUTO-1777191226679",
+    "action": "document_chase",
+    "title": "Document Chase Automation",
+    "summary": "3 onboarding records need document reminders",
+    "status": "attention",
+    "details": [
+      "sravan is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "chandra is missing: aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "Demo Onboard User is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup"
+    ],
+    "createdAt": "2026-04-26T08:13:46.679Z"
+  },
+  {
+    "id": "AUTO-1777191226644",
+    "action": "day_zero_onboarding",
+    "title": "Day-Zero Onboarding",
+    "summary": "No day-zero onboarding actions today",
+    "status": "completed",
+    "details": [
+      "No new joiners scheduled for today."
+    ],
+    "createdAt": "2026-04-26T08:13:46.644Z"
+  },
+  {
+    "id": "AUTO-1777191226606",
+    "action": "work_anniversary",
+    "title": "Work Anniversary Automation",
+    "summary": "No work anniversaries today",
+    "status": "completed",
+    "details": [
+      "No anniversary wishes required today."
+    ],
+    "createdAt": "2026-04-26T08:13:46.606Z"
+  },
+  {
+    "id": "AUTO-1777191226571",
+    "action": "absence_summary",
+    "title": "Auto Absence Summary",
+    "summary": "56 checked in, 1 on leave, 0 absent",
+    "status": "completed",
+    "details": [
+      "Checked in: 56",
+      "Approved leave: 1",
+      "Absent without approved leave: 0"
+    ],
+    "createdAt": "2026-04-26T08:13:46.571Z"
+  },
+  {
+    "id": "AUTO-1777191226476",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T08:13:46.476Z"
+  },
+  {
+    "id": "AUTO-1777190378532",
+    "action": "exit_process",
+    "title": "Exit Process Automation",
+    "summary": "No active exit cases",
+    "status": "completed",
+    "details": [
+      "Exit checklist is idle until a resignation or offboarding request appears."
+    ],
+    "createdAt": "2026-04-26T07:59:38.532Z"
+  },
+  {
+    "id": "AUTO-1777190377873",
+    "action": "probation_reminder",
+    "title": "Probation Reminder",
+    "summary": "No probation reminders today",
+    "status": "completed",
+    "details": [
+      "No 30/60/90-day probation milestones today."
+    ],
+    "createdAt": "2026-04-26T07:59:37.873Z"
+  },
+  {
+    "id": "AUTO-1777190376815",
+    "action": "monthly_hr_report",
+    "title": "Monthly HR Report",
+    "summary": "2 requests, 3 onboarding cases, 56 active employees",
+    "status": "completed",
+    "details": [
+      "Requests this month: 2",
+      "Approved requests: 2",
+      "Rejected requests: 0",
+      "Onboarding cases started this month: 3",
+      "Total employees tracked: 56"
+    ],
+    "createdAt": "2026-04-26T07:59:36.815Z"
+  },
+  {
+    "id": "AUTO-1777190375711",
+    "action": "exit_process",
+    "title": "Exit Process Automation",
+    "summary": "No active exit cases",
+    "status": "completed",
+    "details": [
+      "Exit checklist is idle until a resignation or offboarding request appears."
+    ],
+    "createdAt": "2026-04-26T07:59:35.711Z"
+  },
+  {
+    "id": "AUTO-1777190374570",
+    "action": "probation_reminder",
+    "title": "Probation Reminder",
+    "summary": "No probation reminders today",
+    "status": "completed",
+    "details": [
+      "No 30/60/90-day probation milestones today."
+    ],
+    "createdAt": "2026-04-26T07:59:34.570Z"
+  },
+  {
+    "id": "AUTO-1777190372372",
+    "action": "monthly_hr_report",
+    "title": "Monthly HR Report",
+    "summary": "2 requests, 3 onboarding cases, 56 active employees",
+    "status": "completed",
+    "details": [
+      "Requests this month: 2",
+      "Approved requests: 2",
+      "Rejected requests: 0",
+      "Onboarding cases started this month: 3",
+      "Total employees tracked: 56"
+    ],
+    "createdAt": "2026-04-26T07:59:32.372Z"
+  },
+  {
+    "id": "AUTO-1777190368019",
+    "action": "festival_mailer",
+    "title": "Festival / Event Mailer",
+    "summary": "May Day draft ready for 56 employees",
+    "status": "completed",
+    "details": [
+      "Upcoming event: May Day",
+      "Planned send date: 2026-05-01",
+      "Recipient count: 56"
+    ],
+    "createdAt": "2026-04-26T07:59:28.019Z"
+  },
+  {
+    "id": "AUTO-1777190364859",
+    "action": "attendance_correction",
+    "title": "Attendance Correction Automation",
+    "summary": "No pending attendance corrections",
+    "status": "completed",
+    "details": [
+      "No attendance correction backlog."
+    ],
+    "createdAt": "2026-04-26T07:59:24.859Z"
+  },
+  {
+    "id": "AUTO-1777190363305",
+    "action": "document_chase",
+    "title": "Document Chase Automation",
+    "summary": "3 onboarding records need document reminders",
+    "status": "attention",
+    "details": [
+      "sravan is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "chandra is missing: aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "Demo Onboard User is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup"
+    ],
+    "createdAt": "2026-04-26T07:59:23.305Z"
+  },
+  {
+    "id": "AUTO-1777190360474",
+    "action": "day_zero_onboarding",
+    "title": "Day-Zero Onboarding",
+    "summary": "No day-zero onboarding actions today",
+    "status": "completed",
+    "details": [
+      "No new joiners scheduled for today."
+    ],
+    "createdAt": "2026-04-26T07:59:20.474Z"
+  },
+  {
+    "id": "AUTO-1777190358403",
+    "action": "work_anniversary",
+    "title": "Work Anniversary Automation",
+    "summary": "No work anniversaries today",
+    "status": "completed",
+    "details": [
+      "No anniversary wishes required today."
+    ],
+    "createdAt": "2026-04-26T07:59:18.403Z"
+  },
+  {
+    "id": "AUTO-1777190356200",
+    "action": "absence_summary",
+    "title": "Auto Absence Summary",
+    "summary": "56 checked in, 0 on leave, 0 absent",
+    "status": "completed",
+    "details": [
+      "Checked in: 56",
+      "Approved leave: 0",
+      "Absent without approved leave: 0"
+    ],
+    "createdAt": "2026-04-26T07:59:16.200Z"
+  },
+  {
+    "id": "AUTO-1777190354796",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T07:59:14.796Z"
+  },
+  {
+    "id": "AUTO-1777190354359",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T07:59:14.359Z"
+  },
+  {
+    "id": "AUTO-1777190353783",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T07:59:13.783Z"
+  },
+  {
+    "id": "AUTO-1777190352622",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T07:59:12.622Z"
+  },
+  {
+    "id": "AUTO-1777190348106",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-04-26T07:59:08.106Z"
+  },
+  {
+    "id": "AUTO-1777189862750",
+    "action": "monthly_hr_report",
+    "title": "Monthly HR Report",
+    "summary": "2 requests, 3 onboarding cases, 56 active employees",
+    "status": "completed",
+    "details": [
+      "Requests this month: 2",
+      "Approved requests: 1",
+      "Rejected requests: 0",
+      "Onboarding cases started this month: 3",
+      "Total employees tracked: 56"
+    ],
+    "createdAt": "2026-04-26T07:51:02.750Z"
+  }
+]
