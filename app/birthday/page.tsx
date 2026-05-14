@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface Employee {
   id: string;
@@ -295,6 +296,32 @@ export default function BirthdayPage() {
 
   const draftPreviewName = previewEmp?.name ?? config?.draftPreview?.name ?? "Your Name";
 
+  function handleVoiceAction(action: VoiceAction) {
+    const p = action.params as Record<string, unknown>;
+    switch (action.action) {
+      case "send_today":     sendAllToday(); break;
+      case "send_test":      sendBirthdayTest(); break;
+      case "trigger_n8n":    triggerN8nWorkflow(); break;
+      case "preview_card":
+        if (p.theme) setPreviewTheme((p.theme as CardTheme) || "confetti");
+        break;
+      case "set_theme":
+        setPreviewTheme((p.theme as CardTheme) || "confetti");
+        break;
+      case "set_schedule_time": {
+        const h = String(Number(p.hour) || 9).padStart(2, "0");
+        const m = String(Number(p.minute) || 0).padStart(2, "0");
+        setScheduleTime(`${h}:${m}`);
+        break;
+      }
+      case "toggle_schedule":
+        if (schedule) setSchedule({ ...schedule, enabled: Boolean(p.enabled) });
+        break;
+    }
+  }
+
+  useVoiceCommand(useCallback((action) => handleVoiceAction(action), [])); // eslint-disable-line
+
   return (
     <>
       {toast ? (
@@ -338,26 +365,7 @@ export default function BirthdayPage() {
             variant="inline"
             size="md"
             hint='Try: "Send birthday emails today" or "Set theme to galaxy" or "Enable auto send at 9 AM"'
-            onResult={(_t, action: VoiceAction) => {
-              const p = action.params as Record<string, unknown>;
-              switch (action.action) {
-                case "send_today":     sendAllToday(); break;
-                case "send_test":      sendBirthdayTest(); break;
-                case "trigger_n8n":    triggerN8nWorkflow(); break;
-                case "set_theme":
-                  setPreviewTheme((p.theme as CardTheme) || "confetti");
-                  break;
-                case "set_schedule_time": {
-                  const h = String(Number(p.hour) || 9).padStart(2, "0");
-                  const m = String(Number(p.minute) || 0).padStart(2, "0");
-                  setScheduleTime(`${h}:${m}`);
-                  break;
-                }
-                case "toggle_schedule":
-                  if (schedule) setSchedule({ ...schedule, enabled: Boolean(p.enabled) });
-                  break;
-              }
-            }}
+            onResult={(_t, action) => handleVoiceAction(action)}
           />
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface InboxEmail {
   uid: number;
@@ -306,6 +307,9 @@ export default function MailPage() {
         break;
     }
   }
+
+  // ── Global voice → same handler ─────────────────────────────────────────
+  useVoiceCommand(useCallback((action) => handleVoiceResult("", action), [])); // eslint-disable-line
 
   // ── Compose ──────────────────────────────────────────────────────────────
   async function handleComposeSend() {

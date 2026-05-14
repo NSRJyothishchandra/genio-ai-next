@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import LogoutButton from "./LogoutButton";
+import GlobalVoiceButton from "./components/GlobalVoiceButton";
 
 type TabId = "software" | "mech" | "admin";
 
@@ -136,6 +137,12 @@ export default function Sidebar() {
       </div>
 
       <div className="sidebar-footer">
+        <div className="sidebar-voice-bar">
+          <span className="sidebar-voice-label">🎤 Voice</span>
+          <Suspense fallback={null}>
+            <GlobalVoiceButton />
+          </Suspense>
+        </div>
         {authLoaded && isAdmin ? (
           <LogoutButton />
         ) : (

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface CLILine {
   type: string;
@@ -652,6 +653,9 @@ export default function CoworkPage() {
       if (cmd) void send(activeTarget as "cli" | "desktop" | "browser" | "blender", cmd);
     }
   }
+
+  // Also respond to global sidebar voice events
+  useVoiceCommand(useCallback((action) => handleVoiceResult("", action), [])); // eslint-disable-line
 
   return (
     <>

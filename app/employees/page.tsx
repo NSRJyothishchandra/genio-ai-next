@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface Employee {
   id: string; name: string; dob: string; gender: string;
@@ -177,6 +178,29 @@ export default function EmployeesPage() {
   }
 
   useEffect(() => { loadEmployees(); }, [search, filterPosition]);
+
+  useVoiceCommand(useCallback((action) => {
+    const p = action.params;
+    switch (action.action) {
+      case "search":
+        setSearch(String(p.query ?? ""));
+        break;
+      case "filter_position":
+        setFilterPosition(String(p.position ?? ""));
+        break;
+      case "show_employee":
+        setSearch(String(p.name ?? ""));
+        break;
+      case "add_employee":
+        setShowAddForm(true);
+        break;
+      case "clear_filter":
+        setSearch("");
+        setFilterPosition("");
+        break;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []));
 
   function resetAddForm() {
     setForm({ ...EMPTY_FORM });

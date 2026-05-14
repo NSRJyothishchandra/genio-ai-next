@@ -1,5 +1,6 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface Message { role: "user" | "assistant"; content: string; }
 interface Employee { id: string; name: string; email: string; }
@@ -41,6 +42,23 @@ export default function AssistantPage() {
       .then((response) => response.json())
       .then((data) => setEmployees(data.employees ?? []));
   }, []);
+
+  useVoiceCommand(useCallback((action) => {
+    const p = action.params;
+    switch (action.action) {
+      case "ask":
+        void send(String(p.message ?? ""));
+        break;
+      case "clear_chat":
+        setMessages([{ role: "assistant", content: "New conversation started. How can I help you?" }]);
+        setHistory([]);
+        break;
+      case "submit_leave":
+        setShowLeaveForm(true);
+        break;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []));
 
   function showToast(message: string) {
     setToast(message);

@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface TimesheetEntry {
   id: string;
@@ -211,6 +212,36 @@ export default function TimesheetPage() {
       void generateDemoAttendance();
     }
   }, [employees, attendance]);
+
+  useVoiceCommand(useCallback((action) => {
+    const p = action.params;
+    switch (action.action) {
+      case "switch_tab":
+        setTab(p.tab as typeof tab);
+        break;
+      case "filter_employee":
+        setFilterEmp(String(p.query ?? ""));
+        setTab("attendance");
+        break;
+      case "check_in": {
+        const emp = employees.find(e => e.name.toLowerCase().includes(String(p.employeeId ?? "").toLowerCase()));
+        if (emp) void submitAttendance(emp.id, emp.name, "check_in");
+        break;
+      }
+      case "check_out": {
+        const emp2 = employees.find(e => e.name.toLowerCase().includes(String(p.employeeId ?? "").toLowerCase()));
+        if (emp2) void submitAttendance(emp2.id, emp2.name, "check_out");
+        break;
+      }
+      case "submit_leave":
+        setTab("leave");
+        break;
+      case "refresh":
+        void loadData();
+        break;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [employees]));
 
   async function submitEntry(event: React.FormEvent) {
     event.preventDefault();

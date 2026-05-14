@@ -47,6 +47,8 @@ input, select, textarea { font-family: inherit; }
 .nav-icon { font-size: 11px; width: 28px; height: 28px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; text-align: center; background: #f1f5f9; color: #334155; font-weight: 800; letter-spacing: .02em; flex-shrink: 0; }
 .nav-item.active .nav-icon { background: rgba(99,102,241,.14); color: var(--primary); }
 .sidebar-footer { padding: 14px 10px; border-top: 1px solid var(--border); background: rgba(248,250,252,.7); }
+.sidebar-voice-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 6px 10px; margin-bottom: 6px; background: rgba(99,102,241,.06); border-radius: 12px; border: 1px solid rgba(99,102,241,.15); }
+.sidebar-voice-label { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: .02em; }
 .main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
 .main-login { margin-left: 0; }
 .topbar { height: var(--header-h); background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 50; }

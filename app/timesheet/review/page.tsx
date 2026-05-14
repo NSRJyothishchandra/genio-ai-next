@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
+import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface ActivityEntry { title: string; app: string; category: string; start: string; end: string; durationSec: number; }
 interface TimerSession { id: string; task: string; project: string; start: string | null; end: string | null; durationSec: number; running: boolean; }
@@ -124,6 +125,34 @@ export default function TimesheetReviewPage() {
     }, 1000);
     return () => { if (timerPollRef.current) clearInterval(timerPollRef.current); };
   }, [loadData]);
+
+  useVoiceCommand(useCallback((action) => {
+    const p = action.params;
+    switch (action.action) {
+      case "switch_tab":
+        setTab(p.tab as typeof tab);
+        break;
+      case "start_timer":
+        setTimerTask(String(p.task ?? ""));
+        if (p.project) setTimerProject(String(p.project));
+        setTab("timer");
+        // auto-start after state updates
+        setTimeout(() => startTimer(), 100);
+        break;
+      case "stop_timer": {
+        const running = timers.find(t => t.running);
+        if (running) void stopTimer(running.id);
+        break;
+      }
+      case "infer_tasks":
+        void inferTasks();
+        break;
+      case "submit_timesheet":
+        setTab("inferred");
+        break;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timers]));
 
   // auto-scroll log
   useEffect(() => {
