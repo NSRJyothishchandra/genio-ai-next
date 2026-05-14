@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
 
 interface CLILine {
   type: string;
@@ -28,10 +30,18 @@ interface Status {
 
 interface PrecisionFormState {
   enabled: boolean;
-  partType: "auto" | "gear" | "bolt" | "custom";
+  partType: "auto" | "gear" | "geartrain" | "bolt" | "shaft" | "coupling" | "planetary" | "belt" | "custom";
   units: "mm" | "inch";
+  qualityPreset: "draft" | "balanced" | "high";
+  materialPreset: "steel" | "aluminum" | "brass" | "dark";
+  symmetry: "auto" | "radial" | "bilateral";
+  centerOrigin: boolean;
+  smoothShading: boolean;
   primaryToothCount: string;
   additionalToothCounts: string;
+  planetCount: string;
+  shaftSpacing: string;
+  stageCount: string;
   outerDiameter: string;
   innerDiameter: string;
   thickness: string;
@@ -42,22 +52,74 @@ interface PrecisionFormState {
   tolerance: string;
 }
 
-const QUICK_PROMPTS = [
+type WorkspaceTab = "cli" | "desktop" | "browser" | "blender";
+
+const CLI_PROMPTS = [
   "Create a simple todo list website in the current folder",
+  "Create a landing page with HTML, CSS, and JavaScript in this folder",
+  "Generate a README for the current project",
+  "Check if there are any build errors",
+  "Show git status and recent commits",
   "Review this project and tell me the main issues",
-  "Open https://example.com in Chrome and keep it open",
+];
+
+const DESKTOP_PROMPTS = [
   "Open https://github.com/login, email is demo@example.com password is hunter2, and login",
   "Play Ghost from Amazon Music",
   "Send this prompt into Claude Desktop: summarize the onboarding flow",
-  "Show git status and recent commits",
-  "Check if there are any build errors",
+  "Open Notepad and write a short project summary",
+  "Open Calculator and calculate 275 multiplied by 48",
+];
+
+const BROWSER_PROMPTS = [
+  "Open https://example.com in Chrome and keep it open",
+  "Open github login, email is demo@example.com password is hunter2",
+  "Open Bonfiglioli website and keep it open",
+  "Open LinkedIn and search for industrial automation",
+  "Open Gmail and wait on the inbox page",
 ];
 
 const BLENDER_PROMPTS = [
   "Use Blender CLI to create 3 gears with 5 teeth, 12 teeth, and 18 teeth, and export OBJ files only.",
   "Use Blender CLI to create a clean mechanical bolt model and export OBJ only.",
+  "Create a centered drive shaft with keyway and export OBJ only.",
+  "Create a flexible coupling for two aligned shafts and export OBJ only.",
+  "Create a planetary gear set with sun gear, 3 planet gears, ring gear, and carrier, then export OBJ only.",
+  "Create a two pulley belt drive assembly and export OBJ only.",
   "Create a stylized industrial part from this reference image and export an OBJ mesh only.",
   "Create a metallic gear assembly in Blender and save OBJ output for NX import.",
+];
+
+const MECHANICAL_COMPONENT_GROUPS = [
+  {
+    title: "Drive Train",
+    items: [
+      "Shafts",
+      "Connected gears and shafted gear trains",
+      "Planetary sets",
+      "Belt and pulley drives",
+      "Couplings",
+      "Sun, planet, and ring gears",
+    ],
+  },
+  {
+    title: "Transmission Parts",
+    items: [
+      "Input, intermediate, and output shafts",
+      "Spur and helical gear stages",
+      "Keyways and splines",
+      "Bolts, nuts, washers, and pins",
+    ],
+  },
+  {
+    title: "Prompt Guided Add-ons",
+    items: [
+      "Bearings and bearing seats",
+      "Housing shells and covers",
+      "Seals and O-rings",
+      "Cooling fins and sensor placeholders",
+    ],
+  },
 ];
 
 const BLENDER_ASSETS = [
@@ -110,8 +172,59 @@ const TARGET_INFO = {
   },
 } as const;
 
+const AGENT_WORKSPACE_CONFIG = {
+  cli: {
+    title: "CLI Agent",
+    subtitle: "Visible terminal execution through Claude CLI in the selected local folder.",
+    description:
+      "Use this when you want the exact prompt to be sent to Claude CLI in a real terminal window. Best for coding, file generation, and local command workflows.",
+    placeholder:
+      "Describe the local CLI task...\n\nExamples:\n- Create a simple todo list website in this folder\n- Review this project and tell me the main issues\n- Generate a README for the current project",
+    prompts: CLI_PROMPTS,
+    actionLabel: "Run CLI Agent",
+    tip: "Enter sends immediately. Shift+Enter adds a new line.",
+  },
+  desktop: {
+    title: "Desktop Agent",
+    subtitle: "Windows desktop actions for local applications such as Claude Desktop, Amazon Music, Notepad, and more.",
+    description:
+      "Use this when the task has to happen inside a local desktop app instead of a browser. Include the app name and the exact task you want completed.",
+    placeholder:
+      "Describe the desktop task...\n\nExamples:\n- Play Ghost from Amazon Music\n- Open Notepad and write a project summary\n- Send this prompt into Claude Desktop: summarize the onboarding flow",
+    prompts: DESKTOP_PROMPTS,
+    actionLabel: "Run Desktop Agent",
+    tip: "Name the desktop app in the prompt so the planner can route it correctly.",
+  },
+  browser: {
+    title: "Browser Agent",
+    subtitle: "Chrome or Edge automation for URLs, logins, clicks, typing, and browser-side workflows.",
+    description:
+      "Use this when the task belongs in a website. You can provide a full URL, a bare domain, or even a well-known site name like GitHub or Gmail.",
+    placeholder:
+      "Describe the browser task...\n\nExamples:\n- Open github login, email is demo@example.com password is hunter2\n- Open Bonfiglioli website and keep it open\n- Open a link, login, and complete a browser task",
+    prompts: BROWSER_PROMPTS,
+    actionLabel: "Run Browser Agent",
+    tip: "Ctrl+Enter sends. The agent can infer URLs from common site names and domains.",
+  },
+} as const;
+
+const CLI_AGENT_CAPABILITIES = [
+  "Opens a visible PowerShell window on the local machine",
+  "Runs the exact prompt through Claude CLI with claude -p",
+  "Uses the selected local folder as the working directory",
+  "Best for coding, file generation, debugging, and local reviews",
+];
+
+const CLI_AGENT_FLOW = [
+  "Choose or paste the local working directory",
+  "Write the exact task you want Claude CLI to perform",
+  "Press Enter or click Run CLI Agent",
+  "Review the visible terminal and the streamed execution log here",
+];
+
 export default function CoworkPage() {
-  const [workspaceTab, setWorkspaceTab] = useState<"agents" | "blender">("agents");
+  const router = useRouter();
+  const [workspaceTab, setWorkspaceTab] = useState<WorkspaceTab>("cli");
   const [prompt, setPrompt] = useState("");
   const [blenderImageDataUrl, setBlenderImageDataUrl] = useState<string | null>(null);
   const [blenderImageName, setBlenderImageName] = useState<string | null>(null);
@@ -126,8 +239,16 @@ export default function CoworkPage() {
     enabled: false,
     partType: "auto",
     units: "mm",
+    qualityPreset: "high",
+    materialPreset: "steel",
+    symmetry: "auto",
+    centerOrigin: true,
+    smoothShading: true,
     primaryToothCount: "",
     additionalToothCounts: "",
+    planetCount: "",
+    shaftSpacing: "",
+    stageCount: "",
     outerDiameter: "",
     innerDiameter: "",
     thickness: "",
@@ -141,6 +262,19 @@ export default function CoworkPage() {
   const [promptHistory, setPromptHistory] = useState<string[]>([]);
   const abortRef = useRef<AbortController | null>(null);
   const outputRef = useRef<HTMLDivElement>(null);
+
+  function activateWorkspace(next: WorkspaceTab, syncUrl = true) {
+    setWorkspaceTab(next);
+    setTarget(next === "blender" ? "blender" : next);
+    if (syncUrl && typeof window !== "undefined") {
+      const view = next === "blender" ? "lab" : undefined;
+      const params = new URLSearchParams();
+      params.set("workspace", next);
+      params.set("target", next === "blender" ? "blender" : next);
+      if (view) params.set("view", view);
+      router.replace(`/cowork?${params.toString()}`, { scroll: false });
+    }
+  }
 
   function showToast(msg: string, type: "success" | "error" = "success") {
     setToast({ msg, type });
@@ -166,8 +300,16 @@ export default function CoworkPage() {
       enabled: true,
       partType: precision.partType,
       units: precision.units,
+      qualityPreset: precision.qualityPreset,
+      materialPreset: precision.materialPreset,
+      symmetry: precision.symmetry,
+      centerOrigin: precision.centerOrigin,
+      smoothShading: precision.smoothShading,
       primaryToothCount: parseField(precision.primaryToothCount),
       additionalToothCounts: extraCounts,
+      planetCount: parseField(precision.planetCount),
+      shaftSpacing: parseField(precision.shaftSpacing),
+      stageCount: parseField(precision.stageCount),
       outerDiameter: parseField(precision.outerDiameter),
       innerDiameter: parseField(precision.innerDiameter),
       thickness: parseField(precision.thickness),
@@ -184,6 +326,31 @@ export default function CoworkPage() {
     const interval = setInterval(refreshStatus, 10_000);
     return () => clearInterval(interval);
   }, [refreshStatus]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const workspace = params.get("workspace");
+    const requestedTarget = params.get("target");
+
+    if (
+      workspace === "cli" ||
+      workspace === "desktop" ||
+      workspace === "browser" ||
+      workspace === "blender"
+    ) {
+      activateWorkspace(workspace, false);
+      return;
+    }
+
+    if (requestedTarget === "cli" || requestedTarget === "desktop" || requestedTarget === "browser" || requestedTarget === "blender") {
+      activateWorkspace(requestedTarget, false);
+      return;
+    }
+
+    if (requestedTarget === "all") {
+      setTarget("all");
+    }
+  }, []);
 
   useEffect(() => {
     outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight, behavior: "smooth" });
@@ -233,11 +400,12 @@ export default function CoworkPage() {
     }
   }
 
-  async function send(targetOverride?: "cli" | "desktop" | "browser" | "blender" | "all") {
-    if (!prompt.trim() || running) return;
+  async function send(targetOverride?: "cli" | "desktop" | "browser" | "blender" | "all", promptOverride?: string) {
+    const trimmedPrompt = (promptOverride ?? prompt).trim();
+    if (!trimmedPrompt || running) return;
+    if (promptOverride) setPrompt(promptOverride);
 
     const selectedTarget = targetOverride ?? target;
-    const trimmedPrompt = prompt.trim();
     setPromptHistory((history) => [trimmedPrompt, ...history.slice(0, 49)]);
     setHistoryIdx(-1);
     setCliOutput([
@@ -314,9 +482,15 @@ export default function CoworkPage() {
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
+    if (event.key === "Enter" && target === "cli" && !event.shiftKey) {
+      event.preventDefault();
+      void send();
+      return;
+    }
+
     if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
-      send();
+      void send();
       return;
     }
 
@@ -460,7 +634,24 @@ export default function CoworkPage() {
   }
 
   const runningCount = status?.runningProcesses?.length ?? 0;
-  const info = TARGET_INFO[target];
+  const activeTarget = workspaceTab === "blender" ? "blender" : workspaceTab;
+  const info = TARGET_INFO[activeTarget];
+  const workspaceConfig = workspaceTab === "blender" ? null : AGENT_WORKSPACE_CONFIG[workspaceTab];
+  const recentCliPrompts = promptHistory.slice(0, 6);
+
+  // Voice context per workspace tab
+  const voiceContext =
+    workspaceTab === "blender" ? "nx-agent"
+    : workspaceTab === "cli" ? "cli-agent"
+    : workspaceTab === "desktop" ? "desktop-agent"
+    : "browser-agent";
+
+  function handleVoiceResult(_transcript: string, action: VoiceAction) {
+    if (action.action === "run_command") {
+      const cmd = String(action.params.command ?? "").trim();
+      if (cmd) void send(activeTarget as "cli" | "desktop" | "browser" | "blender", cmd);
+    }
+  }
 
   return (
     <>
@@ -513,6 +704,14 @@ export default function CoworkPage() {
               ) : null}
             </div>
           ) : null}
+          <VoiceButton
+            context={voiceContext}
+            variant="inline"
+            size="md"
+            hint={`Voice command for ${info.label}`}
+            onResult={handleVoiceResult}
+            disabled={running}
+          />
           {(running || runningCount > 0) ? (
             <button onClick={killAll} className="btn btn-danger btn-sm" title="Kill all processes (Escape)">
               Kill All
@@ -526,24 +725,250 @@ export default function CoworkPage() {
           <div className="card-body" style={{ padding: "10px 20px", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)" }}>Workspace:</span>
             <button
-              onClick={() => setWorkspaceTab("agents")}
-              className={`btn btn-sm ${workspaceTab === "agents" ? "btn-primary" : "btn-outline"}`}
+              onClick={() => activateWorkspace("cli")}
+              className={`btn btn-sm ${workspaceTab === "cli" ? "btn-primary" : "btn-outline"}`}
             >
-              Agent Console
+              CLI Agent
             </button>
             <button
-              onClick={() => setWorkspaceTab("blender")}
+              onClick={() => activateWorkspace("desktop")}
+              className={`btn btn-sm ${workspaceTab === "desktop" ? "btn-primary" : "btn-outline"}`}
+            >
+              Desktop Agent
+            </button>
+            <button
+              onClick={() => activateWorkspace("browser")}
+              className={`btn btn-sm ${workspaceTab === "browser" ? "btn-primary" : "btn-outline"}`}
+            >
+              Browser Agent
+            </button>
+            <button
+              onClick={() => activateWorkspace("blender")}
               className={`btn btn-sm ${workspaceTab === "blender" ? "btn-primary" : "btn-outline"}`}
             >
               NX Lab
             </button>
             <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
-              {workspaceTab === "agents"
-                ? "Run Claude CLI, desktop automation, and browser tasks"
-                : "Use Cowork for local NX-style workflows, generated scenes, and 3D prompt presets"}
+              {workspaceTab === "blender"
+                ? "Use Cowork for local NX-style workflows, generated scenes, and 3D prompt presets"
+                : `${workspaceConfig?.title ?? "Agent"} workspace with dedicated prompts, status, and execution flow`}
             </div>
           </div>
         </div>
+
+        {workspaceTab === "cli" && workspaceConfig ? (
+          <div className="grid-2" style={{ gap: 20, marginBottom: 20 }}>
+            <div className="card">
+              <div className="card-header">
+                <div>
+                  <div className="card-title">{workspaceConfig.title}</div>
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{workspaceConfig.subtitle}</div>
+                </div>
+              </div>
+              <div className="card-body" style={{ display: "grid", gap: 14 }}>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <span className={`badge ${status?.cli.available ? "badge-green" : "badge-red"}`}>
+                    {status?.cli.available ? "Claude CLI ready" : "Claude CLI missing"}
+                  </span>
+                  <span className="badge badge-blue">Visible terminal mode</span>
+                  <span className="badge badge-gray">
+                    {workdir.trim() ? "Custom workdir selected" : "Uses current local folder if blank"}
+                  </span>
+                </div>
+
+                <div style={{ fontSize: 13, color: "var(--text)" }}>{workspaceConfig.description}</div>
+
+                <div style={{ display: "grid", gap: 8 }}>
+                  <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)" }}>Working directory</label>
+                  <input
+                    className="form-input"
+                    placeholder="Optional local folder for Claude CLI"
+                    value={workdir}
+                    onChange={(event) => setWorkdir(event.target.value)}
+                  />
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                    Claude CLI path: <strong>{status?.cli.path ?? "Not detected yet"}</strong>
+                  </div>
+                </div>
+
+                <textarea
+                  className="form-textarea"
+                  style={{ minHeight: 180, fontFamily: "monospace", fontSize: 14, resize: "vertical" }}
+                  placeholder={workspaceConfig.placeholder}
+                  value={prompt}
+                  onChange={(event) => setPrompt(event.target.value)}
+                  onKeyDown={handleKeyDown}
+                  disabled={running}
+                />
+
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                  <button
+                    onClick={() => {
+                      void send("cli");
+                    }}
+                    disabled={!prompt.trim() || running}
+                    className="btn btn-primary"
+                  >
+                    {running && target === "cli" ? "Running CLI Agent..." : workspaceConfig.actionLabel}
+                  </button>
+                  <VoiceButton
+                    context="cli-agent"
+                    variant="inline"
+                    size="sm"
+                    hint='Try: "Create a todo list in this folder"'
+                    onResult={handleVoiceResult}
+                    disabled={running}
+                  />
+                  {cliOutput.length > 0 && !running ? (
+                    <button onClick={() => setCliOutput([])} className="btn btn-outline btn-sm">
+                      Clear Output
+                    </button>
+                  ) : null}
+                </div>
+
+                <div style={{ display: "grid", gap: 8 }}>
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>CLI Prompt Presets</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {workspaceConfig.prompts.map((quickPrompt) => (
+                      <button
+                        key={quickPrompt}
+                        onClick={() => {
+                          setPrompt(quickPrompt);
+                          setTarget("cli");
+                        }}
+                        className="btn btn-outline btn-sm"
+                        style={{ justifyContent: "flex-start", textAlign: "left", fontSize: 12 }}
+                      >
+                        {quickPrompt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ fontSize: 12, color: "var(--primary)", fontWeight: 600 }}>
+                  {workspaceConfig.tip}
+                </div>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-header">
+                <div>
+                  <div className="card-title">CLI Session Guide</div>
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                    The CLI workspace now mirrors the dedicated agent-style flow instead of the old shared runner.
+                  </div>
+                </div>
+              </div>
+              <div className="card-body" style={{ display: "grid", gap: 14 }}>
+                <div style={{ display: "grid", gap: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>What this agent does</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {CLI_AGENT_CAPABILITIES.map((item) => (
+                      <div key={item} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                        <span className="badge badge-blue" style={{ minWidth: 28, justifyContent: "center" }}>CLI</span>
+                        <div style={{ fontSize: 12, color: "var(--text)" }}>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 12, display: "grid", gap: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>Execution flow</div>
+                  {CLI_AGENT_FLOW.map((step, index) => (
+                    <div key={step} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                      <span className="badge badge-gray" style={{ minWidth: 28, justifyContent: "center" }}>{index + 1}</span>
+                      <div style={{ fontSize: 12, color: "var(--text)" }}>{step}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 12, display: "grid", gap: 10 }}>
+                  <div className="flex-between" style={{ gap: 12 }}>
+                    <div style={{ fontWeight: 700, fontSize: 13 }}>Recent CLI prompts</div>
+                    <span className="badge badge-gray">{recentCliPrompts.length} saved</span>
+                  </div>
+                  {recentCliPrompts.length === 0 ? (
+                    <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                      Your recent CLI prompts will appear here after the first run.
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      {recentCliPrompts.map((entry, index) => (
+                        <button
+                          key={`${entry}-${index}`}
+                          onClick={() => {
+                            setPrompt(entry);
+                            setTarget("cli");
+                          }}
+                          className="btn btn-outline btn-sm"
+                          style={{ justifyContent: "flex-start", textAlign: "left", fontSize: 12 }}
+                        >
+                          {entry}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {workspaceTab !== "blender" && workspaceTab !== "cli" && workspaceConfig ? (
+          <div className="card mb-4">
+            <div className="card-header">
+              <div>
+                <div className="card-title">{workspaceConfig.title}</div>
+                <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{workspaceConfig.subtitle}</div>
+              </div>
+            </div>
+            <div className="card-body" style={{ display: "grid", gap: 14 }}>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {workspaceTab === "desktop" ? (
+                  <>
+                    <span className={`badge ${status?.desktop.available ? "badge-green" : "badge-red"}`}>
+                      {status?.desktop.available ? "Desktop automation ready" : "Desktop automation missing"}
+                    </span>
+                    <span className={`badge ${status?.desktop.running ? "badge-green" : "badge-yellow"}`}>
+                      {status?.desktop.running ? "Desktop app running" : "Desktop app idle"}
+                    </span>
+                  </>
+                ) : null}
+                {workspaceTab === "browser" ? (
+                  <>
+                    <span className={`badge ${status?.browser.available ? "badge-green" : "badge-red"}`}>
+                      {status?.browser.available ? "Browser automation ready" : "Browser executable missing"}
+                    </span>
+                    <span className="badge badge-blue">{status?.browser.url ?? "Local browser path pending"}</span>
+                  </>
+                ) : null}
+              </div>
+
+              <div style={{ fontSize: 13, color: "var(--text)" }}>{workspaceConfig.description}</div>
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {workspaceConfig.prompts.map((quickPrompt) => (
+                  <button
+                    key={quickPrompt}
+                    onClick={() => {
+                      setPrompt(quickPrompt);
+                      setTarget(activeTarget);
+                    }}
+                    className="btn btn-outline btn-sm"
+                    style={{ fontSize: 12 }}
+                  >
+                    {quickPrompt}
+                  </button>
+                ))}
+              </div>
+
+              <div style={{ fontSize: 12, color: "var(--primary)", fontWeight: 600 }}>
+                {workspaceConfig.tip}
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {workspaceTab === "blender" ? (
           <div className="grid-2" style={{ gap: 20, marginBottom: 20 }}>
@@ -604,7 +1029,12 @@ export default function CoworkPage() {
                           >
                             <option value="auto">Auto detect</option>
                             <option value="gear">Gear</option>
-                            <option value="bolt">Bolt</option>
+                             <option value="geartrain">Gear train assembly</option>
+                             <option value="bolt">Bolt</option>
+                            <option value="shaft">Shaft</option>
+                            <option value="coupling">Coupling</option>
+                            <option value="planetary">Planetary set</option>
+                            <option value="belt">Belt drive</option>
                             <option value="custom">Custom part</option>
                           </select>
                         </label>
@@ -625,6 +1055,41 @@ export default function CoworkPage() {
                           </select>
                         </label>
                         <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Quality</span>
+                          <select
+                            className="form-input"
+                            value={precision.qualityPreset}
+                            onChange={(event) =>
+                              setPrecision((current) => ({
+                                ...current,
+                                qualityPreset: event.target.value as PrecisionFormState["qualityPreset"],
+                              }))
+                            }
+                          >
+                            <option value="draft">Draft</option>
+                            <option value="balanced">Balanced</option>
+                            <option value="high">High</option>
+                          </select>
+                        </label>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Material</span>
+                          <select
+                            className="form-input"
+                            value={precision.materialPreset}
+                            onChange={(event) =>
+                              setPrecision((current) => ({
+                                ...current,
+                                materialPreset: event.target.value as PrecisionFormState["materialPreset"],
+                              }))
+                            }
+                          >
+                            <option value="steel">Steel</option>
+                            <option value="aluminum">Aluminum</option>
+                            <option value="brass">Brass</option>
+                            <option value="dark">Dark metal</option>
+                          </select>
+                        </label>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
                           <span>Tooth count</span>
                           <input
                             className="form-input"
@@ -641,6 +1106,60 @@ export default function CoworkPage() {
                             onChange={(event) => setPrecision((current) => ({ ...current, additionalToothCounts: event.target.value }))}
                             placeholder="5, 12"
                           />
+                        </label>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Planet count</span>
+                          <input
+                            className="form-input"
+                            value={precision.planetCount}
+                            onChange={(event) => setPrecision((current) => ({ ...current, planetCount: event.target.value }))}
+                            placeholder="3"
+                          />
+                        </label>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Stage count</span>
+                          <input
+                            className="form-input"
+                            value={precision.stageCount}
+                            onChange={(event) => setPrecision((current) => ({ ...current, stageCount: event.target.value }))}
+                            placeholder="2"
+                          />
+                        </label>
+                      </div>
+
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Symmetry</span>
+                          <select
+                            className="form-input"
+                            value={precision.symmetry}
+                            onChange={(event) =>
+                              setPrecision((current) => ({
+                                ...current,
+                                symmetry: event.target.value as PrecisionFormState["symmetry"],
+                              }))
+                            }
+                          >
+                            <option value="auto">Auto</option>
+                            <option value="radial">Radial</option>
+                            <option value="bilateral">Bilateral</option>
+                          </select>
+                        </label>
+                        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, paddingTop: 24 }}>
+                          <input
+                            type="checkbox"
+                            checked={precision.centerOrigin}
+                            onChange={(event) => setPrecision((current) => ({ ...current, centerOrigin: event.target.checked }))}
+                          />
+                          Center at origin
+                        </label>
+                        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, paddingTop: 24 }}>
+                          <input
+                            type="checkbox"
+                            checked={precision.smoothShading}
+                            onChange={(event) => setPrecision((current) => ({ ...current, smoothShading: event.target.checked }))}
+                          />
+                          Smooth shading
                         </label>
                       </div>
 
@@ -679,6 +1198,15 @@ export default function CoworkPage() {
                             value={precision.length}
                             onChange={(event) => setPrecision((current) => ({ ...current, length: event.target.value }))}
                             placeholder={precision.units === "mm" ? "100" : "4"}
+                          />
+                        </label>
+                        <label style={{ display: "grid", gap: 6, fontSize: 12 }}>
+                          <span>Shaft spacing</span>
+                          <input
+                            className="form-input"
+                            value={precision.shaftSpacing}
+                            onChange={(event) => setPrecision((current) => ({ ...current, shaftSpacing: event.target.value }))}
+                            placeholder={precision.units === "mm" ? "120" : "4.72"}
                           />
                         </label>
                       </div>
@@ -774,7 +1302,7 @@ export default function CoworkPage() {
                   disabled={running}
                 />
 
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                   <button
                     onClick={() => {
                       void send("blender");
@@ -784,12 +1312,39 @@ export default function CoworkPage() {
                   >
                     {running && target === "blender" ? "Generating 3D Model..." : "Generate 3D Model"}
                   </button>
+                  <VoiceButton
+                    context="nx-agent"
+                    variant="inline"
+                    size="sm"
+                    hint='Try: "Create 3 gears with 18 teeth and export OBJ"'
+                    onResult={handleVoiceResult}
+                    disabled={running}
+                  />
                   <button
                     onClick={() => setTarget("blender")}
                     className={`btn ${target === "blender" ? "btn-primary" : "btn-outline"} btn-sm`}
                   >
                     Use NX Agent
                   </button>
+                </div>
+
+                <div style={{ border: "1px solid var(--border)", borderRadius: 14, padding: 14, display: "grid", gap: 10 }}>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>Mechanical Component Library</div>
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                    Procedural support is strongest for gears, shafts, couplings, planetary sets, and belt drives. The rest can still be guided by prompt and image reference.
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10 }}>
+                    {MECHANICAL_COMPONENT_GROUPS.map((group) => (
+                      <div key={group.title} style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 12 }}>
+                        <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 8 }}>{group.title}</div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                          {group.items.map((item) => (
+                            <span key={item} className="badge badge-gray">{item}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -843,26 +1398,16 @@ export default function CoworkPage() {
           <div className="card-body" style={{ padding: "12px 20px" }}>
             <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)", whiteSpace: "nowrap" }}>
-                Mode:
+                Active Agent:
               </span>
-              {(Object.entries(TARGET_INFO) as [keyof typeof TARGET_INFO, typeof TARGET_INFO[keyof typeof TARGET_INFO]][]).map(([id, meta]) => (
-                <button
-                  key={id}
-                  onClick={() => setTarget(id)}
-                  className={`btn btn-sm ${target === id ? "btn-primary" : "btn-outline"}`}
-                  title={meta.desc}
-                >
-                  {meta.label}
-                </button>
-              ))}
+              <span className="badge badge-blue">{info.label}</span>
+              {target === "all" ? <span className="badge badge-yellow">All Agents mode enabled</span> : null}
               <div style={{ flex: 1 }} />
-              <input
-                className="form-input"
-                style={{ maxWidth: 280, fontSize: 12 }}
-                placeholder="Working directory for CLI tasks (optional)"
-                value={workdir}
-                onChange={(event) => setWorkdir(event.target.value)}
-              />
+              {workspaceTab !== "blender" && workspaceTab !== "cli" ? (
+                <span style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                  Current browser path: {status?.browser.url ?? "pending"}
+                </span>
+              ) : null}
             </div>
             <div style={{ fontSize: 12, color: "var(--primary)", marginTop: 8, fontWeight: 600 }}>
               {info.desc}
@@ -871,79 +1416,107 @@ export default function CoworkPage() {
           </div>
         </div>
 
-        <div className="grid-2" style={{ flex: 1, minHeight: 0, gap: 20 }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <div className="card" style={{ flex: 1 }}>
-              <div className="card-header">
-                <div className="card-title">Task / Prompt</div>
-                <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
-                  Ctrl+Enter send | Escape stop | Up and down arrows for history
-                </div>
-              </div>
-              <div className="card-body" style={{ display: "flex", flexDirection: "column", gap: 12, height: "calc(100% - 57px)" }}>
-                <textarea
-                  className="form-textarea"
-                  style={{ flex: 1, minHeight: 180, fontFamily: "monospace", fontSize: 14, resize: "none" }}
-                  placeholder={`Type a task for Cowork...\n\nExamples:\n- Create a simple todo list website in this folder\n- Play Ghost from Amazon Music\n- Open https://example.com in Chrome\n- Open a link, login, and complete a browser task`}
-                  value={prompt}
-                  onChange={(event) => setPrompt(event.target.value)}
-                  onKeyDown={handleKeyDown}
-                  disabled={running}
-                />
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button
-                    onClick={() => {
-                      void send();
-                    }}
-                    disabled={!prompt.trim() || running}
-                    className="btn btn-primary"
-                    style={{ flex: 1, justifyContent: "center" }}
-                  >
-                    {running ? (
-                      <>
-                        <span className="spinner" />&nbsp;Executing...
-                      </>
-                    ) : (
-                      `Run ${info.label}`
-                    )}
-                  </button>
-                  {running ? (
-                    <button onClick={stopExecution} className="btn btn-danger" title="Stop (Escape)">
-                      Stop
-                    </button>
-                  ) : null}
-                  {cliOutput.length > 0 && !running ? (
-                    <button onClick={() => setCliOutput([])} className="btn btn-outline btn-sm" title="Clear">
-                      Clear
-                    </button>
-                  ) : null}
-                </div>
-                {running && currentSessionId ? (
-                  <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "monospace" }}>
-                    Session {currentSessionId.slice(-10)} | Press Escape to stop
+        <div
+          className={workspaceTab === "cli" ? "" : "grid-2"}
+          style={{ flex: 1, minHeight: 0, gap: 20, display: workspaceTab === "cli" ? "block" : undefined }}
+        >
+          {workspaceTab === "cli" ? null : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div className="card" style={{ flex: 1 }}>
+                <div className="card-header">
+                  <div className="card-title">
+                    {workspaceTab === "blender" ? "NX Prompt" : `${workspaceConfig?.title ?? "Agent"} Prompt`}
                   </div>
-                ) : null}
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                    {workspaceTab === "blender"
+                      ? "Ctrl+Enter send | Escape stop | Up and down arrows for history"
+                      : "Ctrl+Enter send | Escape stop | Up and down arrows for history"}
+                  </div>
+                </div>
+                <div className="card-body" style={{ display: "flex", flexDirection: "column", gap: 12, height: "calc(100% - 57px)" }}>
+                  <textarea
+                    className="form-textarea"
+                    style={{ flex: 1, minHeight: 180, fontFamily: "monospace", fontSize: 14, resize: "none" }}
+                    placeholder={
+                      workspaceTab === "blender"
+                        ? `Describe the NX-style 3D model you want...\n\nExamples:\n- Create 2 connected gears with 18 teeth and 36 teeth and export OBJ only\n- Build a coupling for two aligned shafts and export OBJ only`
+                        : workspaceConfig?.placeholder ?? "Type a task for this agent..."
+                    }
+                    value={prompt}
+                    onChange={(event) => setPrompt(event.target.value)}
+                    onKeyDown={handleKeyDown}
+                    disabled={running}
+                  />
+                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    <button
+                      onClick={() => {
+                        void send();
+                      }}
+                      disabled={!prompt.trim() || running}
+                      className="btn btn-primary"
+                      style={{ flex: 1, justifyContent: "center" }}
+                    >
+                      {running ? (
+                        <>
+                          <span className="spinner" />&nbsp;Executing...
+                        </>
+                      ) : (
+                        workspaceTab === "blender"
+                          ? "Run NX Agent"
+                          : (workspaceConfig?.actionLabel ?? `Run ${info.label}`)
+                      )}
+                    </button>
+                    <VoiceButton
+                      context={voiceContext}
+                      variant="inline"
+                      size="sm"
+                      hint={`Voice command for ${info.label}`}
+                      onResult={handleVoiceResult}
+                      disabled={running}
+                    />
+                    {running ? (
+                      <button onClick={stopExecution} className="btn btn-danger" title="Stop (Escape)">
+                        Stop
+                      </button>
+                    ) : null}
+                    {cliOutput.length > 0 && !running ? (
+                      <button onClick={() => setCliOutput([])} className="btn btn-outline btn-sm" title="Clear">
+                        Clear
+                      </button>
+                    ) : null}
+                  </div>
+                  {running && currentSessionId ? (
+                    <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "monospace" }}>
+                      Session {currentSessionId.slice(-10)} | Press Escape to stop
+                    </div>
+                  ) : null}
+                </div>
               </div>
-            </div>
 
-            <div className="card">
-              <div className="card-header">
-                <div className="card-title">Quick Prompts</div>
-              </div>
-              <div className="card-body" style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {QUICK_PROMPTS.map((quickPrompt) => (
-                  <button
-                    key={quickPrompt}
-                    onClick={() => setPrompt(quickPrompt)}
-                    className="btn btn-outline btn-sm"
-                    style={{ fontSize: 12 }}
-                  >
-                    {quickPrompt}
-                  </button>
-                ))}
+              <div className="card">
+                <div className="card-header">
+                  <div className="card-title">
+                    {workspaceTab === "blender" ? "NX Prompt Presets" : `${workspaceConfig?.title ?? "Agent"} Prompt Presets`}
+                  </div>
+                </div>
+                <div className="card-body" style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {(workspaceTab === "blender" ? BLENDER_PROMPTS : workspaceConfig?.prompts ?? []).map((quickPrompt) => (
+                    <button
+                      key={quickPrompt}
+                      onClick={() => {
+                        setPrompt(quickPrompt);
+                        setTarget(activeTarget);
+                      }}
+                      className="btn btn-outline btn-sm"
+                      style={{ fontSize: 12 }}
+                    >
+                      {quickPrompt}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="card" style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
             <div className="card-header" style={{ flexShrink: 0 }}>
@@ -977,8 +1550,15 @@ export default function CoworkPage() {
                 <div style={{ color: "#475569", fontFamily: "monospace", fontSize: 13, textAlign: "center", paddingTop: 60 }}>
                   <div style={{ fontSize: 32, marginBottom: 12 }}>AI</div>
                   <div>Execution results appear here</div>
-                  <div style={{ marginTop: 6, fontSize: 12 }}>CLI mode runs Claude Code locally</div>
-                  <div style={{ marginTop: 4, fontSize: 12 }}>Desktop and Browser modes run local automation plans</div>
+                  <div style={{ marginTop: 6, fontSize: 12 }}>
+                    {workspaceTab === "cli"
+                      ? "CLI Agent opens a visible terminal and runs the exact prompt in Claude CLI."
+                      : workspaceTab === "desktop"
+                        ? "Desktop Agent plans and executes local Windows app tasks."
+                        : workspaceTab === "browser"
+                          ? "Browser Agent plans and completes website automation in Chrome or Edge."
+                          : "NX Lab generates OBJ-ready mechanical assets for NX workflows."}
+                  </div>
                 </div>
               ) : (
                 cliOutput.map((line, index) => renderLine(line, index))

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import HomeLauncher from "./HomeLauncher";
 
 interface Employee {
   id: string;
@@ -99,6 +100,8 @@ const AUTOMATION_ACTIONS = [
 ] as const;
 
 export default function Dashboard() {
+  const [authLoaded, setAuthLoaded] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [stats, setStats] = useState<Stats | null>(null);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [todayBdays, setTodayBdays] = useState<Employee[]>([]);
@@ -140,7 +143,33 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    void loadDashboard();
+    let mounted = true;
+
+    async function initializePage() {
+      try {
+        const authResponse = await fetch("/api/auth/me", { cache: "no-store" });
+        const authData = await authResponse.json();
+        if (!mounted) return;
+
+        const authenticated = Boolean(authData?.authenticated);
+        setIsAdmin(authenticated);
+        setAuthLoaded(true);
+
+        if (authenticated) {
+          await loadDashboard();
+        }
+      } catch {
+        if (!mounted) return;
+        setIsAdmin(false);
+        setAuthLoaded(true);
+      }
+    }
+
+    void initializePage();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   async function sendBirthdayWishes() {
@@ -228,6 +257,25 @@ export default function Dashboard() {
 
   const managerQueue = requests.filter((request) => request.status === "pending_manager");
   const adminQueue = requests.filter((request) => request.status === "pending_admin");
+
+  if (!authLoaded) {
+    return (
+      <div className="page-content" style={{ display: "grid", placeItems: "center", minHeight: "70vh" }}>
+        <div className="card" style={{ maxWidth: 420, width: "100%" }}>
+          <div className="card-body" style={{ textAlign: "center", padding: 32 }}>
+            <div style={{ fontSize: 24, fontWeight: 900, marginBottom: 8 }}>Loading workspace...</div>
+            <div style={{ color: "var(--text-muted)" }}>
+              Checking whether admin controls should be unlocked for this session.
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return <HomeLauncher />;
+  }
 
   return (
     <>

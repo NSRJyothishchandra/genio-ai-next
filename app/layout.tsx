@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "./Sidebar";
 import ScheduleHeartbeat from "./ScheduleHeartbeat";
+import AppShell from "./AppShell";
 
 export const metadata: Metadata = {
   title: "Genio AI",
@@ -13,10 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ScheduleHeartbeat />
-        <div className="layout">
-          <Sidebar />
-          <main className="main">{children}</main>
-        </div>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
 
 interface InboxEmail {
   uid: number;
@@ -265,6 +266,47 @@ export default function MailPage() {
     setCreatingMeeting(false);
   }
 
+  // ── Voice command handler ────────────────────────────────────────────────
+  function handleVoiceResult(_transcript: string, action: VoiceAction) {
+    const p = action.params as Record<string, unknown>;
+    switch (action.action) {
+      case "compose_email":
+        setComposeTo(String(p.to || ""));
+        setComposeSubject(String(p.subject || ""));
+        setComposeBody(String(p.body || ""));
+        setShowCompose(true);
+        break;
+      case "reply":
+        setDraft(String(p.body || ""));
+        break;
+      case "auto_respond":
+        handleDraft();
+        break;
+      case "acknowledge":
+        handleDraft("Write a polite brief acknowledgement of receipt");
+        break;
+      case "schedule_meeting":
+        setMeetingDetails({
+          title: String(p.title || ""),
+          attendees: Array.isArray(p.attendees) ? p.attendees.map(String) : [],
+          preferredDates: [],
+          duration: Number(p.duration) || 60,
+          agenda: String(p.agenda || ""),
+        });
+        setShowMeeting(true);
+        break;
+      case "refresh_inbox":
+        fetchInbox();
+        break;
+      case "filter_unread":
+        setFilter("unread");
+        break;
+      case "filter_meetings":
+        setFilter("meetings");
+        break;
+    }
+  }
+
   // ── Compose ──────────────────────────────────────────────────────────────
   async function handleComposeSend() {
     setComposing(true);
@@ -341,6 +383,13 @@ OUTLOOK_SMTP_PASS=your-password`}
             {loading ? <span className="spinner spinner-dark" /> : "↻"} Refresh
           </button>
           <button className="btn btn-primary btn-sm" onClick={() => { setShowCompose(true); setComposeOk(false); }}>+ Compose</button>
+          <VoiceButton
+            context="mail"
+            variant="inline"
+            size="md"
+            hint='Try: "Compose email to John about the project" or "Schedule meeting with Sarah"'
+            onResult={handleVoiceResult}
+          />
         </div>
       </div>
 
