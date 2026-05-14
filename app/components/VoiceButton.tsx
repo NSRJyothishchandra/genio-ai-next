@@ -59,12 +59,30 @@ export default function VoiceButton({
   const [showHint, setShowHint] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const finalTranscriptRef = useRef("");
+  const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const SILENCE_MS = 2000; // stop recording after 2 s of silence
+
+  function clearSilenceTimer() {
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+  }
+
+  function resetSilenceTimer() {
+    clearSilenceTimer();
+    silenceTimerRef.current = setTimeout(() => {
+      recognitionRef.current?.stop();
+    }, SILENCE_MS);
+  }
 
   const isSupported =
     typeof window !== "undefined" &&
     !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 
   const stopRecording = useCallback(() => {
+    clearSilenceTimer();
     recognitionRef.current?.stop();
   }, []);
 
@@ -119,15 +137,19 @@ export default function VoiceButton({
       }
       if (final) finalTranscriptRef.current += final;
       setInterimText(interim);
+      // Any speech activity resets the 2-second silence window
+      resetSilenceTimer();
     };
 
     rec.onerror = () => {
+      clearSilenceTimer();
       setState("error");
       setErrorMsg("Microphone error — check permissions");
       setTimeout(() => { setState("idle"); setErrorMsg(""); }, 3000);
     };
 
     rec.onend = () => {
+      clearSilenceTimer();
       const text = finalTranscriptRef.current.trim();
       if (text) processTranscript(text);
       else setState("idle");
@@ -136,6 +158,8 @@ export default function VoiceButton({
     recognitionRef.current = rec;
     rec.start();
     setState("recording");
+    // Start the silence watchdog — fires if nothing is heard within 2 s
+    resetSilenceTimer();
   }, [isSupported, processTranscript]);
 
   const handleClick = () => {
@@ -144,7 +168,7 @@ export default function VoiceButton({
     else if (state === "idle") startRecording();
   };
 
-  useEffect(() => () => { recognitionRef.current?.abort(); }, []);
+  useEffect(() => () => { clearSilenceTimer(); recognitionRef.current?.abort(); }, []);
 
   const iconSize = size === "sm" ? 14 : size === "lg" ? 22 : 18;
   const btnSize = size === "sm" ? 28 : size === "lg" ? 48 : 36;
