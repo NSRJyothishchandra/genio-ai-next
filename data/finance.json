@@ -1,0 +1,124 @@
+{
+  "invoices": [
+    {
+      "id": "INV-24001",
+      "vendor": "SKF Bearings India",
+      "category": "Bearings",
+      "amount": 245000,
+      "currency": "INR",
+      "dueDate": "2026-05-03",
+      "status": "pending",
+      "priority": "high",
+      "notes": "Planetary gearbox bearing lot for May production batch."
+    },
+    {
+      "id": "INV-24002",
+      "vendor": "Siemens Industrial Drives",
+      "category": "Motors",
+      "amount": 418500,
+      "currency": "INR",
+      "dueDate": "2026-05-07",
+      "status": "approved",
+      "priority": "medium",
+      "notes": "Advance against motor delivery for demo assembly line."
+    },
+    {
+      "id": "INV-24003",
+      "vendor": "NSK Components",
+      "category": "Shafts",
+      "amount": 189300,
+      "currency": "INR",
+      "dueDate": "2026-05-01",
+      "status": "pending",
+      "priority": "high",
+      "notes": "Intermediate shaft machining and spline finishing."
+    }
+  ],
+  "expenses": [
+    {
+      "id": "EXP-1778061208039",
+      "employeeId": "EMP442668",
+      "employeeName": "jyothish",
+      "department": ".net developer",
+      "amount": 5000,
+      "currency": "INR",
+      "submittedAt": "2026-05-06T09:53:28.039Z",
+      "type": "Medical",
+      "status": "pending",
+      "notes": "travel\n"
+    },
+    {
+      "id": "EXP-1777447350738",
+      "employeeId": "EMP289745",
+      "employeeName": "Dhanush",
+      "department": "Software Engineer",
+      "amount": 5000,
+      "currency": "INR",
+      "submittedAt": "2026-04-29T07:22:30.738Z",
+      "type": "Training",
+      "status": "pending",
+      "notes": "training"
+    },
+    {
+      "id": "EXP-1777445074521",
+      "employeeId": "EMP442666",
+      "employeeName": "chandra",
+      "department": "Software Engineer",
+      "amount": 500,
+      "currency": "INR",
+      "submittedAt": "2026-04-29T06:44:34.521Z",
+      "type": "Travel",
+      "status": "pending",
+      "notes": "travel"
+    },
+    {
+      "id": "EXP-1801",
+      "employeeName": "Saravanan",
+      "department": "HR",
+      "amount": 8200,
+      "currency": "INR",
+      "submittedAt": "2026-04-28T10:15:00.000Z",
+      "type": "Travel",
+      "status": "pending",
+      "notes": "Candidate travel and welcome kit dispatch."
+    },
+    {
+      "id": "EXP-1802",
+      "employeeName": "asalm",
+      "department": "Engineering",
+      "amount": 3650,
+      "currency": "INR",
+      "submittedAt": "2026-04-27T14:05:00.000Z",
+      "type": "Meals",
+      "status": "approved",
+      "notes": "Vendor review workshop refreshments."
+    }
+  ],
+  "paymentRuns": [
+    {
+      "id": "PAY-0429-A",
+      "title": "Weekly vendor payout batch",
+      "scheduledFor": "2026-04-30T09:30:00.000Z",
+      "status": "ready",
+      "items": 4,
+      "totalAmount": 852800,
+      "currency": "INR"
+    },
+    {
+      "id": "PAY-0427-R",
+      "title": "Expense reimbursement run",
+      "scheduledFor": "2026-04-27T16:00:00.000Z",
+      "status": "completed",
+      "items": 11,
+      "totalAmount": 96450,
+      "currency": "INR"
+    }
+  ],
+  "cashflow": {
+    "monthBudget": 3500000,
+    "actualSpend": 2149650,
+    "committedSpend": 852800,
+    "payrollReserve": 975000,
+    "receivables": 1425000
+  }
+}

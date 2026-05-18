@@ -73,5 +73,30 @@
     "createdAt": "2026-04-22T13:36:41.918Z",
     "updatedAt": "2026-04-22T13:36:41.919Z",
     "notes": ""
+  },
+  {
+    "employeeId": "EMP442668",
+    "name": "jyothish",
+    "email": "narayana.jyothishchandra@gmail.com",
+    "dob": "2000-03-09",
+    "position": ".net developer",
+    "dateOfJoining": "2026-05-05",
+    "status": "in_progress",
+    "checklist": {
+      "photo": false,
+      "aadhaar": false,
+      "pan": false,
+      "bankDetails": false,
+      "offerLetterSigned": false,
+      "ndaSigned": false,
+      "backgroundVerification": false,
+      "itSetup": false,
+      "welcomeEmailSent": true
+    },
+    "documents": [],
+    "photoUrl": null,
+    "createdAt": "2026-05-06T09:49:40.525Z",
+    "updatedAt": "2026-05-06T09:49:40.525Z",
+    "notes": ""
   }
 ]

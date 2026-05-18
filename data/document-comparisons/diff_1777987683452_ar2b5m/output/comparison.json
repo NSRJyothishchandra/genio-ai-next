@@ -1,0 +1,99 @@
+{
+  "leftFileName": "tmp-left.txt",
+  "rightFileName": "tmp-right.txt",
+  "generatedAt": "2026-05-05T18:58:04.168984",
+  "summary": {
+    "leftLineCount": 4,
+    "rightLineCount": 4,
+    "equalLines": 2,
+    "changedLines": 3,
+    "replacedLines": 1,
+    "insertedLines": 1,
+    "deletedLines": 1
+  },
+  "entries": [
+    {
+      "kind": "equal",
+      "leftLineNumber": 1,
+      "rightLineNumber": 1,
+      "leftParts": [
+        {
+          "text": "Line one stays same",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Line one stays same",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "replace",
+      "leftLineNumber": 2,
+      "rightLineNumber": 2,
+      "leftParts": [
+        {
+          "text": "Line two is ",
+          "type": "equal"
+        },
+        {
+          "text": "old",
+          "type": "delete"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Line two is ",
+          "type": "equal"
+        },
+        {
+          "text": "updated now",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 3,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Line three removed",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 4,
+      "rightLineNumber": 3,
+      "leftParts": [
+        {
+          "text": "Final line",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Final line",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 4,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Extra line added",
+          "type": "insert"
+        }
+      ]
+    }
+  ]
+}

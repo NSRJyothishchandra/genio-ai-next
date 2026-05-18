@@ -1,0 +1,28 @@
+{
+  "page_number": 10,
+  "document_code": "MTQ-000",
+  "title": "Cover Page and Product Image",
+  "page_kind": "reference",
+  "topics": [
+    "Bonfiglioli Technical Quality Handbook introduction",
+    "Product line overview"
+  ],
+  "components": [
+    "gearbox",
+    "planetary gearbox",
+    "shaft",
+    "housing"
+  ],
+  "rules": [],
+  "dimensions": [],
+  "tolerances": [],
+  "surface_finish": [],
+  "inspection": [],
+  "manufacturing_notes": [],
+  "training_guidance": [
+    "This page serves as a visual reference for the types of mechanical power transmission products covered in the Bonfiglioli Technical Quality Handbook.",
+    "The handbook applies to gearboxes, planetary drives, shafts, housings, and related power transmission components.",
+    "Document code MTQ-000 dated 26.10.2010 1/1 establishes the handbook version control."
+  ],
+  "summary": "This is the cover page of the Bonfiglioli Technical Quality Handbook (document MTQ-000, dated 26.10.2010). It displays the company logo and a photograph showing various gearbox and power transmission products including planetary gearboxes, shafts, and housings. The page establishes the scope of the handbook which covers quality standards for mechanical drive components."
+}

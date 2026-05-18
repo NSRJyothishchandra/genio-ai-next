@@ -1,0 +1,4576 @@
+{
+  "leftFileName": "YP00111955.pdf",
+  "rightFileName": "YZ00040658--_DRAFT.pdf",
+  "generatedAt": "2026-05-06T15:14:16.520465",
+  "summary": {
+    "leftLineCount": 0,
+    "rightLineCount": 380,
+    "equalLines": 0,
+    "changedLines": 380,
+    "replacedLines": 0,
+    "insertedLines": 380,
+    "deletedLines": 0
+  },
+  "entries": [
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 1,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 2,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 3,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " A-A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 4,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "B  ( 10:1 )",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 5,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "113",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 6,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "147",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 7,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "194",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 8,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "246",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 9,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 10,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "81,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 11,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 12,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0 131 0,05",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 13,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "20,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 14,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "4",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 15,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 16,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0 36,5 20",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 17,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 18,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "75",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 19,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 20,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "61",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 21,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "24",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 22,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "136",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 23,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "160",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 24,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "272,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 25,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "75",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 26,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "32",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 27,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "56",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 28,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "C  ( 3:1 )",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 29,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "24 0,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 30,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "67",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 31,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1015",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 32,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "206",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 33,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "180 f7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 34,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,043",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 35,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,083",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 36,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "175 f7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 37,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,043",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 38,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,083",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 39,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "152",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 40,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "140 M7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 41,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 42,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,04",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 43,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "17",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 44,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "14,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 45,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 46,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 47,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "160 H8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 48,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,063",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 49,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 50,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "160",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 51,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 52,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 53,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 54,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "2,65 H13",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 55,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,14",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 56,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 57,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "x451",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 58,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "x450,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 59,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 60,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,8R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 61,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "163,6 H11",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 62,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,25",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 63,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 64,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "2,4",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 65,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "2,5 0,05 2,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 66,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "2,2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 67,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 68,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 69,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "max",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 70,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 71,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R 0,3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 72,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 73,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 74,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 75,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "max",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 76,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 77,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 78,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 79,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 80,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "243",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 81,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "55",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 82,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "10",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 83,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 84,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "47",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 85,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 86,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 87,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "51",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 88,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "8,182 16,364",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 89,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "10R 8R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 90,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "10R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 91,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1,6R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 92,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1,6R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 93,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,8R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 94,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "125",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 95,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G 3/8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 96,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "n 1  ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 97,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 98,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 99,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "B",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 100,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "C",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 101,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 102,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "125 M7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 103,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 104,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-0,04",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 105,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "236 H7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 106,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,046",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 107,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 108,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sformi  di  fusione  non  quotati  3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 109,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Raggi  di  fusione  non  quotati  R5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 110,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sovrammetallo  di  fusione  2  mm",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 111,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Draft  angle  3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 112,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Fillets  not  quoted  R5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 113,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Machining  allowances  2  mm",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 114,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "M n 2210",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 115,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0,8R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 116,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15R",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 117,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "128",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 118,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "E  ( 3:1 )",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 119,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "M X18",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 120,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "E",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 121,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "16,7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 122,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 123,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 124,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "45",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 125,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "145",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 126,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "125",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 127,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "222",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 128,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "165",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 129,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "60",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 130,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "prof.-depth  4.5  n 22,25",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 131,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "244",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 132,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "120",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 133,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 134,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " F-F",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 135,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 136,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "25",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 137,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "5,5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 138,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Piano  utile",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 139,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Min  diameter  for  the  plug",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 140,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "14",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 141,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sm  1x45",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 142,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sm  2x45",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 143,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0.06 G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 144,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0.04 G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 145,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0.06 G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 146,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "K",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 147,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "H",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 148,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "11",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 149,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 150,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3 8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 151,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "I",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 152,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 153,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "C",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 154,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "15",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 155,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "6 16",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 156,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "8 11",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 157,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 158,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 159,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "C",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 160,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "E",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 161,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "K",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 162,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "I",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 163,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "14",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 164,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1410",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 165,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 166,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "H",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 167,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "L",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 168,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 169,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "6",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 170,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 171,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "J",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 172,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "E",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 173,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "L",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 174,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "13",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 175,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "137 10",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 176,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 177,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "J",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 178,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 179,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "D",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 180,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "5 15",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 181,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "9",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 182,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 183,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "B",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 184,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "D",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 185,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "4",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 186,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "B",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 187,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1612",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 188,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 189,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "21 4",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 190,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "9",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 191,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 192,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 193,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 194,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Opzionale",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 195,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Emesso con  -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 196,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Disegno n° -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 197,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "C.F. :",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 198,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Optional",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 199,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Issued with.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 200,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Lelli G.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 201,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Description Change",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 202,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 203,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "KurianJohn P.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 204,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Mod. da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 205,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Dimensions in mm unless otherwise specified",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 206,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Dimensioni espresse in mm se non diversamente indicato",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 207,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Rev.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 208,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Descrizione Modifica",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 209,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Q.ta' mod.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 210,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 211,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Changed by",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 212,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Dwg no.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 213,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Change q.ty",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 214,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1 :1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 215,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 216,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Edges",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 217,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "EN_GJS_500_7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 218,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "FilletsScale",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 219,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Obtained from",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 220,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Stato rilascio -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 221,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "UNI 5541",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 222,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Dimensional and geometrical tolerances for elements without ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 223,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "specific tolerances according to:",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 224,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Spigoli -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 225,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Standard",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 226,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "FUSIONE",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 227,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Date",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 228,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Heat Treatment",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 229,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 230,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "6H - 6g",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 231,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Foglio -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 232,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Functional class",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 233,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Change Class",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 234,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1 /1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 235,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Tensile Strenght",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 236,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sheet",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 237,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Peso -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 238,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sostituisce -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 239,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "-",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 240,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R0.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 241,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 242,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "KG",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 243,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Data -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 244,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Data Rev. -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 245,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Durezza -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 246,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Replace",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 247,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Date",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 248,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Case Hard. Depth",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 249,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Drawn by",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 250,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "24.1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 251,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Material",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 252,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Classe funzionale -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 253,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Ricavabile da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 254,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "950008840G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 255,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Trattamento Termico -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 256,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "705 T",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 257,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "P* D180P222M10-22 G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 258,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 259,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Hardness",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 260,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Raw Weight",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 261,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "KG",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 262,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Oggetto -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 263,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Scala -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 264,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Materiale -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 265,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "20.3",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 266,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "OFFICIAL ERP",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 267,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Tolleranze dimensionali e geometriche per elementi privi di ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 268,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "tolleranze specifiche, secondo:",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 269,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "YZ00040658",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 270,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Weight",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 271,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Replaced by",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 272,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "ECN0111827",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 273,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Peso Grezzo",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 274,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Formato -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 275,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Ricavare da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 276,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "UNI EN 22768",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 277,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Raccordi -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 278,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Emesso con -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 279,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Object",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 280,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "18-Mar-2025",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 281,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Rev. Date",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 282,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "m - K",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 283,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 284,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 285,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Approved by",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 286,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Unmachined 3D",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 287,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Checked by",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 288,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Data -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 289,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 290,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "EN 1563",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 291,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Obtainable from",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 292,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Rev.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 293,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Filettature prive di tolleranze da eseguire in",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 294,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Threading without tolerances to be performed in",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 295,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "La BONFIGLIOLI GROUP si riserva a termini di ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 296,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "legge la proprieta' di questo disegno, con divieto ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 297,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "di riprodurlo o di renderlo comunque noto a terzi ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 298,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "senza la specifica approvazione",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 299,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3D non lavorato -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 300,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Sost. dal -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 301,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Size",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 302,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 303,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Approvato da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 304,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Description",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 305,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "P* D180P222M10-22 G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 306,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Dis. da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 307,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 308,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Prof. Cementazione",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 309,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "I",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 310,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "0.5x45",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 311,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Issued with",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 312,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Release status",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 313,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "CASTING",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 314,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "CORPO",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 315,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Classe Mod. -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 316,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Resistenza ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 317,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "HOUSING",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 318,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "KurianJohn P..",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 319,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Lelli G.",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 320,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Contr. da -",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 321,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "BONFIGLIOLI GROUP Holds the legal ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 322,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "proprietary rights of this drawing. Unauthorised ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 323,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "reproduction or disclosure of the Drawing to ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 324,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "third parties is forbidden",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 325,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Descrizione",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 326,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 327,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "20",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 328,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 329,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "20",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 330,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "75",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 331,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1.6",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 332,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1.6",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 333,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "N/mm2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 334,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "%A min",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 335,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "HB",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 336,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "%7",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 337,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " Rp min",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 338,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "500  ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 339,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "CARATTERISTICHE MATERIALE",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 340,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "MATERIAL CHARACTERISTICS",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 341,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 342,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R min",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 343,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "N/mm2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 344,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "A min",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 345,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "170-230",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 346,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "CARATTERISTICHE MATERIALE",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 347,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "MATERIAL CHARACTERISTICS",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 348,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "R min  ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 349,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "DUREZZA",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 350,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "HARDNESS",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 351,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "N/mm2320Rp min",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 352,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1 45XSm",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 353,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 354,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "1.6",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 355,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 356,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Piano  utile",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 357,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Min  diameter  for  the  plug",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 358,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "26",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 359,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 360,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.2 Smusso  secondo",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 361,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Chamfer  acc.  to  ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 362,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "UNI  EN  ISO  1179-1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 363,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 364,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "8",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 365,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "+0,2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 366,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": " 0",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 367,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Smusso  secondo",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 368,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "Chamfer  acc.  to  ",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 369,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "UNI  EN  ISO  9974-1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 370,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 371,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 372,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.26.312.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 373,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 374,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "3.2",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 375,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 376,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "203 0,1",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 377,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G ( 2:1 )",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 378,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 379,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "45",
+          "type": "insert"
+        }
+      ]
+    },
+    {
+      "kind": "insert",
+      "leftLineNumber": null,
+      "rightLineNumber": 380,
+      "leftParts": [],
+      "rightParts": [
+        {
+          "text": "12.5",
+          "type": "insert"
+        }
+      ]
+    }
+  ]
+}

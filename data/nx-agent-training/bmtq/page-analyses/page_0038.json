@@ -1,0 +1,71 @@
+{
+  "page_number": 38,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zones introduction",
+    "Housing geometry for seal rings",
+    "Bearing and seal ring assembly with same fitting diameter"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat"
+  ],
+  "rules": [
+    "Working zone introduction for seal rings in housing must include lead-in chamfer with angle 15° ± 5° and depth proportional to diameter",
+    "Chamfer radius R depends on diameter: ød ≤ 60 use R=0.4, >60 to ≤120 use R=0.8, >120 use R=1.2",
+    "Minimum effective dimension a = 1 mm (effective minimum) unless larger dimensioning is not permitted, constrained to a ≤ 2 mm",
+    "For bearing and seal ring with same fitting diameter (dc = da): seal ring assembly must follow bearing assembly",
+    "All zone 'L' dimensions must be equal when bearing and seal ring share fitting diameter",
+    "Specific zones must remain the same and useful length assigned",
+    "Rounded edge indication means there must be no sharp roughness",
+    "Surface possibly with plunge grinding machining and without roughness a/o helical ridges"
+  ],
+  "dimensions": [
+    "Chamfer angle: 15° ± 5°",
+    "Chamfer depth component: Δ = 2",
+    "Chamfer depth component: Δ = 1.6",
+    "Minimum effective dimension: a = 1 mm",
+    "Maximum effective dimension: a ≤ 2 mm",
+    "Chamfer radius R: 0.4 mm for ød ≤ 60",
+    "Chamfer radius R: 0.8 mm for 60 < ød ≤ 120",
+    "Chamfer radius R: 1.2 mm for ød > 120"
+  ],
+  "tolerances": [
+    "Chamfer angle tolerance: ± 5°",
+    "Effective dimension constraint: a ≤ 2 mm",
+    "Fitting tolerance and roughness values must be indicated in technical zones"
+  ],
+  "surface_finish": [
+    "Surface possibly with plunge grinding machining",
+    "No sharp edges or roughness allowed on rounded edges",
+    "No helical ridges allowed",
+    "Roughness values must be specified in technical zones"
+  ],
+  "inspection": [
+    "Verify chamfer angle 15° ± 5°",
+    "Verify effective dimension a is minimum 1 mm and maximum 2 mm",
+    "Verify appropriate radius R based on diameter range",
+    "Verify rounded edges have no sharp roughness",
+    "Check surface for absence of helical ridges"
+  ],
+  "manufacturing_notes": [
+    "Spigot rounded or rounded side must have sharp edge removed",
+    "Use plunge grinding for surface finish where applicable",
+    "Ensure no helical ridges remain after machining",
+    "When assembling bearing and seal ring with same diameter: seal ring follows bearing in sequence",
+    "All technical zones must indicate fitting tolerance and roughness values"
+  ],
+  "training_guidance": [
+    "NX agent should create seal ring housing pockets with 15° ± 5° lead-in chamfer",
+    "Apply diameter-dependent fillet radius: R=0.4 for small (≤60mm), R=0.8 for medium (60-120mm), R=1.2 for large (>120mm) seal seats",
+    "Maintain effective working dimension 'a' between 1-2 mm on housing seal pockets",
+    "When modeling combined bearing-seal assemblies with shared fitting diameter, ensure zone 'L' dimensions are equal",
+    "Add rounded edge callouts to prevent sharp transitions at seal seat entries",
+    "Specify plunge grinding surface finish requirement on seal seat surfaces to eliminate helical grinding marks",
+    "Generate assembly sequence constraints: seal ring installation must follow bearing installation when diameters match"
+  ],
+  "summary": "This standard defines the geometry requirements for seal ring housing working zones, including mandatory 15° ± 5° lead-in chamfers with diameter-dependent fillet radii (0.4 to 1.2 mm) and effective working dimensions constrained between 1-2 mm. Special rules apply when bearing and seal ring share the same fitting diameter, requiring matched zone dimensions and specific assembly sequences. Surface finish must prevent sharp edges and helical ridges, preferably using plunge grinding."
+}

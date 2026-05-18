@@ -553,14 +553,14 @@
   {
     "id": "EMP442665",
     "name": "asalm",
-    "dob": "2000-04-22",
+    "dob": "2000-04-29",
     "gender": "Male",
     "email": "narayana.jyothishchandra@gmail.com",
     "phone": "84846151848",
     "position": "Software Engineer",
     "dateOfJoining": "2026-02-06",
     "address": "Chennai",
-    "photoUrl": "/employee-photos/EMP442665.png"
+    "photoUrl": "/employee-photos/EMP442665.jpg"
   },
   {
     "id": "EMP2346",
@@ -577,26 +577,26 @@
   {
     "id": "EMP149",
     "name": "Mounika",
-    "dob": "2001-04-22",
+    "dob": "2001-04-29",
     "gender": "Female",
     "email": "narayana.jyothish@gmail.com",
     "phone": "7997661804",
     "position": "Software Engineer",
     "dateOfJoining": "2026-04-04",
     "address": "Chennai",
-    "photoUrl": "/employee-photos/EMP149.png"
+    "photoUrl": "/employee-photos/EMP149.jpeg"
   },
   {
     "id": "EMP442666",
     "name": "chandra",
-    "dob": "2000-03-22",
+    "dob": "2000-04-29",
     "gender": "Male",
     "email": "narayana.jyothish@gmail.com",
-    "phone": "",
+    "phone": "8328396101",
     "position": "Software Engineer",
     "dateOfJoining": "2026-04-03",
-    "address": "",
-    "photoUrl": "/employee-photos/EMP442666.png"
+    "address": "Chennai",
+    "photoUrl": "/employee-photos/EMP442666.jpg"
   },
   {
     "id": "EMP289745",
@@ -620,5 +620,16 @@
     "position": "Software Engineer",
     "dateOfJoining": "2026-04-02",
     "address": "Chennai"
+  },
+  {
+    "id": "EMP442668",
+    "name": "jyothish",
+    "dob": "2000-03-09",
+    "gender": "Male",
+    "email": "narayana.jyothishchandra@gmail.com",
+    "phone": "",
+    "position": ".net developer",
+    "dateOfJoining": "2026-05-05",
+    "address": ""
   }
 ]

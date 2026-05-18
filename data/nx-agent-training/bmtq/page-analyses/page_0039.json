@@ -1,0 +1,70 @@
+{
+  "page_number": 39,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zone introduction",
+    "Bearing and seal ring assembly with same fitting diameter",
+    "Housing chamfer and relief groove geometry",
+    "Assembly sequence rules for bearing and seal"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat",
+    "chamfer"
+  ],
+  "rules": [
+    "Minimum effective dimension a = 1 mm where dimensions don't allow larger sizing (constraint: 1 ≤ a ≤ 2 mm)",
+    "Radius R based on diameter ød: ød ≤ 60 → R = 0.4 mm; ød > 60 ≤ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+    "Assembly sequence: seal ring must be assembled followed by bearing when dc = da (same fitting diameter)",
+    "Assembly sequence: bearing must be assembled followed by seal ring in standard configuration",
+    "Zone 'L' must be dimensioned with specific tolerances and roughness",
+    "Working zone must remain on the specific zones assigned, indicating useful length of execution",
+    "Rounded edge indication means there must be no sharp roughness",
+    "Sharp corners in relief groove allowed if chamfer edge is rounded",
+    "Surface finishing with plunge grinding machining or helical milling allowed without roughness a/o helical riflings"
+  ],
+  "dimensions": [
+    "Minimum effective dimension a = 1 mm (range 1 mm ≤ a ≤ 2 mm)",
+    "Spacing dimension L must be indicated with tolerance and roughness",
+    "Relief groove spacing L1 shown in assembly detail",
+    "Chamfer angle indicated as 2° in housing cross-section"
+  ],
+  "tolerances": [
+    "Zone 'L' must indicate specific tolerance and roughness values",
+    "Dimension 'a' constrained between 1 mm and 2 mm",
+    "Tolerance for bearing/seal fitting diameter (dc = da) must match"
+  ],
+  "surface_finish": [
+    "Roughness values must be specified in zone 'L'",
+    "Surface finishing possible with plunge grinding machining without roughness constraint",
+    "Helical milling allowed without roughness a/o helical riflings constraint",
+    "Rounded edges required (no sharp roughness allowed)"
+  ],
+  "inspection": [
+    "Verify minimum effective dimension a ≥ 1 mm",
+    "Check that relief radius R matches diameter range specification",
+    "Verify zone 'L' dimensions remain within assigned tolerance",
+    "Confirm rounded edge condition (no sharp roughness)",
+    "Validate assembly sequence based on fitting diameter relationship"
+  ],
+  "manufacturing_notes": [
+    "Use minimum dimension a = 1 mm only when larger dimensions not feasible",
+    "Apply radius R according to diameter ranges: 0.4 mm (ød ≤ 60), 0.8 mm (60 < ød ≤ 120), 1.2 mm (ød > 120)",
+    "Plunge grinding or helical milling acceptable for surface finishing",
+    "Rounded corners required; sharp corners acceptable only in relief groove with rounded chamfer edge",
+    "Assembly order critical: when dc = da, seal must precede bearing; otherwise bearing precedes seal"
+  ],
+  "training_guidance": [
+    "NX agent must create seal housing working zones with chamfer angle 2° and appropriate radius R based on diameter",
+    "Apply minimum relief dimension a = 1 mm only when space constrained, otherwise use larger values up to 2 mm",
+    "Model rounded edges at chamfer transitions; avoid sharp corners except in relief grooves where chamfer edge is rounded",
+    "Zone 'L' geometry must include tolerance and surface finish annotations in drawing output",
+    "Validate assembly sequence logic: if bearing and seal share same fitting diameter (dc = da), seal must be assembled first",
+    "When generating housing geometry, automatically select radius R: if ød ≤ 60 use 0.4 mm, if 60 < ød ≤ 120 use 0.8 mm, if ød > 120 use 1.2 mm",
+    "Include surface finish callouts specifying plunge grinding or helical milling as acceptable methods"
+  ],
+  "summary": "This standard defines the geometric requirements for seal ring housing working zones in gearbox housings. It specifies chamfer angles (2°), relief radii (0.4–1.2 mm based on diameter), minimum effective spacing (1 mm), and assembly sequence rules when bearings and seals share the same fitting diameter. The page includes detailed guidance on surface finish methods (plunge grinding, helical milling) and mandates rounded edges with specified tolerances and roughness in critical zone 'L'."
+}

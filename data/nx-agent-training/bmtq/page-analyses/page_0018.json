@@ -1,0 +1,65 @@
+{
+  "page_number": 18,
+  "document_code": "TAB-001 / TAB-002",
+  "title": "Relief Grooves for Grinding Zones and Thread",
+  "page_kind": "rule",
+  "topics": [
+    "Relief grooves for grinding zones (TAB-001)",
+    "Relief grooves for thread (TAB-002)",
+    "Comparison with UNI4386 groove standard",
+    "Dimensional specifications for relief grooves by diameter range"
+  ],
+  "components": [
+    "shaft",
+    "bearing seat",
+    "seal seat",
+    "thread",
+    "grinding zone"
+  ],
+  "rules": [
+    "Relief grooves for thread must be made in cases where the thread zone ends at a shoulder with ledge function",
+    "Relief groove dimensions vary by shaft diameter range (18-50mm, 51-80mm, 81-125mm, >125mm for grinding zones)",
+    "Relief groove dimensions for thread vary by pitch (P ≤ 1.25, 1.5 ≤ P ≤ 2, 2.5 ≤ P ≤ 3)",
+    "Grooves follow both UNI regulation and TRASMITAL specifications",
+    "Possible specific grooves must be indicated in details in drawing"
+  ],
+  "dimensions": [
+    "Grinding zone 18-50mm: width 2.5mm, depth 0.1mm, radius R 1...6, angle 30°, tolerance ±0.2",
+    "Grinding zone 51-80mm: width 3mm, depth 0.2mm, radius R 1...6, angle 30°, tolerance ±0.2",
+    "Grinding zone 81-125mm: width 4.5mm, depth 0.3mm, radius R 2.5, angle 30°, tolerance ±0.3",
+    "Grinding zone >125mm: width 7mm, depth profile, radius R4.0, angle 30°, tolerance ±0.2-0.3",
+    "Thread P ≤ 1.25: R=1.2, A=3.3, B=1.2, T1=0.2, T2=1.2",
+    "Thread 1.5 ≤ P ≤ 2: R=1.6, A=4.0, B=1.2, T1=0.2, T2=1.7",
+    "Thread 2.5 ≤ P ≤ 3: R=2.0, A=5.0, B=1.5, T1=0.3, T2=2.4"
+  ],
+  "tolerances": [
+    "Grinding zone small diameters (18-50mm): ±0.1mm depth, ±0.2mm width",
+    "Grinding zone medium diameters (51-80mm): ±0.2mm general tolerance",
+    "Grinding zone large diameters (81-125mm): ±0.3mm width, ±0.4mm depth, tolerance range 0.2...0.3",
+    "Grinding zone extra large (>125mm): ±0.2mm to ±0.3mm various features, ±0.2 GD&T",
+    "Thread grooves: T1 tolerance 0.2-0.3mm, T2 tolerance 1.2-2.4mm depending on pitch"
+  ],
+  "surface_finish": [],
+  "inspection": [
+    "Verify relief groove presence where thread ends at shoulder with ledge function",
+    "Check groove dimensions match diameter/pitch range specifications",
+    "Confirm groove dimensions are detailed in drawing when non-standard"
+  ],
+  "manufacturing_notes": [
+    "Relief grooves enable complete grinding of adjacent zones without interference",
+    "Relief grooves at thread allow proper thread run-out at shoulders",
+    "Groove geometry includes radius at bottom for stress concentration reduction",
+    "30° angle standard for grinding zone relief grooves",
+    "Specific groove designs may deviate from standard and must be documented"
+  ],
+  "training_guidance": [
+    "When modeling shafts with grinding zones (bearing seats, seal seats), automatically insert relief grooves per diameter range: 2.5mm wide × 0.1mm deep for 18-50mm shafts, 3mm × 0.2mm for 51-80mm, 4.5mm × 0.3mm for 81-125mm, 7mm for >125mm",
+    "For threaded features ending at shoulders with ledge function, insert thread relief groove with radius R and dimensions A, B per thread pitch: R1.2/A3.3 for fine pitch, R1.6/A4.0 for medium, R2.0/A5.0 for coarse",
+    "Model relief grooves with 30° lead angle and specified radius at groove bottom (R 1-6 for grinding, R 1.2-2.0 for thread)",
+    "Apply specified tolerances to groove width and depth based on shaft diameter range",
+    "Flag for drawing detail callout when non-standard groove geometry is required",
+    "Validate that all ground surfaces adjacent to shoulders include appropriate relief grooves",
+    "Cross-reference UNI4386 standard for baseline groove geometry, apply TRASMITAL specifications as override"
+  ],
+  "summary": "This page defines standard relief groove geometries for two applications: grinding zones (TAB-001) and threaded zones (TAB-002). Grinding zone grooves are sized by shaft diameter (18-50mm through >125mm) with specific widths, depths, radii, and tolerances. Thread relief grooves are sized by thread pitch (P ≤ 1.25 through 2.5-3mm) and are required where threads meet shoulders. All grooves follow UNI and TRASMITAL specifications and must be detailed in drawings when non-standard."
+}

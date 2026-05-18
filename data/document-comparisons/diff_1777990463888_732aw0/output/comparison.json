@@ -1,0 +1,2428 @@
+{
+  "leftFileName": "AD00016277--_DRAFT.pdf",
+  "rightFileName": "AD00019198S01.pdf",
+  "generatedAt": "2026-05-05T19:44:26.504230",
+  "summary": {
+    "leftLineCount": 201,
+    "rightLineCount": 0,
+    "equalLines": 0,
+    "changedLines": 201,
+    "replacedLines": 0,
+    "insertedLines": 0,
+    "deletedLines": 201
+  },
+  "entries": [
+    {
+      "kind": "delete",
+      "leftLineNumber": 1,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "BB",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 2,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "B-B",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 3,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A-A",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 4,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M10x130  10.9  GEO  N 22",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 5,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": " 70  Nm  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 6,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "m10  z13  x0.45",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 7,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M10x35  8.8  N 4",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 8,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": " 50  Nm  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 9,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M60x2",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 10,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_101  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 11,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "3/8\"G  N 1",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 12,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 13,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "  Applicare  grasso",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 14,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "  APPLY  GREASE  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 15,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "  GADUS  S2  V220  0  (3,8  KG)",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 16,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "33117",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 17,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "30214",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 18,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "305",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 19,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1:4.25",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 20,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "303",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 21,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1:5.33",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 22,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1:7.20",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 23,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "PRECARICO  REGISTRAZIONE",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 24,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "CUSC.  CONICI  25000-30000  N",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 25,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "TAPERED  ROLLER  BEARING  PRELOAD",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 26,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M10x70  8.8  N 4",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 27,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": " 40  Nm",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 28,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "-  LOCTITE  638  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 29,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "14.5",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 30,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "+0,5",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 31,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "-0,3",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 32,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M8x1  N 1  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 33,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 34,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "DADO  AUTOFREN.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 35,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "SELF-LOCKING  NUT",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 36,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M10  8G  GEO  n 4",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 37,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "...Nm",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 38,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Fornire  a  corredo",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 39,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Supplied  as  loose  parts  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 40,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "DADO  /  NUT",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 41,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "M10  6S  GEO  n 2",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 42,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "...Nm",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 43,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 44,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 45,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 46,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 47,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "300",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 48,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Applicare  grasso  secondo  C_TS_04",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 49,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 50,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "APPLICA  TIPO  SEALANT  ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 51,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "SIKAFLEX  291i  O  SIKAFLEX  221  SECONDO  AQM2960",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 52,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "APPLY  SEALANT  TYPE",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 53,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "SIKAFLEX  291i  OR  SIKAFLEX  221  ACCORDING  TO  AQM2960",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 54,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 55,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 56,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 57,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 58,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "58x53x27",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 59,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "DIN  5482",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 60,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "K",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 61,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "H",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 62,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "11",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 63,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "5",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 64,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "3 8",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 65,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "I",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 66,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "G",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 67,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "C",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 68,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "15",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 69,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "6 16",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 70,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "8 11",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 71,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "2",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 72,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "7",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 73,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "C",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 74,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "E",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 75,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "K",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 76,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "I",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 77,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "14",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 78,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1410",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 79,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 80,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "H",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 81,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "L",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 82,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 83,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "6",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 84,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "12",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 85,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "J",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 86,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "E",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 87,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "L",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 88,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "13",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 89,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "137 10",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 90,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "F",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 91,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "J",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 92,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "F",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 93,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "D",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 94,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "5 15",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 95,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "9",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 96,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 97,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "B",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 98,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "D",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 99,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "4",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 100,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "B",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 101,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1612",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 102,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "G",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 103,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "21 4",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 104,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "9",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 105,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "3",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 106,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Applicare  grasso  secondo",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 107,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "C_TS_04",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 108,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 109,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Optional",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 110,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "PRJ00036552 KurianJohn P.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 111,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Approved by",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 112,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Lelli G.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 113,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Emesso con -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 114,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Lelli G.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 115,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Drawn by",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 116,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Date",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 117,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Classe Mod. -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 118,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "GEARBOX",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 119,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Issued with.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 120,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 121,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Sost. dal -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 122,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Descrizione Modifica",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 123,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Change Class",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 124,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Issued with Checked by",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 125,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Date",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 126,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Rev. Date",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 127,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1:163 SPECIAL PAM LEROY",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 128,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Scala -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 129,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Data -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 130,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Changed by",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 131,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Release status",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 132,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "KurianJohn P.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 133,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Sheet",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 134,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 135,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Change q.ty Emesso con -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 136,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "RIDUTTORE",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 137,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "ECN0111827",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 138,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 139,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Dis. da -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 140,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Size",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 141,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Replaced by",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 142,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A1",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 143,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Opzionale",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 144,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 145,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "705T",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 146,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "OFFICIAL ERP",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 147,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "18-Mar-2025",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 148,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Sostituisce -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 149,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Scale",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 150,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Replace",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 151,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Data Rev. -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 152,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Q.ta' mod.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 153,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Stato rilascio -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 154,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Project",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 155,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Approvato da -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 156,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "JZ00018493",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 157,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Mod. da -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 158,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Foglio -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 159,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Data -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 160,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 161,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1 :1",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 162,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Rev.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 163,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1:163 SPECIALE PAM LEROY",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 164,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 165,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Formato -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 166,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Contr. da -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 167,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Progetto -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 168,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Description Change",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 169,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "-",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 170,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 171,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Dwg no.Cod. Prod.-",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 172,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Descrizione",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 173,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "1 /1",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 174,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Description",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 175,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 176,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Rev.",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 177,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "AD00016277",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 178,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "La BONFIGLIOLI GROUP si riserva a termini di ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 179,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "legge la proprieta' di questo disegno, con divieto ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 180,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "di riprodurlo o di renderlo comunque noto a terzi ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 181,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "senza la specifica approvazione",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 182,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Per dimensioni o prestazioni riduttore non indicate vedere ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 183,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "catalogo ove disponibile",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 184,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Dimensioni espresse in mm se non diversamente indicato",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 185,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Oggetto -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 186,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "-",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 187,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "For dimensions or gearbox performance not indicated see ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 188,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "catalogue if available",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 189,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Disegno n° -",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 190,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "BONFIGLIOLI GROUP Holds the legal ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 191,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "proprietary rights of this drawing. Unauthorised ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 192,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "reproduction or disclosure of the Drawing to ",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 193,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "third parties is forbidden",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 194,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Prod. Code",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 195,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Object",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 196,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "Dimensions in mm unless otherwise specified",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 197,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "2",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 198,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "+0,5",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 199,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "-0,7",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 200,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    },
+    {
+      "kind": "delete",
+      "leftLineNumber": 201,
+      "rightLineNumber": null,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "delete"
+        }
+      ],
+      "rightParts": []
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { getEmployee } from "@/lib/employees";
 import { createRequest, getRequests, updateRequestStatus } from "@/lib/requests";
 import { sendLeaveRequestDraftEmail } from "@/lib/email";
+import { ADMIN_SESSION_COOKIE, isValidSessionToken } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +60,11 @@ export async function POST(request: NextRequest) {
   }
 
   if (action === "decision") {
+    const token = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
+    if (!isValidSessionToken(token)) {
+      return Response.json({ error: "Admin login required for approvals." }, { status: 401 });
+    }
+
     const updated = updateRequestStatus(body.id, body.actor, body.decision);
     if (!updated) {
       return Response.json({ error: "Request not found" }, { status: 404 });

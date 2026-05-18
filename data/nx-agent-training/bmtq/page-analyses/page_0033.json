@@ -1,0 +1,63 @@
+{
+  "page_number": 33,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zone introduction",
+    "Relief radius for seal ring seats",
+    "Bearing and seal ring assembly with same fitting diameter"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat"
+  ],
+  "rules": [
+    "Relief radius R must be applied at seal ring housing working zone introduction",
+    "Relief radius R varies by diameter: ød ≤ 60 → R = 0.4 mm; ød > 60 ≤ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+    "Minimum effective relief dimension a = 1 mm (minimum effective), use minimum value when dimensions don't allow larger relief (constraint: a ≥ 2 mm normally)",
+    "For bearing and seal ring with same fitting diameter (dc = da): seal ring assembly must be followed by bearing assembly",
+    "When bearing outer diameter equals seal ring fitting diameter, zone L on specific zones must remain the same and roughness useful length assigned",
+    "All zone L must be dimensioned on the drawing indicating the useful length of execution",
+    "Rounded edge (spigot arrotondato) or sharp edge (spigot tagliente) must be specified - sharp edges must be avoided",
+    "Surface with plunge grinding machining and without roughness a/o helical riflings must be indicated"
+  ],
+  "dimensions": [
+    "a = 1 mm minimum effective (normally a ≥ 2 mm)",
+    "R = 0.4 mm for ød ≤ 60",
+    "R = 0.8 mm for ød > 60 ≤ 120",
+    "R = 1.2 mm for ød > 120",
+    "Zone L must be specified and dimensioned on drawing"
+  ],
+  "tolerances": [
+    "Bearing fitting tolerance and roughness values must be indicated in zone L when dc = da"
+  ],
+  "surface_finish": [
+    "Roughness values must be specified in zone L",
+    "Surface possibly with plunge grinding machining and without roughness a/o helical riflings must be indicated with specific symbol"
+  ],
+  "inspection": [
+    "Verify relief radius R according to diameter range",
+    "Verify minimum effective dimension a ≥ 1 mm",
+    "Check that zone L is properly dimensioned on drawing",
+    "Verify rounded edge specification (spigot arrotondato e/o estremità arrotondata)",
+    "Confirm assembly sequence when dc = da (seal ring before bearing)"
+  ],
+  "manufacturing_notes": [
+    "Relief dimension a should normally be ≥ 2 mm, but minimum effective value is 1 mm when space is constrained",
+    "Sharp edges (spigot tagliente) must be avoided",
+    "Rounded edges or rounded extremities must be specified",
+    "Plunge grinding machining without helical riflings may be specified for certain surfaces",
+    "Assembly sequence is critical when bearing and seal ring share same fitting diameter"
+  ],
+  "training_guidance": [
+    "NX agent must create relief radius R at seal ring housing introduction based on diameter: 0.4 mm (d≤60), 0.8 mm (60<d≤120), 1.2 mm (d>120)",
+    "Model minimum effective relief length a = 1 mm, prefer a ≥ 2 mm when space permits",
+    "When bearing seat outer diameter equals seal ring seat diameter (dc = da), ensure zone L is modeled with consistent dimensions and mark for proper tolerancing",
+    "Apply rounded edge feature (fillet/chamfer) at seal seat entries; avoid sharp edges",
+    "Include zone L dimension annotation in drawing output with tolerance and roughness specifications",
+    "Flag assemblies where dc = da to enforce seal-then-bearing assembly sequence in manufacturing instructions"
+  ],
+  "summary": "This standard defines the geometric requirements for seal ring housing working zones, specifying diameter-dependent relief radii (R = 0.4/0.8/1.2 mm) and minimum relief length (a ≥ 1 mm effective). When bearing and seal ring share the same fitting diameter, special attention must be given to zone L dimensioning, assembly sequence (seal first, then bearing), and surface finish specifications. Rounded edges are mandatory and all critical dimensions must be clearly indicated on drawings."
+}

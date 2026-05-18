@@ -1,0 +1,66 @@
+{
+  "page_number": 22,
+  "document_code": "TAB-001 and TAB-002",
+  "title": "Relief Grooves for Grinding Zones and Thread",
+  "page_kind": "rule",
+  "topics": [
+    "Relief grooves for grinding zones (TAB-001)",
+    "Relief grooves for thread (TAB-002)",
+    "UNI4386 groove comparison",
+    "Thread relief groove dimensional standards"
+  ],
+  "components": [
+    "grinding zone",
+    "relief groove",
+    "thread",
+    "shoulder"
+  ],
+  "rules": [
+    "Relief grooves for grinding zones must be compared with UNI4386 groove standard",
+    "Relief grooves for thread must be made in case where the thread zone ends at a shoulder with ledge function",
+    "Groove dimensions vary by diameter range (18-50mm, 51-80mm, 81-125mm, >125mm)",
+    "Thread relief groove dimensions vary by thread pitch (P ≤ 1.25, 1.5 ≤ P ≤ 2, 2.5 ≤ P ≤ 3)",
+    "Possible specific grooves must be indicated in details in drawing",
+    "Dashed lines represent UNI regulation, solid lines represent TRASMITAL specifications"
+  ],
+  "dimensions": [
+    "Grinding zone Ø18-50mm: width 2.5mm, depth 0.1mm, radius R1.6, angle 30°, tolerances ±0.2, ±0.1",
+    "Grinding zone Ø51-80mm: width 3mm, depth 0.2mm, radius R1.6, angle 30°, tolerances ±0.2",
+    "Grinding zone Ø81-125mm: width 4.5mm, depth 0.3mm, radius R2.5, angle 30°, tolerances ±0.3, ±0.4",
+    "Grinding zone Ø>125mm: width 7mm, depth varies, radius R4.0, angle 30°, tolerances ±0.2 to ±0.3",
+    "Thread relief P ≤ 1.25: R=1.2, A=3.3, B=1.2, T1=0.2, T2=1.2",
+    "Thread relief 1.5 ≤ P ≤ 2: R=1.6, A=4.0, B=1.2, T1=0.2, T2=1.7",
+    "Thread relief 2.5 ≤ P ≤ 3: R=2.0, A=5.0, B=1.5, T1=0.3, T2=2.4"
+  ],
+  "tolerances": [
+    "Grinding groove width tolerance: ±0.1 to ±0.3mm depending on diameter",
+    "Grinding groove depth tolerance: ±0.1 to ±0.4mm depending on diameter",
+    "Thread relief groove tolerance: P -0.6 +3 +3 where applicable"
+  ],
+  "surface_finish": [],
+  "inspection": [
+    "Relief grooves must be verified against UNI4386 standard",
+    "Specific groove details must be indicated in detailed drawings"
+  ],
+  "manufacturing_notes": [
+    "Relief grooves are required at grinding zones to allow grinding wheel clearance",
+    "Thread relief grooves required at shoulders with ledge function to prevent interference",
+    "Groove geometry includes 30° approach angle and specific radii for chip break",
+    "TRASMITAL specifications (solid line) may differ from UNI regulation (dashed line)"
+  ],
+  "training_guidance": [
+    "When modeling a shaft with a grinding zone, add relief groove per TAB-001 based on diameter range",
+    "For Ø18-50mm: create groove 2.5mm wide, 0.1mm deep, R1.6 fillet, 30° angle",
+    "For Ø51-80mm: create groove 3mm wide, 0.2mm deep, R1.6 fillet, 30° angle",
+    "For Ø81-125mm: create groove 4.5mm wide, 0.3mm deep, R2.5 fillet, 30° angle",
+    "For Ø>125mm: create groove 7mm wide, R4.0 fillet, 30° angle, depth per drawing",
+    "When thread terminates at shoulder, add relief groove per TAB-002 based on thread pitch",
+    "For fine thread (P≤1.25): R=1.2, width A=3.3, depth B=1.2",
+    "For medium thread (1.5≤P≤2): R=1.6, width A=4.0, depth B=1.2",
+    "For coarse thread (2.5≤P≤3): R=2.0, width A=5.0, depth B=1.5",
+    "Relief groove geometry allows grinding wheel runout and thread tool clearance",
+    "Validate groove dimensions against UNI4386 when applicable",
+    "Document any custom groove geometry in detail views per Bonfiglioli standard"
+  ],
+  "summary": "This page defines two critical relief groove standards: TAB-001 for grinding zones and TAB-002 for thread terminations. Grinding relief grooves are sized by shaft diameter (18mm to >125mm) with specific widths, depths, radii, and 30° angles to provide grinding wheel clearance. Thread relief grooves are sized by thread pitch (P≤1.25 to 2.5≤P≤3) and are required where threads end at shoulders. All dimensions include specific tolerances and must be compared against UNI4386 standard, with TRASMITAL specifications shown as solid lines versus UNI regulation dashed lines."
+}

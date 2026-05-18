@@ -1,0 +1,30 @@
+{
+  "page_number": 16,
+  "document_code": "MTQ-000",
+  "title": "Bonfiglioli Technical Quality Handbook - Cover and Index Overview",
+  "page_kind": "reference",
+  "topics": [
+    "Technical quality handbook introduction",
+    "Bonfiglioli gearbox and drive systems overview",
+    "Product portfolio display"
+  ],
+  "components": [
+    "gearbox",
+    "planetary drive",
+    "housing",
+    "assembly"
+  ],
+  "rules": [],
+  "dimensions": [],
+  "tolerances": [],
+  "surface_finish": [],
+  "inspection": [],
+  "manufacturing_notes": [],
+  "training_guidance": [
+    "This page serves as a visual introduction to Bonfiglioli's product range including gearboxes, planetary drives, and power transmission assemblies.",
+    "The handbook MTQ-000 dated 26.10.2010 establishes technical quality standards for Bonfiglioli mechanical components.",
+    "Subsequent pages in this manual will contain detailed engineering rules for gears, shafts, bearings, seals, and other drivetrain components.",
+    "NX modeling agents should expect detailed dimensional, tolerance, and manufacturing specifications in following pages of this standard."
+  ],
+  "summary": "Page 16 displays the cover and introductory visual content of the Bonfiglioli Technical Quality Handbook (MTQ-000, dated 26.10.2010). It features product imagery of various gearboxes and drive systems manufactured by Bonfiglioli. This page does not contain specific engineering rules or dimensional standards but serves as the document's front matter and visual reference for the product families covered in the handbook."
+}

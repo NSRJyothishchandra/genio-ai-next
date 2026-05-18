@@ -1,0 +1,80 @@
+{
+  "fileName": "gear_with_12_teeth_2026-05-05T10-38-04-402Z.obj",
+  "fileType": "obj",
+  "generatedAt": "2026-05-06T11:56:50.165368",
+  "mesh": {
+    "vertexCount": 1648,
+    "faceCount": 1676,
+    "edgeCount": 3324
+  },
+  "dimensions": {
+    "width": 0.059986,
+    "depth": 0.008,
+    "height": 0.059986,
+    "diagonal": 0.08520939145422879,
+    "center": [
+      -1.0228868554493097e-18,
+      -1.0684128204590165e-19,
+      -1.4563106795672651e-08
+    ],
+    "boundsMin": [
+      -0.029993,
+      -0.004,
+      -0.029993
+    ],
+    "boundsMax": [
+      0.029993,
+      0.004,
+      0.029993
+    ],
+    "centerText": "(-0.000, -0.000, -0.000)",
+    "boundsText": "min(-0.030, -0.004, -0.030) max(0.030, 0.004, 0.030)"
+  },
+  "analysis": {
+    "units": "model units",
+    "dominantAngles": {
+      "top": [
+        0.0,
+        90.0,
+        180.0,
+        105.0,
+        75.0,
+        165.0
+      ],
+      "front": [
+        0.0,
+        179.0,
+        177.0,
+        178.0,
+        165.0,
+        86.0
+      ],
+      "side": [
+        90.0,
+        0.0,
+        165.0,
+        15.0,
+        4.0,
+        176.0
+      ]
+    },
+    "detectedRadii": [
+      0.008,
+      0.026,
+      0.007,
+      0.004,
+      0.005,
+      0.025
+    ],
+    "topAnglesText": "0°, 90°, 180°, 105°, 75°, 165°",
+    "frontAnglesText": "0°, 179°, 177°, 178°, 165°, 86°",
+    "sideAnglesText": "90°, 0°, 165°, 15°, 4°, 176°",
+    "radiiText": "0.008, 0.026, 0.007, 0.004, 0.005, 0.025"
+  },
+  "views": {
+    "front": "/cad-reports/cad_1778048809673_td2j7l/front-view.png",
+    "top": "/cad-reports/cad_1778048809673_td2j7l/top-view.png",
+    "side": "/cad-reports/cad_1778048809673_td2j7l/side-view.png",
+    "pdf": "/cad-reports/cad_1778048809673_td2j7l/drawing-report.pdf"
+  }
+}

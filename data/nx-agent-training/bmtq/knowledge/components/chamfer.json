@@ -1,0 +1,202 @@
+{
+  "component": "chamfer",
+  "rules": [
+    "Minimum effective dimension a = 1 mm for working zones",
+    "When dimension doesn't allow larger sizing, use a = 1 mm (effective minimum)",
+    "Chamfer radius R varies based on diameter: ød ≤ 60 → R = 0.4 mm; ød > 60 ÷ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+    "For bearing and seal ring with same fitting diameter (dc = da): seal ring assembly must be followed by bearing assembly",
+    "Zone 'L' must be dimensioned with specific tolerance to indicate useful length of execution",
+    "Rounded edges and sharp corners must be avoided on seal seats",
+    "Surface finish symbol refers to surfaces possibly with plunge grinding machining and without roughness a/o helical riflings",
+    "Minimum effective dimension a = 1 mm where dimensions don't allow larger sizing (constraint: 1 ≤ a ≤ 2 mm)",
+    "Radius R based on diameter ød: ød ≤ 60 → R = 0.4 mm; ød > 60 ≤ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+    "Assembly sequence: seal ring must be assembled followed by bearing when dc = da (same fitting diameter)",
+    "Assembly sequence: bearing must be assembled followed by seal ring in standard configuration",
+    "Zone 'L' must be dimensioned with specific tolerances and roughness",
+    "Working zone must remain on the specific zones assigned, indicating useful length of execution",
+    "Rounded edge indication means there must be no sharp roughness",
+    "Sharp corners in relief groove allowed if chamfer edge is rounded",
+    "Surface finishing with plunge grinding machining or helical milling allowed without roughness a/o helical riflings",
+    "Minimum effective dimension 'a' = 1 mm unless dimensioning doesn't allow larger value (Bonfiglioli tolerances: a = 2 mm)",
+    "Effective minimum 'a = 1' must be used where dimension doesn't allow larger dimensioning (Consensus: a ≤ 2 mm)",
+    "Seal ring assembly must be followed by bearing assembly when dc = da (same fitting diameter)",
+    "Bearing assembly must be followed by seal ring in reverse case",
+    "Every zone must indicate the specific tolerance and roughness values",
+    "On specific zones the useful assembly length must remain indicated",
+    "Rounded edge/rounded side indication means there must be sharp roughness",
+    "Sharp edge indication with 'spigolo arrotondato e/o estremita arrotondata' means no sharp edges allowed"
+  ],
+  "examples": [
+    {
+      "component": "chamfer",
+      "page_number": 32,
+      "document_code": "TAB-004",
+      "title": "Working Zones Introduction and Seal Ring's Housing",
+      "rules": [
+        "Minimum effective dimension a = 1 mm for working zones",
+        "When dimension doesn't allow larger sizing, use a = 1 mm (effective minimum)",
+        "Chamfer radius R varies based on diameter: ød ≤ 60 → R = 0.4 mm; ød > 60 ÷ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+        "For bearing and seal ring with same fitting diameter (dc = da): seal ring assembly must be followed by bearing assembly",
+        "Zone 'L' must be dimensioned with specific tolerance to indicate useful length of execution",
+        "Rounded edges and sharp corners must be avoided on seal seats",
+        "Surface finish symbol refers to surfaces possibly with plunge grinding machining and without roughness a/o helical riflings"
+      ],
+      "dimensions": [
+        "a = 1 mm minimum effective working zone dimension",
+        "a ≤ 2 mm typically for dimensioning (Bonfiglioli internal standard)",
+        "Chamfer R: 0.4 mm (ød ≤ 60), 0.8 mm (60 < ød ≤ 120), 1.2 mm (ød > 120)",
+        "Length L must be specified with tolerance for bearing/seal assembly zones"
+      ],
+      "tolerances": [
+        "Zone 'L' must indicate the specific tolerance assigned",
+        "Working zone dimension tolerance to be clearly indicated on drawings"
+      ],
+      "surface_finish": [
+        "Surface finishing possibly with plunge grinding machining without roughness or helical riflings",
+        "Sharp edges must be avoided (rounded edges required)",
+        "Surface must be free of helical riflings to prevent seal damage"
+      ],
+      "inspection": [
+        "Verify minimum dimension a ≥ 1 mm for working zones",
+        "Check chamfer radius R matches diameter range specification",
+        "Verify absence of sharp corners or edges on seal seats",
+        "Confirm surface finish is free of helical riflings"
+      ],
+      "manufacturing_notes": [
+        "Use plunge grinding where possible for seal seat surfaces to avoid helical riflings",
+        "Ensure rounded edges or chamfers are applied - no sharp corners permitted",
+        "When assembling bearing and seal with same diameter, always install seal first, then bearing",
+        "Working zone must remain within specified zones to avoid interference with other features"
+      ],
+      "training_guidance": [
+        "NX agent should automatically add 1 mm minimum working zone (dimension 'a') when creating seal ring housing features",
+        "Apply chamfer radius based on housing diameter: R = 0.4 mm for ød ≤ 60 mm, R = 0.8 mm for 60 < ød ≤ 120 mm, R = 1.2 mm for ød > 120 mm",
+        "When modeling seal seats in housings, ensure all edges are rounded or chamfered - flag any sharp corners as errors",
+        "For bearing and seal combinations with identical fitting diameter, annotate assembly sequence: seal first, bearing second",
+        "Apply surface finish symbols indicating plunge grinding without helical patterns on seal seat surfaces",
+        "Dimension zone 'L' with explicit tolerance callout on technical drawings to indicate useful execution length",
+        "Validate that working zone dimension 'a' does not exceed 2 mm per Bonfiglioli internal standards unless specifically required"
+      ],
+      "summary": "This standard defines working zone introduction requirements for seal ring housings in Bonfiglioli gearbox assemblies. Key requirements include a minimum 1 mm working zone dimension, diameter-dependent chamfer radii (0.4-1.2 mm), and prohibition of sharp edges on seal seats. Special assembly sequencing is required when bearings and seals share the same fitting diameter, with seals always installed before bearings."
+    },
+    {
+      "component": "chamfer",
+      "page_number": 39,
+      "document_code": "TAB-004",
+      "title": "Working Zones Introduction and Seal Ring's Housing",
+      "rules": [
+        "Minimum effective dimension a = 1 mm where dimensions don't allow larger sizing (constraint: 1 ≤ a ≤ 2 mm)",
+        "Radius R based on diameter ød: ød ≤ 60 → R = 0.4 mm; ød > 60 ≤ 120 → R = 0.8 mm; ød > 120 → R = 1.2 mm",
+        "Assembly sequence: seal ring must be assembled followed by bearing when dc = da (same fitting diameter)",
+        "Assembly sequence: bearing must be assembled followed by seal ring in standard configuration",
+        "Zone 'L' must be dimensioned with specific tolerances and roughness",
+        "Working zone must remain on the specific zones assigned, indicating useful length of execution",
+        "Rounded edge indication means there must be no sharp roughness",
+        "Sharp corners in relief groove allowed if chamfer edge is rounded",
+        "Surface finishing with plunge grinding machining or helical milling allowed without roughness a/o helical riflings"
+      ],
+      "dimensions": [
+        "Minimum effective dimension a = 1 mm (range 1 mm ≤ a ≤ 2 mm)",
+        "Spacing dimension L must be indicated with tolerance and roughness",
+        "Relief groove spacing L1 shown in assembly detail",
+        "Chamfer angle indicated as 2° in housing cross-section"
+      ],
+      "tolerances": [
+        "Zone 'L' must indicate specific tolerance and roughness values",
+        "Dimension 'a' constrained between 1 mm and 2 mm",
+        "Tolerance for bearing/seal fitting diameter (dc = da) must match"
+      ],
+      "surface_finish": [
+        "Roughness values must be specified in zone 'L'",
+        "Surface finishing possible with plunge grinding machining without roughness constraint",
+        "Helical milling allowed without roughness a/o helical riflings constraint",
+        "Rounded edges required (no sharp roughness allowed)"
+      ],
+      "inspection": [
+        "Verify minimum effective dimension a ≥ 1 mm",
+        "Check that relief radius R matches diameter range specification",
+        "Verify zone 'L' dimensions remain within assigned tolerance",
+        "Confirm rounded edge condition (no sharp roughness)",
+        "Validate assembly sequence based on fitting diameter relationship"
+      ],
+      "manufacturing_notes": [
+        "Use minimum dimension a = 1 mm only when larger dimensions not feasible",
+        "Apply radius R according to diameter ranges: 0.4 mm (ød ≤ 60), 0.8 mm (60 < ød ≤ 120), 1.2 mm (ød > 120)",
+        "Plunge grinding or helical milling acceptable for surface finishing",
+        "Rounded corners required; sharp corners acceptable only in relief groove with rounded chamfer edge",
+        "Assembly order critical: when dc = da, seal must precede bearing; otherwise bearing precedes seal"
+      ],
+      "training_guidance": [
+        "NX agent must create seal housing working zones with chamfer angle 2° and appropriate radius R based on diameter",
+        "Apply minimum relief dimension a = 1 mm only when space constrained, otherwise use larger values up to 2 mm",
+        "Model rounded edges at chamfer transitions; avoid sharp corners except in relief grooves where chamfer edge is rounded",
+        "Zone 'L' geometry must include tolerance and surface finish annotations in drawing output",
+        "Validate assembly sequence logic: if bearing and seal share same fitting diameter (dc = da), seal must be assembled first",
+        "When generating housing geometry, automatically select radius R: if ød ≤ 60 use 0.4 mm, if 60 < ød ≤ 120 use 0.8 mm, if ød > 120 use 1.2 mm",
+        "Include surface finish callouts specifying plunge grinding or helical milling as acceptable methods"
+      ],
+      "summary": "This standard defines the geometric requirements for seal ring housing working zones in gearbox housings. It specifies chamfer angles (2°), relief radii (0.4–1.2 mm based on diameter), minimum effective spacing (1 mm), and assembly sequence rules when bearings and seals share the same fitting diameter. The page includes detailed guidance on surface finish methods (plunge grinding, helical milling) and mandates rounded edges with specified tolerances and roughness in critical zone 'L'."
+    },
+    {
+      "component": "chamfer",
+      "page_number": 40,
+      "document_code": "TAB-004",
+      "title": "Working Zones Introduction and Seal Ring's Housing",
+      "rules": [
+        "Minimum effective dimension 'a' = 1 mm unless dimensioning doesn't allow larger value (Bonfiglioli tolerances: a = 2 mm)",
+        "Effective minimum 'a = 1' must be used where dimension doesn't allow larger dimensioning (Consensus: a ≤ 2 mm)",
+        "Seal ring assembly must be followed by bearing assembly when dc = da (same fitting diameter)",
+        "Bearing assembly must be followed by seal ring in reverse case",
+        "Every zone must indicate the specific tolerance and roughness values",
+        "On specific zones the useful assembly length must remain indicated",
+        "Rounded edge/rounded side indication means there must be sharp roughness",
+        "Sharp edge indication with 'spigolo arrotondato e/o estremita arrotondata' means no sharp edges allowed"
+      ],
+      "dimensions": [
+        "a = 1 mm (minimum effective) where larger dimensioning not allowed",
+        "a = 2 mm (Bonfiglioli standard when possible)",
+        "Chamfer depth related to housing zones",
+        "L = total zone length",
+        "L1 = useful assembly length"
+      ],
+      "tolerances": [
+        "Radius R based on diameter: ød ≤ 60 → R = 0.4 mm",
+        "Radius R based on diameter: > 60 ÷ 120 → R = 0.8 mm",
+        "Radius R based on diameter: > 120 → R = 1.2 mm",
+        "Zone-specific tolerances must be indicated on all working zones"
+      ],
+      "surface_finish": [
+        "Ra ≤ 0.8 for seal ring housing surfaces",
+        "Surface finish must be indicated on each zone",
+        "Surface possibly with 'plunge grinding' machining and without roughness a/o helical rilings",
+        "Roughness values must be specified for each working zone"
+      ],
+      "inspection": [
+        "Verify minimum effective dimension 'a' is maintained",
+        "Check radius R according to diameter ranges",
+        "Verify tolerance zones are properly indicated",
+        "Confirm roughness specifications on all working zones",
+        "Verify rounded edges where specified",
+        "Check assembly sequence when bearing and seal share fitting diameter"
+      ],
+      "manufacturing_notes": [
+        "Working zone introduction requires careful dimensional control",
+        "Chamfer and radius must follow diameter-dependent specifications",
+        "When bearing and seal ring have same fitting diameter (dc = da), assembly sequence is critical",
+        "Seal ring must be assembled before bearing in same-diameter scenarios",
+        "Sharp edges must be avoided where rounded edge symbol is indicated",
+        "Plunge grinding may be required for specific surface finish requirements"
+      ],
+      "training_guidance": [
+        "When modeling seal ring housing in NX, create working zone with minimum 1 mm effective dimension 'a', preferably 2 mm when space allows",
+        "Apply chamfer radius R based on bore diameter: 0.4 mm for ø≤60, 0.8 mm for ø60-120, 1.2 mm for ø>120",
+        "For bearing and seal combinations with identical fitting diameter, model seal seat before bearing seat in assembly sequence",
+        "Add annotations to indicate specific tolerance zones and surface finish requirements (Ra ≤ 0.8) on seal housing surfaces",
+        "Include edge break/radius features at transitions to avoid sharp edges unless specifically required for roughness",
+        "Model separate zones L (total) and L1 (useful assembly length) with appropriate dimensional callouts",
+        "Ensure all working zones have tolerance and surface finish annotations for manufacturing clarity"
+      ],
+      "summary": "This standard defines working zone requirements for seal ring housings in Bonfiglioli gearbox assemblies. Key specifications include minimum effective dimensions (a = 1-2 mm), diameter-dependent chamfer radii (R = 0.4-1.2 mm), and surface finish requirements (Ra ≤ 0.8). When bearings and seal rings share the same fitting diameter, the seal ring must be assembled first, followed by the bearing, with all zones clearly annotated with specific tolerances and roughness values."
+    }
+  ]
+}

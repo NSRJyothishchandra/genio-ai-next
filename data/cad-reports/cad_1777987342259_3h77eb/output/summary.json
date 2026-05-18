@@ -1,0 +1,63 @@
+{
+  "fileName": "tmp-cube.obj",
+  "fileType": "obj",
+  "generatedAt": "2026-05-05T18:52:23.829617",
+  "mesh": {
+    "vertexCount": 8,
+    "faceCount": 6,
+    "edgeCount": 12
+  },
+  "dimensions": {
+    "width": 10.0,
+    "depth": 10.0,
+    "height": 10.0,
+    "diagonal": 17.320508075688775,
+    "center": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "boundsMin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "boundsMax": [
+      10.0,
+      10.0,
+      10.0
+    ],
+    "centerText": "(5.000, 5.000, 5.000)",
+    "boundsText": "min(0.000, 0.000, 0.000) max(10.000, 10.000, 10.000)"
+  },
+  "analysis": {
+    "units": "model units",
+    "dominantAngles": {
+      "top": [
+        0.0,
+        90.0
+      ],
+      "front": [
+        0.0,
+        90.0
+      ],
+      "side": [
+        0.0,
+        90.0
+      ]
+    },
+    "detectedRadii": [
+      7.071
+    ],
+    "topAnglesText": "0°, 90°",
+    "frontAnglesText": "0°, 90°",
+    "sideAnglesText": "0°, 90°",
+    "radiiText": "7.071"
+  },
+  "views": {
+    "front": "/cad-reports/cad_1777987342259_3h77eb/front-view.png",
+    "top": "/cad-reports/cad_1777987342259_3h77eb/top-view.png",
+    "side": "/cad-reports/cad_1777987342259_3h77eb/side-view.png",
+    "pdf": "/cad-reports/cad_1777987342259_3h77eb/drawing-report.pdf"
+  }
+}

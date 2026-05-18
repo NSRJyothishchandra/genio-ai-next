@@ -1,0 +1,78 @@
+{
+  "page_number": 8,
+  "document_code": "MTQ-001",
+  "title": "Document Index and Component Family Reference",
+  "page_kind": "index",
+  "topics": [
+    "Table of Index - Technical drawing standards and component specifications",
+    "Components Index - Shaft families, gear families, bearing components, planetary systems, and housings"
+  ],
+  "components": [
+    "shaft",
+    "spline",
+    "keyway",
+    "bearing seat",
+    "seal seat",
+    "thread",
+    "gear",
+    "planetary gears",
+    "sun gears",
+    "ring gears",
+    "planet carrier",
+    "housing"
+  ],
+  "rules": [
+    "TAB 001: Code of practice for mechanical grinding wheel selection",
+    "TAB 002: Relieving groove for threading tool definition",
+    "TAB 003: Centering hole and thread hole dimensional standards",
+    "TAB 004: Oil seal seating specifications on shaft end and bore",
+    "TAB 005: Bearing seating zones definition",
+    "TAB 006: Circlip seating groove standards",
+    "TAB 007: Radial and axial shaft positioning groove specifications",
+    "TAB 008: Thread for ring nuts on shafts",
+    "TAB 009: Chamfer surface for introduction of dynamic shafts",
+    "TAB 010: Bearing seating surface specifications",
+    "TAB 011: Execution of teeth modulus (e.g., 20°)",
+    "TAB 012: Involute spline representation standards",
+    "TAB 013: Drilling and specifications for crosswise springs (e.g., 20°)",
+    "TAB 014: Key way dimensional standards",
+    "TAB 015: Shaft for blank disc connection specifications",
+    "TAB 017: ISO thread with triangular profile",
+    "TAB 098: Assembly and section view conventions",
+    "TAB 099: Maximum roughness in machining"
+  ],
+  "dimensions": [
+    "Reference to teeth modulus execution (e.g., 20°)",
+    "Crosswise spring drilling specifications (e.g., 20°)",
+    "Standard keyway dimensions per TAB 014"
+  ],
+  "tolerances": [
+    "Bearing seating surface tolerances per TAB 010",
+    "Shaft positioning tolerances per TAB 007",
+    "Spline fit tolerances per TAB 012"
+  ],
+  "surface_finish": [
+    "TAB 099: Maximum roughness values in machining operations",
+    "TAB 010: Surface finish requirements for bearing seats",
+    "TAB 009: Chamfer surface finish for dynamic shaft introduction"
+  ],
+  "inspection": [
+    "Drawing and section view conventions per TAB 098",
+    "Profile representation standards per TAB 012",
+    "Groove and feature verification per component-specific TAB sheets"
+  ],
+  "manufacturing_notes": [
+    "Grinding wheel selection per TAB 001",
+    "Threading tool relief groove requirements per TAB 002",
+    "Centering and thread hole preparation per TAB 003",
+    "Component-specific manufacturing standards referenced by family codes (66300-A through 66600)"
+  ],
+  "training_guidance": [
+    "NX agent should reference TAB sheets for specific geometric features when modeling shafts, gears, splines, keyways, bearing seats, and seal seats",
+    "Component family codes (66300-A: Piston shafts, 66301-B: Scanalati shafts, 66311: Hollow shafts, 66410-A: Ring gears, 66420: Planetary gears, 66430: Sun gears, 66555: Plane carriers, 66600: Ring nuts) indicate distinct design standards",
+    "Always apply appropriate TAB standards for threads (TAB 008, TAB 017), grooves (TAB 006, TAB 007), seats (TAB 004, TAB 005, TAB 010), and splines (TAB 012)",
+    "Manufacturing constraints include grinding wheel selection, surface roughness limits, and chamfer specifications for assembly operations",
+    "Drawing conventions per TAB 098 must be followed for assembly and section views"
+  ],
+  "summary": "This page serves as the master index for the Bonfiglioli Technical Quality Handbook (MTQ-001), dated 26.10.2010. It lists all TAB (technical specification) sheets covering manufacturing standards for grinding, threading, bearing seats, seal seats, grooves, splines, keyways, gears, and surface finish requirements. The lower section provides a component family index mapping family codes to specific mechanical components including various shaft types, gear types (planetary, sun, ring), planet carriers, and housings."
+}

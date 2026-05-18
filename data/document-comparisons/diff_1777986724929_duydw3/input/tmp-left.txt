@@ -1,0 +1,4 @@
+Line one stays same
+Line two is old
+Line three removed
+Final line

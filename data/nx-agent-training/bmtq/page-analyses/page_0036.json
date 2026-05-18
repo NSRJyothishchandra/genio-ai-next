@@ -1,0 +1,65 @@
+{
+  "page_number": 36,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zones introduction",
+    "Bearing and seal ring assembly with same fitting diameter",
+    "Dimensional tolerancing for housing zones",
+    "Assembly sequence requirements"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat"
+  ],
+  "rules": [
+    "Minimum effective dimension 'a' must be used when dimensions don't allow larger dimensioning, with constraint a ≥ 2 mm",
+    "For seal ring assembly followed by bearing assembly: zone L must indicate bearing's fitting diameter tolerance and roughness",
+    "For bearing assembly followed by seal ring: every zone must indicate fitting tolerance and roughness values",
+    "Sharp edges must be rounded or chamfered where indicated with 'rounded edge a/o rounded side' notation",
+    "Surface finish symbol 'spigolo arrotondato e/o estremità arrotondata' means sharp edges must be removed"
+  ],
+  "dimensions": [
+    "a = 1 mm (minimum effective) when dimensions don't allow larger values, constraint a ≥ 2 mm",
+    "Zone dimensions include L and Ls for bearing and seal assemblies",
+    "ød (diameter) ranges: ≤ 60, > 60 ≤ 120, > 120"
+  ],
+  "tolerances": [
+    "Radius R based on diameter ød: ≤ 60 → R = 0.4 mm",
+    "Radius R based on diameter ød: > 60 ≤ 120 → R = 0.8 mm",
+    "Radius R based on diameter ød: > 120 → R = 1.2 mm",
+    "Zone L must retain bearing fitting diameter tolerance specifications",
+    "Fitting tolerance must be indicated for all zones in bearing-then-seal assembly"
+  ],
+  "surface_finish": [
+    "Surface finish requirements indicated by roughness symbols in assembly zones",
+    "Rounded edges or chamfers required at transitions (spigolo arrotondato)",
+    "Surface possibly with 'plunge grinding' machining and without roughness a/o helical rifrings notation"
+  ],
+  "inspection": [
+    "Verify minimum dimension 'a' meets effective minimum requirement (≥ 2 mm)",
+    "Check fitting diameter tolerance compliance in zone L",
+    "Verify roughness values in all specified zones",
+    "Confirm edge rounding/chamfering where indicated"
+  ],
+  "manufacturing_notes": [
+    "Assembly sequence determines zone specification requirements",
+    "For dc = da (bearing and seal same diameter): seal assembly must precede bearing assembly",
+    "Zone L specifications must indicate useful length of execution",
+    "All zones must specify tolerance and roughness when bearing precedes seal ring",
+    "Sharp edges must be removed through rounding or chamfering",
+    "Plunge grinding may be used for surface finishing"
+  ],
+  "training_guidance": [
+    "When modeling housing for seal rings: always create working zone 'a' with minimum 1 mm effective dimension, constrained to ≥ 2 mm",
+    "Apply radius R at transitions based on housing bore diameter: 0.4 mm for ≤60 mm, 0.8 mm for 60-120 mm, 1.2 mm for >120 mm",
+    "For combined bearing and seal seats with same diameter (dc = da): model seal seat zone first (assembly order), then bearing zone L with full tolerance specification",
+    "For bearing-then-seal assembly sequence: specify fitting tolerance and surface finish for all zones independently",
+    "Add edge-rounding or chamfer features at all housing transition zones per drawing callouts",
+    "Zone L length must accommodate full bearing width plus installation clearance",
+    "Validate that housing bore transitions include proper radii to prevent stress concentrations and seal damage"
+  ],
+  "summary": "This standard defines working zone geometry and tolerancing for seal ring housings in gearbox assemblies. It specifies minimum effective dimensions (a ≥ 1 mm, constraint a ≥ 2 mm), transition radii based on bore diameter (R = 0.4 to 1.2 mm), and assembly-sequence-dependent tolerance callout requirements. When bearing and seal share the same fitting diameter, the seal must be assembled first, with zone L specifying the bearing's tolerance and roughness."
+}

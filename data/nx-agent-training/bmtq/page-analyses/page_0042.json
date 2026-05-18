@@ -1,0 +1,49 @@
+{
+  "page_number": 42,
+  "document_code": "TAB-007",
+  "title": "Chamfers or Radius and Relief Grooves on Toothing and Involute Splined",
+  "page_kind": "rule",
+  "topics": [
+    "Chamfers on toothing and involute splines",
+    "Relief grooves on toothing and involute splines",
+    "Spline edge treatment",
+    "Gear tooth edge treatment"
+  ],
+  "components": [
+    "spline",
+    "gear",
+    "shaft"
+  ],
+  "rules": [
+    "When fitting coupling slide-guide is not possible, a chamfer with grinding wheel on tooth's edge must be made (see picture D015DA)",
+    "Chamfer at 15° for inner involute splined must be made in all cases, except for splined toothing intended for assembly with rotating discs (e.g., flanged hub or brake's housing)",
+    "Radius R (indicated in picture) must be made where necessary for fitting axe or centring in next machining processes",
+    "Tolerance must be an angle value different to 30° to respect condition of fitting with engraved angle"
+  ],
+  "dimensions": [
+    "Chamfer angle: 15°",
+    "Depth dimension: 0.5 units shown in drawing D015C",
+    "Width dimension: 15° angle indicated",
+    "Relief groove depth: 9 x 45° shown in drawing D015E"
+  ],
+  "tolerances": [
+    "Angle tolerance must differ from 30° to respect fitting with engraved angle condition"
+  ],
+  "surface_finish": [],
+  "inspection": [],
+  "manufacturing_notes": [
+    "For internal splines, chamfer is 15° in all cases except for splined toothing intended for assembly with rotating discs (flanged hub or brake housing)",
+    "Use radius R for fitting axle or centering in next machining processes",
+    "When slide-guide coupling fitting is not possible, perform chamfer with grinding wheel on tooth edge",
+    "Relief groove must accommodate subsequent machining operations for assembly"
+  ],
+  "training_guidance": [
+    "NX agent must create 15° chamfer on internal involute splines by default unless the spline is intended for rotating disc assembly",
+    "For external splines on shafts where slide-guide is not feasible, apply grinding wheel chamfer per D015DA",
+    "Apply radius relief R at spline ends when required for axle fitting or centering operations",
+    "Ensure chamfer angle is not exactly 30° to avoid interference with engraved angle mating features",
+    "Model relief grooves with 9 x 45° geometry per D015E when axial clearance is needed for subsequent operations",
+    "Use drawing reference D015C for standard internal spline chamfer geometry with 0.5 depth and 15° angle"
+  ],
+  "summary": "This standard defines chamfer and relief groove requirements for toothed and involute splined components. Internal splines require a 15° chamfer in most cases, except when interfacing with rotating discs, while external splines may need grinding wheel chamfers when slide-guide coupling is impractical. Relief radii and grooves are specified to facilitate assembly and subsequent machining operations, with angle tolerances deliberately avoiding 30° to prevent interference with engraved angle features."
+}

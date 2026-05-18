@@ -1,0 +1,66 @@
+{
+  "page_number": 25,
+  "document_code": "TAB-001 / TAB-002",
+  "title": "Relief Grooves for Grinding Zones and Thread",
+  "page_kind": "rule",
+  "topics": [
+    "Relief grooves for grinding zones (TAB-001)",
+    "Relief grooves for thread (TAB-002)",
+    "Comparison with UNI4386 groove standard",
+    "Dimensional specifications for relief grooves by size range"
+  ],
+  "components": [
+    "shaft",
+    "bearing seat",
+    "seal seat",
+    "thread",
+    "grinding zone"
+  ],
+  "rules": [
+    "Relief grooves for thread must be made in case where the thread zone ends at a shoulder with ledge function",
+    "Relief groove geometry must comply with UNI regulation or TRASMITAL specifications",
+    "Groove dimensions vary by diameter range: 18-50mm, 51-80mm, 81-125mm, >125mm",
+    "Possible specific grooves must be indicated in details in drawing",
+    "Thread relief groove pitch (P) determines groove dimensions R, A, B, T1, T2"
+  ],
+  "dimensions": [
+    "Grinding relief 18-50mm: width 2.5mm, depth 0.1mm, radius R 1...R 1.6, angle 30°",
+    "Grinding relief 51-80mm: width 3mm, depth 0.2mm, radius R 1.6...R 1.6, angle 30°",
+    "Grinding relief 81-125mm: width 4.5mm, depth 0.3mm, radius R 2.5, angle 30°",
+    "Grinding relief >125mm: width 7mm, depth varies, radius R4.0, angle 30°",
+    "Thread relief P<1.25: R=1.2, A=3.3, B=1.2, T1=0.2, T2=1.2",
+    "Thread relief P=1.5-1.75-2: R=1.6, A=4.0, B=1.2, T1=0.2, T2=1.7",
+    "Thread relief P=2.5-3: R=2.0, A=5.0, B=1.5, T1=0.3, T2=2.4"
+  ],
+  "tolerances": [
+    "Grinding relief 18-50mm: width ±0.1mm, depth +0.1/-0.1mm, position ±0.2mm",
+    "Grinding relief 51-80mm: width ±0.2mm, depth ±0.2mm, position ±0.2mm",
+    "Grinding relief 81-125mm: width ±0.3mm, depth +0.4/-0.3mm, position ±0.3mm",
+    "Grinding relief >125mm: width tolerance ±0.2mm (with B tolerance), depth varies ±0.3mm"
+  ],
+  "surface_finish": [],
+  "inspection": [
+    "Verify relief groove dimensions according to diameter or pitch range",
+    "Check groove position relative to shoulder or thread termination",
+    "Confirm groove geometry matches UNI4386 or TRASMITAL specifications",
+    "Verify specific grooves are detailed in drawing when non-standard"
+  ],
+  "manufacturing_notes": [
+    "Relief grooves facilitate grinding operations by providing clearance",
+    "Thread relief grooves prevent interference at shoulder transitions",
+    "Groove angle typically 30° for grinding reliefs",
+    "Eventual specific grooves must be indicated in detail on drawing",
+    "Relief groove geometry standardized by size ranges to simplify manufacturing"
+  ],
+  "training_guidance": [
+    "NX agent should automatically create relief grooves at grinding zone boundaries based on shaft diameter range",
+    "For threads ending at shoulders with ledge function, insert thread relief groove per pitch specifications",
+    "Select groove dimensions (width, depth, radius) from table based on diameter (grinding) or thread pitch",
+    "Apply specified tolerances to groove width, depth, and axial position",
+    "Default to 30° groove angle for grinding relief applications",
+    "Flag non-standard groove requirements for explicit drawing detail callout",
+    "Validate that relief groove provides adequate clearance for grinding wheel or thread cutting tool exit",
+    "Use UNI4386 standard as baseline comparison for groove geometry verification"
+  ],
+  "summary": "This page defines standard relief groove geometry for both grinding zones (TAB-001) and threaded areas (TAB-002). Grinding relief grooves are specified in four diameter ranges (18-50mm, 51-80mm, 81-125mm, >125mm) with corresponding widths, depths, radii, and tolerances compared against UNI4386 standard. Thread relief grooves are dimensioned based on thread pitch (P<1.25, 1.5-2, 2.5-3) and must be used when threads terminate at shoulders. All non-standard grooves require explicit drawing callouts."
+}

@@ -1,0 +1,68 @@
+{
+  "page_number": 37,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zones",
+    "Bearing and seal ring assembly with same fitting diameter",
+    "Introduction radii for seals and bearings",
+    "Surface finish requirements for seal seats"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat"
+  ],
+  "rules": [
+    "Introduction zone must have fillet radius R based on diameter: ød ≤ 60 → R=0.4, >60 to ≤120 → R=0.8, >120 → R=1.2",
+    "Minimum effective dimension a=1 (minimum effective), used when dimensions don't allow larger dimensioning, otherwise a = s ≥ 2mm",
+    "For bearing and seal ring with same diameter (dc = da): seal ring assembly must be followed by bearing assembly",
+    "All zone 'L' must be dimensioned with the bearing's fitting diameter (or similar)",
+    "On specific zones must remain the specifications of roughness assigned, indicating useful length of execution",
+    "Every zone must indicate the specific tolerance and roughness values",
+    "Sharp edges must be rounded with indication 'rounded edge a/o rounded side'",
+    "Surfaces possibly with plunge grinding machining and without roughness a/o helical riflinge"
+  ],
+  "dimensions": [
+    "a = 1 mm (minimum effective)",
+    "a = s ≥ 2 mm (otherwise)",
+    "Introduction radius R: 0.4 mm (ød ≤ 60), 0.8 mm (60 < ød ≤ 120), 1.2 mm (ød > 120)",
+    "Zone L dimensioned based on bearing fitting diameter"
+  ],
+  "tolerances": [
+    "Specific tolerance values must be indicated for every zone",
+    "Tolerance for bearing fitting diameter applies to zone L"
+  ],
+  "surface_finish": [
+    "Roughness specifications must remain assigned on specific zones with useful length indicated",
+    "Surface possibly with plunge grinding machining",
+    "No helical riflinge on surfaces",
+    "Rounded edges required (sharp edges not allowed)"
+  ],
+  "inspection": [
+    "Verify introduction radii R according to diameter ranges",
+    "Verify minimum effective dimension a=1 or a=s≥2mm",
+    "Check roundedness of edges",
+    "Verify roughness values on specified zones",
+    "Confirm absence of sharp edges"
+  ],
+  "manufacturing_notes": [
+    "Assembly sequence critical: seal ring first, then bearing when dc=da",
+    "Introduction zones facilitate seal and bearing installation",
+    "Plunge grinding preferred for seal seat surfaces",
+    "Avoid helical machining marks on seal seats",
+    "Sharp edges must be broken/rounded"
+  ],
+  "training_guidance": [
+    "When modeling housing seal seats in NX, apply introduction chamfer/radius based on bore diameter: R0.4 for ød≤60mm, R0.8 for 60<ød≤120mm, R1.2 for ød>120mm",
+    "Model working zone 'a' with minimum 1mm effective length, prefer 2mm or greater when space allows",
+    "For combined bearing/seal seats with same diameter, dimension the seal seat zone L using the bearing tolerance class",
+    "Apply edge break or rounding to all sharp edges at seal seat transitions",
+    "Annotate seal seat zones with specific roughness callouts over defined axial lengths",
+    "Ensure assembly sequence annotations specify seal-then-bearing order when diameters match",
+    "Model seal seat surfaces suitable for plunge grinding (no helical tool paths)",
+    "Always dimension and tolerance each functional zone of the seal seat separately"
+  ],
+  "summary": "This standard defines the geometry and dimensioning requirements for seal ring housing working zones in Bonfiglioli housings. Key rules include diameter-dependent introduction radii (R=0.4 to 1.2mm), minimum effective dimensions (a≥1mm), and mandatory edge rounding. When bearing and seal share the same fitting diameter, the seal must be assembled first and zone L dimensioned per the bearing tolerance. All zones require specific tolerance and roughness callouts, with plunge-ground surfaces preferred."
+}

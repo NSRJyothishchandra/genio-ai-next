@@ -1,0 +1,46 @@
+{
+  "page_number": 41,
+  "document_code": "TAB-007",
+  "title": "Chamfers or Radius and Relief Grooves on Toothing and Involute Splined",
+  "page_kind": "rule",
+  "topics": [
+    "Chamfers on toothed components",
+    "Relief grooves on involute splines",
+    "Grinding wheel clearance on internal splines",
+    "Exit chamfer specifications for splined features"
+  ],
+  "components": [
+    "spline",
+    "gear",
+    "toothing"
+  ],
+  "rules": [
+    "When fitting coupling slide-guide is not possible, a chamfer with grinding wheel angle must be made on tooth edge (see picture D015DA)",
+    "For internal involute splines: chamfer at 15° must be made in all cases except for splined toothing inside flange discs (e.g., flanged hub or brake's housing)",
+    "Radius R on toothing must be made where necessary for fitting axe or centring in next machining processes",
+    "Exit chamfer must have an angle value different to 30° to respect condition of fitting with engraved angle"
+  ],
+  "dimensions": [
+    "Chamfer angle: 15° for internal involute splines",
+    "Exit chamfer: angle different from 30° required",
+    "Dimension 0.5 shown on drawing D015C (chamfer depth)",
+    "Dimension 9÷12 shown on drawing D015E (relief groove width)"
+  ],
+  "tolerances": [],
+  "surface_finish": [],
+  "inspection": [],
+  "manufacturing_notes": [
+    "Grinding wheel clearance must be considered when designing internal splines",
+    "Relief grooves must provide clearance for fitting axe or centering operations",
+    "Exit chamfer angle must differ from 30° to enable fitting with engraved angle",
+    "For internal splines in flange discs, radius R is used instead of chamfer"
+  ],
+  "training_guidance": [
+    "When modeling involute splines (internal), always include 15° chamfer at tooth edges unless component is a flange disc",
+    "For flange disc applications (flanged hub or brake housing), use radius R instead of chamfer",
+    "Exit chamfers on splined features must not be 30° - choose different angle to accommodate engraved angle mating",
+    "Include relief grooves with adequate width (9-12mm reference) for subsequent machining operations",
+    "When designing toothing that cannot accommodate slide-guide coupling, add chamfer matching grinding wheel angle at tooth edge"
+  ],
+  "summary": "This standard defines chamfer and relief groove requirements for toothed and involute splined components. Internal involute splines require 15° chamfers except in flange disc applications where radius is used. Exit chamfers must use angles other than 30° to enable proper fitting with engraved angles, and relief grooves must provide clearance for subsequent machining operations."
+}

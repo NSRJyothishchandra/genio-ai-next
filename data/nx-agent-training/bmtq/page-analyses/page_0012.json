@@ -1,0 +1,47 @@
+{
+  "page_number": 12,
+  "document_code": "MTQ-000",
+  "title": "Index Page - Document Structure and Component Families",
+  "page_kind": "index",
+  "topics": [
+    "Document structure overview",
+    "Table of index references",
+    "Sheet references for technical standards",
+    "Component family classifications"
+  ],
+  "components": [
+    "piston shaft",
+    "spline shafts",
+    "hollow shafts",
+    "hollow shafts with spline",
+    "shafts with cylindrical bars",
+    "planetary pins",
+    "ring gears",
+    "planetary gears",
+    "sun gears",
+    "pinion shafts with bore",
+    "planet carriers",
+    "ring nuts"
+  ],
+  "rules": [
+    "Document MTQ-000 serves as the front page/cover",
+    "Document MTQ-001 contains the general index",
+    "Document MTQ-002 provides general information",
+    "TAB series documents contain specific technical sheets organized by topic",
+    "Family series documents (66300-A through 66600) contain component-specific standards"
+  ],
+  "dimensions": [],
+  "tolerances": [],
+  "surface_finish": [],
+  "inspection": [],
+  "manufacturing_notes": [],
+  "training_guidance": [
+    "This is the primary index page for the Bonfiglioli Technical Quality Handbook MTQ-000 dated 26.10.2010",
+    "The handbook is organized into TAB sheets covering general standards (threading, sealing, bearings, etc.) and Family sheets covering specific component types",
+    "When modeling gears, reference Family 66300-66450 for piston shafts, spline shafts, and gear components",
+    "When modeling shafts, reference Family 66300-66311 for various shaft types including hollow shafts and shafts with splines",
+    "TAB sheets 001-018 contain cross-cutting standards applicable across component families",
+    "The document uses a hierarchical structure: MTQ documents for top-level organization, TAB for technical sheets, and Family codes for component-specific guidance"
+  ],
+  "summary": "This is the index page (1/3) of Bonfiglioli's Technical Quality Handbook MTQ-000. It presents the document structure including TAB reference sheets covering general technical standards (threading, sealing, bearings, splines, etc.) and Family index entries for specific component types such as piston shafts (66300-A), spline shafts (66301-B), hollow shafts (66301, 66311), planetary pins (66345-A), ring gears (66410-A), planetary gears (66420), sun gears (66430), and related power transmission components. This page serves as a navigation aid to locate detailed technical specifications organized by component family."
+}

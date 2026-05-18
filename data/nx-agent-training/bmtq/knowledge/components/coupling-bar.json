@@ -1,0 +1,65 @@
+{
+  "component": "coupling bar",
+  "rules": [
+    "TAB 001: Grinding wheel reference codes for notching",
+    "TAB 002: Threading tool groove codes",
+    "TAB 003: Centering body and mandrel body element list",
+    "TAB 004: Oil seal seating specifications on shaft end and bore",
+    "TAB 005: Bearing seating zones",
+    "TAB 006: Crimp sealing groove specifications",
+    "TAB 007: Spline grooves on gears and shafts",
+    "TAB 008: Thread specifications for ring nuts on shafts",
+    "TAB 009: Dynamic shaft coupling surface inclusions",
+    "TAB 010: Bearing seating surface specifications",
+    "TAB 011: Flange execution for pressures (e.g., 20°)",
+    "TAB 012: Incline spline representation",
+    "TAB 013: Drilling and socket drilling specifications",
+    "TAB 014: Key way standards",
+    "TAB 015: Shaft for blank disc connection details",
+    "TAB 017: ISO thread profiles (triangular)",
+    "TAB 098: Assembly and sectional drawings",
+    "TAB 099: Cross-sections and exploded views"
+  ],
+  "examples": [
+    {
+      "component": "coupling bar",
+      "page_number": 5,
+      "document_code": "MTQ-000 / MTQ-001",
+      "title": "Table of Contents - Sheets and Component Families Index",
+      "rules": [
+        "TAB 001: Grinding wheel reference codes for notching",
+        "TAB 002: Threading tool groove codes",
+        "TAB 003: Centering body and mandrel body element list",
+        "TAB 004: Oil seal seating specifications on shaft end and bore",
+        "TAB 005: Bearing seating zones",
+        "TAB 006: Crimp sealing groove specifications",
+        "TAB 007: Spline grooves on gears and shafts",
+        "TAB 008: Thread specifications for ring nuts on shafts",
+        "TAB 009: Dynamic shaft coupling surface inclusions",
+        "TAB 010: Bearing seating surface specifications",
+        "TAB 011: Flange execution for pressures (e.g., 20°)",
+        "TAB 012: Incline spline representation",
+        "TAB 013: Drilling and socket drilling specifications",
+        "TAB 014: Key way standards",
+        "TAB 015: Shaft for blank disc connection details",
+        "TAB 017: ISO thread profiles (triangular)",
+        "TAB 098: Assembly and sectional drawings",
+        "TAB 099: Cross-sections and exploded views"
+      ],
+      "dimensions": [],
+      "tolerances": [],
+      "surface_finish": [],
+      "inspection": [],
+      "manufacturing_notes": [],
+      "training_guidance": [
+        "This index page maps the structure of the Bonfiglioli Technical Quality Handbook, providing reference codes (TAB series and Family series) for various mechanical component standards.",
+        "When modeling shafts in NX, reference TAB 004 for seal seats, TAB 005 for bearing seats, TAB 008 for threads, and TAB 014 for keyways.",
+        "Spline modeling should consult TAB 007 for groove specifications and TAB 012 for incline spline representation.",
+        "Gear components (planetary, ring, sun) are indexed under Family codes 66301-66600.",
+        "Assembly and sectional drawing conventions are detailed in TAB 098 and TAB 099.",
+        "Use this index to navigate to specific technical sheets when validating or generating component geometry."
+      ],
+      "summary": "This page presents the table of contents for the Bonfiglioli Technical Quality Handbook, organized into TAB (Sheet) and Family (Component) indices. The TAB section lists manufacturing and design standards for components including shafts, bearings, seals, threads, splines, keyways, and gears. The Family section categorizes component types such as piston shafts, spline shafts, planetary gears, ring gears, and various shaft configurations, providing a structured reference system for mechanical design and quality control."
+    }
+  ]
+}

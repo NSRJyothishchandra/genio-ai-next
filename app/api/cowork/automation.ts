@@ -250,6 +250,38 @@ function extractFirstUrl(prompt: string) {
   return match?.[0];
 }
 
+function inferBrowserUrl(prompt: string) {
+  const explicit = extractFirstUrl(prompt);
+  if (explicit) return explicit;
+
+  const bareDomain = prompt.match(/\b((?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s)]*)?)/i);
+  if (bareDomain?.[1]) {
+    return `https://${bareDomain[1]}`;
+  }
+
+  const normalized = prompt.toLowerCase();
+  const knownSites: Array<{ pattern: RegExp; url: string }> = [
+    { pattern: /\bgithub\b/, url: normalized.includes("login") ? "https://github.com/login" : "https://github.com/" },
+    { pattern: /\bgmail\b/, url: "https://mail.google.com/" },
+    { pattern: /\bgoogle\b/, url: "https://www.google.com/" },
+    { pattern: /\bamazon music\b/, url: "https://music.amazon.com/" },
+    { pattern: /\bamazon\b/, url: "https://www.amazon.com/" },
+    { pattern: /\bbonfiglioli\b/, url: "https://www.bonfiglioli.com/" },
+    { pattern: /\blinkedin\b/, url: "https://www.linkedin.com/" },
+    { pattern: /\byoutube\b/, url: "https://www.youtube.com/" },
+    { pattern: /\bchatgpt\b/, url: "https://chatgpt.com/" },
+    { pattern: /\bclaude\b/, url: "https://claude.ai/" },
+  ];
+
+  for (const site of knownSites) {
+    if (site.pattern.test(normalized)) {
+      return site.url;
+    }
+  }
+
+  return null;
+}
+
 function extractBrowserCredentials(prompt: string): BrowserCredentials {
   const creds: BrowserCredentials = {};
 
@@ -315,7 +347,7 @@ function detectAppFromPrompt(prompt: string): { appName: string; task: string } 
 }
 
 function parseHeuristicPlan(prompt: string, target: CoworkTarget): AutomationPlan {
-  const url = extractFirstUrl(prompt);
+  const url = inferBrowserUrl(prompt);
   const credentials = extractBrowserCredentials(prompt);
   const desktopRequested = target === "desktop" || target === "all";
   const browserRequested = target === "browser" || target === "all";

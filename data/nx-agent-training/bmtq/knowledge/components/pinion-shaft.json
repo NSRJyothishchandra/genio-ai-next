@@ -1,0 +1,72 @@
+{
+  "component": "pinion shaft",
+  "rules": [
+    "MTQ-000: Front Page",
+    "MTQ-001: General index",
+    "MTQ-002: General Information",
+    "TAB 001: Relieving groove for grinding wheel",
+    "TAB 002: Relieving groove for threading tool",
+    "TAB 003: Earthing body and threaded hole",
+    "TAB 004: Oil seal seating on the shaft and in the bore",
+    "TAB 005: Bearing seating surface",
+    "TAB 006: Circlip seating groove",
+    "TAB 007: Connection between bearing groove on gear and shaft",
+    "TAB 008: Thread for ring nuts on shafts",
+    "TAB 009: Shaft end surface for fitting of dynamic element",
+    "TAB 010: Bearing seating surface",
+    "TAB 011: Execution of medium modulus (up. 20°)",
+    "TAB 012: Involute spline representation",
+    "TAB 013: Drilling and space for screws",
+    "TAB 014: Key way",
+    "TAB 015: Seat for blank disc connection",
+    "TAB 017: ISO thread with triangular profile",
+    "TAB 098: Assembly and sections (planetary)",
+    "TAB 099: General tolerances"
+  ],
+  "examples": [
+    {
+      "component": "pinion shaft",
+      "page_number": 3,
+      "document_code": "MTQ-001",
+      "title": "Document Index and Component Families",
+      "rules": [
+        "MTQ-000: Front Page",
+        "MTQ-001: General index",
+        "MTQ-002: General Information",
+        "TAB 001: Relieving groove for grinding wheel",
+        "TAB 002: Relieving groove for threading tool",
+        "TAB 003: Earthing body and threaded hole",
+        "TAB 004: Oil seal seating on the shaft and in the bore",
+        "TAB 005: Bearing seating surface",
+        "TAB 006: Circlip seating groove",
+        "TAB 007: Connection between bearing groove on gear and shaft",
+        "TAB 008: Thread for ring nuts on shafts",
+        "TAB 009: Shaft end surface for fitting of dynamic element",
+        "TAB 010: Bearing seating surface",
+        "TAB 011: Execution of medium modulus (up. 20°)",
+        "TAB 012: Involute spline representation",
+        "TAB 013: Drilling and space for screws",
+        "TAB 014: Key way",
+        "TAB 015: Seat for blank disc connection",
+        "TAB 017: ISO thread with triangular profile",
+        "TAB 098: Assembly and sections (planetary)",
+        "TAB 099: General tolerances"
+      ],
+      "dimensions": [],
+      "tolerances": [],
+      "surface_finish": [],
+      "inspection": [],
+      "manufacturing_notes": [],
+      "training_guidance": [
+        "This index page maps the handbook structure: MTQ documents are meta-documents; TAB documents contain specific engineering rules for component features",
+        "When generating shafts, consult TAB 004, TAB 005, TAB 006, TAB 008, TAB 009, and TAB 010 for bearing seats, seal seats, circlip grooves, and thread standards",
+        "For spline features, reference TAB 012 for involute spline representation standards",
+        "For keyway features, reference TAB 014",
+        "For gear components, reference TAB 007 (bearing groove connection) and TAB 011 (medium modulus execution)",
+        "For threading operations, reference TAB 002 (relieving groove), TAB 008 (ring nut threads), and TAB 017 (ISO triangular profile threads)",
+        "Component families 66300-series cover shaft variations; 66345-A and 66410-A cover planetary and ring gear components; 66420 and 66430 cover planetary gears; 66500 and 66555 cover planet carriers and nuts"
+      ],
+      "summary": "This is the primary index page for the Bonfiglioli Technical Quality Handbook document MTQ-001, dated 26.10.2010. It lists the TAB-series technical standards covering specific features such as bearing seats, seal seats, threads, splines, keyways, relieving grooves, and gear connections. The page also indexes component families (66300–66600 series) that correspond to shafts, gears, planetary assemblies, and related power transmission elements."
+    }
+  ]
+}

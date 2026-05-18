@@ -67,5 +67,21 @@
     "adminDecisionAt": null,
     "createdAt": "2026-04-27T12:47:53.901Z",
     "updatedAt": "2026-04-27T12:47:53.901Z"
+  },
+  {
+    "id": "REQ-1778061298043",
+    "employeeId": "EMP442667",
+    "employeeName": "sravan",
+    "employeeEmail": "testbonfiglioli@gmail.com",
+    "kind": "leave",
+    "title": "sick",
+    "reason": "sick",
+    "startDate": "2026-05-07",
+    "endDate": "2026-05-08",
+    "status": "pending_manager",
+    "managerDecisionAt": null,
+    "adminDecisionAt": null,
+    "createdAt": "2026-05-06T09:54:58.043Z",
+    "updatedAt": "2026-05-06T09:54:58.043Z"
   }
 ]

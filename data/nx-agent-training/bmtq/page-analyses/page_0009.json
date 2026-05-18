@@ -1,0 +1,80 @@
+{
+  "page_number": 9,
+  "document_code": "MTQ-001",
+  "title": "General Index - Table of Contents",
+  "page_kind": "index",
+  "topics": [
+    "Relieving grooves for grinding wheel",
+    "Relieving groove for threading tool",
+    "Centring body and threaded shaft",
+    "Oil seal seating on the shaft and in the bore",
+    "Bearing seating surface",
+    "Circlip seating groove",
+    "Standard O-ring seating groove on gear",
+    "Through bore and thread shaft",
+    "Thread for ring nuts on shafts",
+    "Shaft end surface for lubrication of dynamic shaft",
+    "Bearing seating surface",
+    "Diameter chamfers and provisions (eng. 20°)",
+    "Involute spline representation",
+    "Drafting and specifying",
+    "Key ways",
+    "Shaft for blank disc connection",
+    "ISO thread with triangular profile",
+    "Assembly and sectional drawings",
+    "Drawing tolerances",
+    "Piston shafts",
+    "Solid shafts and spline shafts",
+    "Hollow shafts with spline",
+    "Hollow shafts",
+    "Shafts with locating bars",
+    "Planetary pins",
+    "Ring Gears",
+    "Planetary gears",
+    "Sun gears",
+    "Gears with bore",
+    "Planet carriers",
+    "Ring Nut"
+  ],
+  "components": [
+    "shaft",
+    "thread",
+    "spline",
+    "keyway",
+    "bearing seat",
+    "seal seat",
+    "gear",
+    "chamfer",
+    "housing",
+    "assembly drawing"
+  ],
+  "rules": [
+    "Document is organized by TAB sheets for machining and finishing standards",
+    "Document is organized by Family codes (66xxx series) for component-specific standards",
+    "TAB sheets cover: relieving grooves, threading, centring, seals, bearings, circlips, O-rings, threads, ring nuts, chamfers, splines, keyways, profiles, assembly drawings",
+    "Family sections cover: piston shafts, solid shafts, spline shafts, hollow shafts, locating bars, planetary components, gears, planet carriers, ring nuts"
+  ],
+  "dimensions": [],
+  "tolerances": [
+    "Drawing tolerances are addressed in TAB 098"
+  ],
+  "surface_finish": [
+    "Bearing seating surfaces have dedicated standards (TAB 003, TAB 010)"
+  ],
+  "inspection": [],
+  "manufacturing_notes": [
+    "Relieving grooves specified for grinding wheel operations (TAB 002)",
+    "Relieving grooves specified for threading tool operations (TAB 003)",
+    "Thread specifications for ring nuts on shafts (TAB 008)",
+    "Chamfer provisions standardized at 20° engineering angle (TAB 011)"
+  ],
+  "training_guidance": [
+    "When modeling shafts, reference TAB sheets 001-018 for feature-specific standards including grooves, seal seats, bearing seats, threads, and chamfers",
+    "When modeling gears and planetary components, reference Family sections 66xxx for component-specific standards",
+    "Spline representations and specifications are found in TAB 012 and Family sections 66301 and 66303",
+    "Keyway standards are defined in TAB 014",
+    "Assembly and sectional drawing conventions are specified in TAB 097 and TAB 098",
+    "All shaft variants (solid, hollow, splined, piston) have dedicated family code standards in the 66xxx series"
+  ],
+  "summary": "This is the main index page (MTQ-001, page 1/3) of the Bonfiglioli Technical Quality Handbook dated 26.10.2010. The document is structured into TAB sheets covering machining features and processes (TAB 001-098), and Family sections organized by component codes (66xxx series) covering specific shaft types, gears, and planetary components. The index provides a comprehensive roadmap to all technical standards for designing and manufacturing power transmission components."
+}

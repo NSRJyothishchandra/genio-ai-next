@@ -1,0 +1,3433 @@
+{
+  "leftFileName": "AD00016277--_DRAFT.pdf",
+  "rightFileName": "AD00016277--_DRAFT.pdf",
+  "generatedAt": "2026-05-07T12:40:00.104760",
+  "summary": {
+    "leftLineCount": 201,
+    "rightLineCount": 201,
+    "equalLines": 201,
+    "changedLines": 0,
+    "replacedLines": 0,
+    "insertedLines": 0,
+    "deletedLines": 0
+  },
+  "entries": [
+    {
+      "kind": "equal",
+      "leftLineNumber": 1,
+      "rightLineNumber": 1,
+      "leftParts": [
+        {
+          "text": "BB",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "BB",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 2,
+      "rightLineNumber": 2,
+      "leftParts": [
+        {
+          "text": "B-B",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "B-B",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 3,
+      "rightLineNumber": 3,
+      "leftParts": [
+        {
+          "text": "A-A",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A-A",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 4,
+      "rightLineNumber": 4,
+      "leftParts": [
+        {
+          "text": "M10x130  10.9  GEO  N 22",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M10x130  10.9  GEO  N 22",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 5,
+      "rightLineNumber": 5,
+      "leftParts": [
+        {
+          "text": " 70  Nm  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": " 70  Nm  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 6,
+      "rightLineNumber": 6,
+      "leftParts": [
+        {
+          "text": "m10  z13  x0.45",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "m10  z13  x0.45",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 7,
+      "rightLineNumber": 7,
+      "leftParts": [
+        {
+          "text": "M10x35  8.8  N 4",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M10x35  8.8  N 4",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 8,
+      "rightLineNumber": 8,
+      "leftParts": [
+        {
+          "text": " 50  Nm  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": " 50  Nm  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 9,
+      "rightLineNumber": 9,
+      "leftParts": [
+        {
+          "text": "M60x2",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M60x2",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 10,
+      "rightLineNumber": 10,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_101  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "BUMWS  TS_101  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 11,
+      "rightLineNumber": 11,
+      "leftParts": [
+        {
+          "text": "3/8\"G  N 1",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "3/8\"G  N 1",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 12,
+      "rightLineNumber": 12,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 13,
+      "rightLineNumber": 13,
+      "leftParts": [
+        {
+          "text": "  Applicare  grasso",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "  Applicare  grasso",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 14,
+      "rightLineNumber": 14,
+      "leftParts": [
+        {
+          "text": "  APPLY  GREASE  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "  APPLY  GREASE  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 15,
+      "rightLineNumber": 15,
+      "leftParts": [
+        {
+          "text": "  GADUS  S2  V220  0  (3,8  KG)",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "  GADUS  S2  V220  0  (3,8  KG)",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 16,
+      "rightLineNumber": 16,
+      "leftParts": [
+        {
+          "text": "33117",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "33117",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 17,
+      "rightLineNumber": 17,
+      "leftParts": [
+        {
+          "text": "30214",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "30214",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 18,
+      "rightLineNumber": 18,
+      "leftParts": [
+        {
+          "text": "305",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "305",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 19,
+      "rightLineNumber": 19,
+      "leftParts": [
+        {
+          "text": "1:4.25",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1:4.25",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 20,
+      "rightLineNumber": 20,
+      "leftParts": [
+        {
+          "text": "303",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "303",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 21,
+      "rightLineNumber": 21,
+      "leftParts": [
+        {
+          "text": "1:5.33",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1:5.33",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 22,
+      "rightLineNumber": 22,
+      "leftParts": [
+        {
+          "text": "1:7.20",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1:7.20",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 23,
+      "rightLineNumber": 23,
+      "leftParts": [
+        {
+          "text": "PRECARICO  REGISTRAZIONE",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "PRECARICO  REGISTRAZIONE",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 24,
+      "rightLineNumber": 24,
+      "leftParts": [
+        {
+          "text": "CUSC.  CONICI  25000-30000  N",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "CUSC.  CONICI  25000-30000  N",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 25,
+      "rightLineNumber": 25,
+      "leftParts": [
+        {
+          "text": "TAPERED  ROLLER  BEARING  PRELOAD",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "TAPERED  ROLLER  BEARING  PRELOAD",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 26,
+      "rightLineNumber": 26,
+      "leftParts": [
+        {
+          "text": "M10x70  8.8  N 4",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M10x70  8.8  N 4",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 27,
+      "rightLineNumber": 27,
+      "leftParts": [
+        {
+          "text": " 40  Nm",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": " 40  Nm",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 28,
+      "rightLineNumber": 28,
+      "leftParts": [
+        {
+          "text": "-  LOCTITE  638  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "-  LOCTITE  638  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 29,
+      "rightLineNumber": 29,
+      "leftParts": [
+        {
+          "text": "14.5",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "14.5",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 30,
+      "rightLineNumber": 30,
+      "leftParts": [
+        {
+          "text": "+0,5",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "+0,5",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 31,
+      "rightLineNumber": 31,
+      "leftParts": [
+        {
+          "text": "-0,3",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "-0,3",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 32,
+      "rightLineNumber": 32,
+      "leftParts": [
+        {
+          "text": "M8x1  N 1  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M8x1  N 1  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 33,
+      "rightLineNumber": 33,
+      "leftParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "BUMWS  TS_103",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 34,
+      "rightLineNumber": 34,
+      "leftParts": [
+        {
+          "text": "DADO  AUTOFREN.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "DADO  AUTOFREN.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 35,
+      "rightLineNumber": 35,
+      "leftParts": [
+        {
+          "text": "SELF-LOCKING  NUT",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "SELF-LOCKING  NUT",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 36,
+      "rightLineNumber": 36,
+      "leftParts": [
+        {
+          "text": "M10  8G  GEO  n 4",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M10  8G  GEO  n 4",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 37,
+      "rightLineNumber": 37,
+      "leftParts": [
+        {
+          "text": "...Nm",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "...Nm",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 38,
+      "rightLineNumber": 38,
+      "leftParts": [
+        {
+          "text": "Fornire  a  corredo",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Fornire  a  corredo",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 39,
+      "rightLineNumber": 39,
+      "leftParts": [
+        {
+          "text": "Supplied  as  loose  parts  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Supplied  as  loose  parts  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 40,
+      "rightLineNumber": 40,
+      "leftParts": [
+        {
+          "text": "DADO  /  NUT",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "DADO  /  NUT",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 41,
+      "rightLineNumber": 41,
+      "leftParts": [
+        {
+          "text": "M10  6S  GEO  n 2",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "M10  6S  GEO  n 2",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 42,
+      "rightLineNumber": 42,
+      "leftParts": [
+        {
+          "text": "...Nm",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "...Nm",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 43,
+      "rightLineNumber": 43,
+      "leftParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 44,
+      "rightLineNumber": 44,
+      "leftParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 45,
+      "rightLineNumber": 45,
+      "leftParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "TARGHETTA",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 46,
+      "rightLineNumber": 46,
+      "leftParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "NAME  PLATE",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 47,
+      "rightLineNumber": 47,
+      "leftParts": [
+        {
+          "text": "300",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "300",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 48,
+      "rightLineNumber": 48,
+      "leftParts": [
+        {
+          "text": "Applicare  grasso  secondo  C_TS_04",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Applicare  grasso  secondo  C_TS_04",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 49,
+      "rightLineNumber": 49,
+      "leftParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 50,
+      "rightLineNumber": 50,
+      "leftParts": [
+        {
+          "text": "APPLICA  TIPO  SEALANT  ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "APPLICA  TIPO  SEALANT  ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 51,
+      "rightLineNumber": 51,
+      "leftParts": [
+        {
+          "text": "SIKAFLEX  291i  O  SIKAFLEX  221  SECONDO  AQM2960",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "SIKAFLEX  291i  O  SIKAFLEX  221  SECONDO  AQM2960",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 52,
+      "rightLineNumber": 52,
+      "leftParts": [
+        {
+          "text": "APPLY  SEALANT  TYPE",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "APPLY  SEALANT  TYPE",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 53,
+      "rightLineNumber": 53,
+      "leftParts": [
+        {
+          "text": "SIKAFLEX  291i  OR  SIKAFLEX  221  ACCORDING  TO  AQM2960",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "SIKAFLEX  291i  OR  SIKAFLEX  221  ACCORDING  TO  AQM2960",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 54,
+      "rightLineNumber": 54,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 55,
+      "rightLineNumber": 55,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 56,
+      "rightLineNumber": 56,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 57,
+      "rightLineNumber": 57,
+      "leftParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "*",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 58,
+      "rightLineNumber": 58,
+      "leftParts": [
+        {
+          "text": "58x53x27",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "58x53x27",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 59,
+      "rightLineNumber": 59,
+      "leftParts": [
+        {
+          "text": "DIN  5482",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "DIN  5482",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 60,
+      "rightLineNumber": 60,
+      "leftParts": [
+        {
+          "text": "K",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "K",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 61,
+      "rightLineNumber": 61,
+      "leftParts": [
+        {
+          "text": "H",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "H",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 62,
+      "rightLineNumber": 62,
+      "leftParts": [
+        {
+          "text": "11",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "11",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 63,
+      "rightLineNumber": 63,
+      "leftParts": [
+        {
+          "text": "5",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "5",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 64,
+      "rightLineNumber": 64,
+      "leftParts": [
+        {
+          "text": "3 8",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "3 8",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 65,
+      "rightLineNumber": 65,
+      "leftParts": [
+        {
+          "text": "I",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "I",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 66,
+      "rightLineNumber": 66,
+      "leftParts": [
+        {
+          "text": "G",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 67,
+      "rightLineNumber": 67,
+      "leftParts": [
+        {
+          "text": "C",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "C",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 68,
+      "rightLineNumber": 68,
+      "leftParts": [
+        {
+          "text": "15",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "15",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 69,
+      "rightLineNumber": 69,
+      "leftParts": [
+        {
+          "text": "6 16",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "6 16",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 70,
+      "rightLineNumber": 70,
+      "leftParts": [
+        {
+          "text": "8 11",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "8 11",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 71,
+      "rightLineNumber": 71,
+      "leftParts": [
+        {
+          "text": "2",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "2",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 72,
+      "rightLineNumber": 72,
+      "leftParts": [
+        {
+          "text": "7",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "7",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 73,
+      "rightLineNumber": 73,
+      "leftParts": [
+        {
+          "text": "C",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "C",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 74,
+      "rightLineNumber": 74,
+      "leftParts": [
+        {
+          "text": "E",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "E",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 75,
+      "rightLineNumber": 75,
+      "leftParts": [
+        {
+          "text": "K",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "K",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 76,
+      "rightLineNumber": 76,
+      "leftParts": [
+        {
+          "text": "I",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "I",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 77,
+      "rightLineNumber": 77,
+      "leftParts": [
+        {
+          "text": "14",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "14",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 78,
+      "rightLineNumber": 78,
+      "leftParts": [
+        {
+          "text": "1410",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1410",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 79,
+      "rightLineNumber": 79,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 80,
+      "rightLineNumber": 80,
+      "leftParts": [
+        {
+          "text": "H",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "H",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 81,
+      "rightLineNumber": 81,
+      "leftParts": [
+        {
+          "text": "L",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "L",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 82,
+      "rightLineNumber": 82,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 83,
+      "rightLineNumber": 83,
+      "leftParts": [
+        {
+          "text": "6",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "6",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 84,
+      "rightLineNumber": 84,
+      "leftParts": [
+        {
+          "text": "12",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "12",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 85,
+      "rightLineNumber": 85,
+      "leftParts": [
+        {
+          "text": "J",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "J",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 86,
+      "rightLineNumber": 86,
+      "leftParts": [
+        {
+          "text": "E",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "E",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 87,
+      "rightLineNumber": 87,
+      "leftParts": [
+        {
+          "text": "L",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "L",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 88,
+      "rightLineNumber": 88,
+      "leftParts": [
+        {
+          "text": "13",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "13",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 89,
+      "rightLineNumber": 89,
+      "leftParts": [
+        {
+          "text": "137 10",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "137 10",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 90,
+      "rightLineNumber": 90,
+      "leftParts": [
+        {
+          "text": "F",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 91,
+      "rightLineNumber": 91,
+      "leftParts": [
+        {
+          "text": "J",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "J",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 92,
+      "rightLineNumber": 92,
+      "leftParts": [
+        {
+          "text": "F",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "F",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 93,
+      "rightLineNumber": 93,
+      "leftParts": [
+        {
+          "text": "D",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "D",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 94,
+      "rightLineNumber": 94,
+      "leftParts": [
+        {
+          "text": "5 15",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "5 15",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 95,
+      "rightLineNumber": 95,
+      "leftParts": [
+        {
+          "text": "9",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "9",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 96,
+      "rightLineNumber": 96,
+      "leftParts": [
+        {
+          "text": "1",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 97,
+      "rightLineNumber": 97,
+      "leftParts": [
+        {
+          "text": "B",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "B",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 98,
+      "rightLineNumber": 98,
+      "leftParts": [
+        {
+          "text": "D",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "D",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 99,
+      "rightLineNumber": 99,
+      "leftParts": [
+        {
+          "text": "4",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "4",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 100,
+      "rightLineNumber": 100,
+      "leftParts": [
+        {
+          "text": "B",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "B",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 101,
+      "rightLineNumber": 101,
+      "leftParts": [
+        {
+          "text": "1612",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1612",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 102,
+      "rightLineNumber": 102,
+      "leftParts": [
+        {
+          "text": "G",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "G",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 103,
+      "rightLineNumber": 103,
+      "leftParts": [
+        {
+          "text": "21 4",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "21 4",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 104,
+      "rightLineNumber": 104,
+      "leftParts": [
+        {
+          "text": "9",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "9",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 105,
+      "rightLineNumber": 105,
+      "leftParts": [
+        {
+          "text": "3",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "3",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 106,
+      "rightLineNumber": 106,
+      "leftParts": [
+        {
+          "text": "Applicare  grasso  secondo",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Applicare  grasso  secondo",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 107,
+      "rightLineNumber": 107,
+      "leftParts": [
+        {
+          "text": "C_TS_04",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "C_TS_04",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 108,
+      "rightLineNumber": 108,
+      "leftParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Apply  grease  as  C_TS_04",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 109,
+      "rightLineNumber": 109,
+      "leftParts": [
+        {
+          "text": "Optional",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Optional",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 110,
+      "rightLineNumber": 110,
+      "leftParts": [
+        {
+          "text": "PRJ00036552 KurianJohn P.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "PRJ00036552 KurianJohn P.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 111,
+      "rightLineNumber": 111,
+      "leftParts": [
+        {
+          "text": "Approved by",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Approved by",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 112,
+      "rightLineNumber": 112,
+      "leftParts": [
+        {
+          "text": "Lelli G.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Lelli G.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 113,
+      "rightLineNumber": 113,
+      "leftParts": [
+        {
+          "text": "Emesso con -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Emesso con -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 114,
+      "rightLineNumber": 114,
+      "leftParts": [
+        {
+          "text": "Lelli G.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Lelli G.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 115,
+      "rightLineNumber": 115,
+      "leftParts": [
+        {
+          "text": "Drawn by",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Drawn by",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 116,
+      "rightLineNumber": 116,
+      "leftParts": [
+        {
+          "text": "Date",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Date",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 117,
+      "rightLineNumber": 117,
+      "leftParts": [
+        {
+          "text": "Classe Mod. -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Classe Mod. -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 118,
+      "rightLineNumber": 118,
+      "leftParts": [
+        {
+          "text": "GEARBOX",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "GEARBOX",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 119,
+      "rightLineNumber": 119,
+      "leftParts": [
+        {
+          "text": "Issued with.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Issued with.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 120,
+      "rightLineNumber": 120,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 121,
+      "rightLineNumber": 121,
+      "leftParts": [
+        {
+          "text": "Sost. dal -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Sost. dal -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 122,
+      "rightLineNumber": 122,
+      "leftParts": [
+        {
+          "text": "Descrizione Modifica",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Descrizione Modifica",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 123,
+      "rightLineNumber": 123,
+      "leftParts": [
+        {
+          "text": "Change Class",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Change Class",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 124,
+      "rightLineNumber": 124,
+      "leftParts": [
+        {
+          "text": "Issued with Checked by",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Issued with Checked by",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 125,
+      "rightLineNumber": 125,
+      "leftParts": [
+        {
+          "text": "Date",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Date",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 126,
+      "rightLineNumber": 126,
+      "leftParts": [
+        {
+          "text": "Rev. Date",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Rev. Date",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 127,
+      "rightLineNumber": 127,
+      "leftParts": [
+        {
+          "text": "1:163 SPECIAL PAM LEROY",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1:163 SPECIAL PAM LEROY",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 128,
+      "rightLineNumber": 128,
+      "leftParts": [
+        {
+          "text": "Scala -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Scala -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 129,
+      "rightLineNumber": 129,
+      "leftParts": [
+        {
+          "text": "Data -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Data -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 130,
+      "rightLineNumber": 130,
+      "leftParts": [
+        {
+          "text": "Changed by",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Changed by",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 131,
+      "rightLineNumber": 131,
+      "leftParts": [
+        {
+          "text": "Release status",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Release status",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 132,
+      "rightLineNumber": 132,
+      "leftParts": [
+        {
+          "text": "KurianJohn P.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "KurianJohn P.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 133,
+      "rightLineNumber": 133,
+      "leftParts": [
+        {
+          "text": "Sheet",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Sheet",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 134,
+      "rightLineNumber": 134,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 135,
+      "rightLineNumber": 135,
+      "leftParts": [
+        {
+          "text": "Change q.ty Emesso con -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Change q.ty Emesso con -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 136,
+      "rightLineNumber": 136,
+      "leftParts": [
+        {
+          "text": "RIDUTTORE",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "RIDUTTORE",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 137,
+      "rightLineNumber": 137,
+      "leftParts": [
+        {
+          "text": "ECN0111827",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "ECN0111827",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 138,
+      "rightLineNumber": 138,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 139,
+      "rightLineNumber": 139,
+      "leftParts": [
+        {
+          "text": "Dis. da -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Dis. da -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 140,
+      "rightLineNumber": 140,
+      "leftParts": [
+        {
+          "text": "Size",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Size",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 141,
+      "rightLineNumber": 141,
+      "leftParts": [
+        {
+          "text": "Replaced by",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Replaced by",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 142,
+      "rightLineNumber": 142,
+      "leftParts": [
+        {
+          "text": "A1",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A1",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 143,
+      "rightLineNumber": 143,
+      "leftParts": [
+        {
+          "text": "Opzionale",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Opzionale",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 144,
+      "rightLineNumber": 144,
+      "leftParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 145,
+      "rightLineNumber": 145,
+      "leftParts": [
+        {
+          "text": "705T",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "705T",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 146,
+      "rightLineNumber": 146,
+      "leftParts": [
+        {
+          "text": "OFFICIAL ERP",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "OFFICIAL ERP",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 147,
+      "rightLineNumber": 147,
+      "leftParts": [
+        {
+          "text": "18-Mar-2025",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "18-Mar-2025",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 148,
+      "rightLineNumber": 148,
+      "leftParts": [
+        {
+          "text": "Sostituisce -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Sostituisce -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 149,
+      "rightLineNumber": 149,
+      "leftParts": [
+        {
+          "text": "Scale",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Scale",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 150,
+      "rightLineNumber": 150,
+      "leftParts": [
+        {
+          "text": "Replace",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Replace",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 151,
+      "rightLineNumber": 151,
+      "leftParts": [
+        {
+          "text": "Data Rev. -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Data Rev. -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 152,
+      "rightLineNumber": 152,
+      "leftParts": [
+        {
+          "text": "Q.ta' mod.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Q.ta' mod.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 153,
+      "rightLineNumber": 153,
+      "leftParts": [
+        {
+          "text": "Stato rilascio -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Stato rilascio -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 154,
+      "rightLineNumber": 154,
+      "leftParts": [
+        {
+          "text": "Project",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Project",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 155,
+      "rightLineNumber": 155,
+      "leftParts": [
+        {
+          "text": "Approvato da -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Approvato da -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 156,
+      "rightLineNumber": 156,
+      "leftParts": [
+        {
+          "text": "JZ00018493",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "JZ00018493",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 157,
+      "rightLineNumber": 157,
+      "leftParts": [
+        {
+          "text": "Mod. da -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Mod. da -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 158,
+      "rightLineNumber": 158,
+      "leftParts": [
+        {
+          "text": "Foglio -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Foglio -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 159,
+      "rightLineNumber": 159,
+      "leftParts": [
+        {
+          "text": "Data -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Data -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 160,
+      "rightLineNumber": 160,
+      "leftParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "02-Apr-2025",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 161,
+      "rightLineNumber": 161,
+      "leftParts": [
+        {
+          "text": "1 :1",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1 :1",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 162,
+      "rightLineNumber": 162,
+      "leftParts": [
+        {
+          "text": "Rev.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Rev.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 163,
+      "rightLineNumber": 163,
+      "leftParts": [
+        {
+          "text": "1:163 SPECIALE PAM LEROY",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1:163 SPECIALE PAM LEROY",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 164,
+      "rightLineNumber": 164,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 165,
+      "rightLineNumber": 165,
+      "leftParts": [
+        {
+          "text": "Formato -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Formato -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 166,
+      "rightLineNumber": 166,
+      "leftParts": [
+        {
+          "text": "Contr. da -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Contr. da -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 167,
+      "rightLineNumber": 167,
+      "leftParts": [
+        {
+          "text": "Progetto -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Progetto -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 168,
+      "rightLineNumber": 168,
+      "leftParts": [
+        {
+          "text": "Description Change",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Description Change",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 169,
+      "rightLineNumber": 169,
+      "leftParts": [
+        {
+          "text": "-",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "-",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 170,
+      "rightLineNumber": 170,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 171,
+      "rightLineNumber": 171,
+      "leftParts": [
+        {
+          "text": "Dwg no.Cod. Prod.-",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Dwg no.Cod. Prod.-",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 172,
+      "rightLineNumber": 172,
+      "leftParts": [
+        {
+          "text": "Descrizione",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Descrizione",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 173,
+      "rightLineNumber": 173,
+      "leftParts": [
+        {
+          "text": "1 /1",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "1 /1",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 174,
+      "rightLineNumber": 174,
+      "leftParts": [
+        {
+          "text": "Description",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Description",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 175,
+      "rightLineNumber": 175,
+      "leftParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": ".",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 176,
+      "rightLineNumber": 176,
+      "leftParts": [
+        {
+          "text": "Rev.",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Rev.",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 177,
+      "rightLineNumber": 177,
+      "leftParts": [
+        {
+          "text": "AD00016277",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "AD00016277",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 178,
+      "rightLineNumber": 178,
+      "leftParts": [
+        {
+          "text": "La BONFIGLIOLI GROUP si riserva a termini di ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "La BONFIGLIOLI GROUP si riserva a termini di ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 179,
+      "rightLineNumber": 179,
+      "leftParts": [
+        {
+          "text": "legge la proprieta' di questo disegno, con divieto ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "legge la proprieta' di questo disegno, con divieto ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 180,
+      "rightLineNumber": 180,
+      "leftParts": [
+        {
+          "text": "di riprodurlo o di renderlo comunque noto a terzi ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "di riprodurlo o di renderlo comunque noto a terzi ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 181,
+      "rightLineNumber": 181,
+      "leftParts": [
+        {
+          "text": "senza la specifica approvazione",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "senza la specifica approvazione",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 182,
+      "rightLineNumber": 182,
+      "leftParts": [
+        {
+          "text": "Per dimensioni o prestazioni riduttore non indicate vedere ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Per dimensioni o prestazioni riduttore non indicate vedere ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 183,
+      "rightLineNumber": 183,
+      "leftParts": [
+        {
+          "text": "catalogo ove disponibile",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "catalogo ove disponibile",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 184,
+      "rightLineNumber": 184,
+      "leftParts": [
+        {
+          "text": "Dimensioni espresse in mm se non diversamente indicato",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Dimensioni espresse in mm se non diversamente indicato",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 185,
+      "rightLineNumber": 185,
+      "leftParts": [
+        {
+          "text": "Oggetto -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Oggetto -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 186,
+      "rightLineNumber": 186,
+      "leftParts": [
+        {
+          "text": "-",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "-",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 187,
+      "rightLineNumber": 187,
+      "leftParts": [
+        {
+          "text": "For dimensions or gearbox performance not indicated see ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "For dimensions or gearbox performance not indicated see ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 188,
+      "rightLineNumber": 188,
+      "leftParts": [
+        {
+          "text": "catalogue if available",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "catalogue if available",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 189,
+      "rightLineNumber": 189,
+      "leftParts": [
+        {
+          "text": "Disegno n° -",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Disegno n° -",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 190,
+      "rightLineNumber": 190,
+      "leftParts": [
+        {
+          "text": "BONFIGLIOLI GROUP Holds the legal ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "BONFIGLIOLI GROUP Holds the legal ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 191,
+      "rightLineNumber": 191,
+      "leftParts": [
+        {
+          "text": "proprietary rights of this drawing. Unauthorised ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "proprietary rights of this drawing. Unauthorised ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 192,
+      "rightLineNumber": 192,
+      "leftParts": [
+        {
+          "text": "reproduction or disclosure of the Drawing to ",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "reproduction or disclosure of the Drawing to ",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 193,
+      "rightLineNumber": 193,
+      "leftParts": [
+        {
+          "text": "third parties is forbidden",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "third parties is forbidden",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 194,
+      "rightLineNumber": 194,
+      "leftParts": [
+        {
+          "text": "Prod. Code",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Prod. Code",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 195,
+      "rightLineNumber": 195,
+      "leftParts": [
+        {
+          "text": "Object",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Object",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 196,
+      "rightLineNumber": 196,
+      "leftParts": [
+        {
+          "text": "Dimensions in mm unless otherwise specified",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "Dimensions in mm unless otherwise specified",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 197,
+      "rightLineNumber": 197,
+      "leftParts": [
+        {
+          "text": "2",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "2",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 198,
+      "rightLineNumber": 198,
+      "leftParts": [
+        {
+          "text": "+0,5",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "+0,5",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 199,
+      "rightLineNumber": 199,
+      "leftParts": [
+        {
+          "text": "-0,7",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "-0,7",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 200,
+      "rightLineNumber": 200,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ]
+    },
+    {
+      "kind": "equal",
+      "leftLineNumber": 201,
+      "rightLineNumber": 201,
+      "leftParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ],
+      "rightParts": [
+        {
+          "text": "A",
+          "type": "equal"
+        }
+      ]
+    }
+  ]
+}

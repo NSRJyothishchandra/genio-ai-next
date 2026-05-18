@@ -1,0 +1,64 @@
+{
+  "page_number": 35,
+  "document_code": "TAB-004",
+  "title": "Working Zones Introduction and Seal Ring's Housing",
+  "page_kind": "rule",
+  "topics": [
+    "Seal ring housing working zone introduction",
+    "Bearing and seal ring assembly with same fitting diameter"
+  ],
+  "components": [
+    "housing",
+    "seal seat",
+    "bearing seat"
+  ],
+  "rules": [
+    "Working zone introduction radius R varies by diameter: ød ≤ 60 → R=0.4, >60 to ≤120 → R=0.8, >120 → R=1.2",
+    "Minimum effective dimension a=1 (minimum effective) must be used when dimensions don't allow larger dimensioning, constrained to 1 ≤ a ≤ 2 mm",
+    "When bearing and seal ring share same fitting diameter (dc = da), seal ring assembly must follow bearing assembly",
+    "All zone 'L' must be dimensioned with the bearing's fitting diameter (or similar)",
+    "Specific zones must remain with roughness and tolerances assigned, indicating useful length of execution",
+    "In seal ring assembly followed by bearing case, every zone must indicate its specific tolerance and roughness values",
+    "Sharp edges must be rounded or chamfered with 'spigolo arrotondato e/o estremità arrotondata' indication",
+    "Rounded edge indication means there must be no sharp roughness"
+  ],
+  "dimensions": [
+    "Working zone introduction dimension 'a' constrained between 1 mm and 2 mm",
+    "Radius R dimension based on diameter ød: R=0.4 (ød≤60), R=0.8 (60<ød≤120), R=1.2 (ød>120)",
+    "Zone length L and L1 must be specified on technical drawings"
+  ],
+  "tolerances": [
+    "Spazio errore ± (tolerance space indication required in working zones)",
+    "Specific tolerance callout of ±1.6 and ±2 shown in housing example",
+    "Each zone must indicate specific tolerance values when seal ring follows bearing assembly"
+  ],
+  "surface_finish": [
+    "Surface finish symbol references 'superficie possibilmente con lavorazione di rettifica a tutto'",
+    "Plunge grinding machining recommended without roughness and helical ridges",
+    "Roughness values must be assigned and indicated for useful length zones",
+    "Rounded edges required to eliminate sharp roughness"
+  ],
+  "inspection": [
+    "Verify working zone introduction radius R matches diameter range specification",
+    "Verify dimension 'a' is within 1-2 mm range",
+    "Check that zone L dimensions are properly specified on drawings",
+    "Verify tolerance and roughness values are indicated for each zone",
+    "Confirm rounded edges are properly executed without sharp roughness"
+  ],
+  "manufacturing_notes": [
+    "Use minimum effective dimension a=1 only when larger dimensioning not possible",
+    "Assembly sequence matters: seal ring assembly sequence depends on bearing assembly when sharing fitting diameter",
+    "Plunge grinding machining method preferred for seal seat surfaces",
+    "Rounded or chamfered edges required at housing transitions",
+    "All working zones must have assigned roughness indicating useful execution length"
+  ],
+  "training_guidance": [
+    "When modeling housing with seal seats, generate working zone introduction with radius R based on diameter: use R=0.4 for ød≤60mm, R=0.8 for 60<ød≤120mm, R=1.2 for ød>120mm",
+    "Apply minimum transition dimension 'a' between 1-2mm, preferring a=1mm only when space constrained",
+    "For combined bearing and seal ring housings with same fitting diameter, dimension zone L using bearing fitting diameter and maintain consistent tolerances",
+    "Add surface finish callouts indicating plunge grinding operation for seal seat surfaces",
+    "Include rounded edge or chamfer specifications at housing transitions to eliminate sharp edges",
+    "On drawings, explicitly dimension all working zone lengths (L, L1) with appropriate tolerance and roughness specifications for each zone"
+  ],
+  "summary": "This standard defines working zone introduction geometry for seal ring housings in Bonfiglioli gearbox housings. Key requirements include diameter-dependent introduction radii (R=0.4/0.8/1.2mm based on diameter ranges), constrained transition dimension 'a' between 1-2mm, and specific assembly coordination rules when bearings and seals share the same fitting diameter. All zones require explicit tolerance, roughness, and dimensional callouts, with plunge grinding recommended and sharp edges prohibited."
+}

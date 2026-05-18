@@ -1,0 +1,73 @@
+{
+  "fileName": "6652500650_01-BRAKE_HOUSING_-_305_4__MG_DF236_DF130_G.stp",
+  "fileType": "stp",
+  "generatedAt": "2026-05-06T16:46:37.386902",
+  "mesh": {
+    "vertexCount": 4287,
+    "faceCount": 8662,
+    "edgeCount": 12992
+  },
+  "dimensions": {
+    "width": 106.00000000000003,
+    "depth": 243.31772651220794,
+    "height": 244.0,
+    "diagonal": 360.52117279720153,
+    "center": [
+      58.95387255355832,
+      -3.9392841233266034,
+      0.26516591879102147
+    ],
+    "boundsMin": [
+      2.99999999999999,
+      -121.65886325610394,
+      -122.0
+    ],
+    "boundsMax": [
+      109.00000000000001,
+      121.658863256104,
+      122.0
+    ],
+    "centerText": "(58.954, -3.939, 0.265)",
+    "boundsText": "min(3.000, -121.659, -122.000) max(109.000, 121.659, 122.000)"
+  },
+  "analysis": {
+    "units": "model units",
+    "dominantAngles": {
+      "top": [
+        90.0,
+        0.0,
+        89.0,
+        180.0,
+        91.0,
+        179.0
+      ],
+      "front": [
+        90.0,
+        0.0,
+        180.0,
+        91.0,
+        89.0,
+        93.0
+      ],
+      "side": [
+        90.0,
+        0.0,
+        45.0,
+        135.0,
+        165.0,
+        15.0
+      ]
+    },
+    "detectedRadii": [],
+    "topAnglesText": "90°, 0°, 89°, 180°, 91°, 179°",
+    "frontAnglesText": "90°, 0°, 180°, 91°, 89°, 93°",
+    "sideAnglesText": "90°, 0°, 45°, 135°, 165°, 15°",
+    "radiiText": "n/a"
+  },
+  "views": {
+    "front": "/cad-reports/cad_1778066188818_wne0s0/front-view.png",
+    "top": "/cad-reports/cad_1778066188818_wne0s0/top-view.png",
+    "side": "/cad-reports/cad_1778066188818_wne0s0/side-view.png",
+    "pdf": "/cad-reports/cad_1778066188818_wne0s0/drawing-report.pdf"
+  }
+}

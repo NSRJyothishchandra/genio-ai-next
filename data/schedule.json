@@ -1,8 +1,8 @@
 {
-  "enabled": false,
-  "hour": 18,
-  "minute": 16,
-  "lastSentDate": "",
-  "lastSentAt": "",
-  "startOnDate": ""
+  "enabled": true,
+  "hour": 12,
+  "minute": 39,
+  "lastSentDate": "2026-05-14",
+  "lastSentAt": "2026-05-14T11:32:44.183Z",
+  "startOnDate": "2026-04-29"
 }
