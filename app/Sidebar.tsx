@@ -1,7 +1,8 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
 import GlobalVoiceButton from "./components/GlobalVoiceButton";
 
@@ -17,43 +18,49 @@ interface NavItem {
 const tabConfig: Record<TabId, { label: string; routes: string[]; items: NavItem[] }> = {
   software: {
     label: "Software",
-    routes: ["/employees", "/timesheet", "/finance", "/assistant", "/integrations"],
+    routes: ["/cowork"],
     items: [
-      { id: "employees", href: "/employees", icon: "EMP", label: "Employees" },
-      { id: "timesheets", href: "/timesheet", icon: "TS", label: "Timesheets" },
-      { id: "finance", href: "/finance", icon: "FIN", label: "Finance" },
-      { id: "assistant", href: "/assistant", icon: "AI", label: "AI Assistant" },
-      { id: "integrations", href: "/integrations", icon: "N8N", label: "n8n / Integrations" },
+      { id: "cli-agent",     href: "/cowork?workspace=cli&target=cli",                         icon: "CLI", label: "CLI Agent" },
+      { id: "desktop-agent", href: "/cowork?workspace=desktop&target=desktop",                 icon: "APP", label: "Desktop Agent" },
+      { id: "browser-agent", href: "/cowork?workspace=browser&target=browser",                 icon: "WEB", label: "Browser Agent" },
     ],
   },
   mech: {
     label: "Mech",
-    routes: ["/documents", "/cad", "/cowork"],
+    routes: ["/documents", "/cad"],
     items: [
-      { id: "documents", href: "/documents", icon: "DOC", label: "Documents" },
-      { id: "cad", href: "/cad", icon: "CAD", label: "CAD" },
-      { id: "nx-agent", href: "/cowork?workspace=blender&target=blender&view=agent", icon: "NX", label: "NX Agent" },
-      { id: "nx-lab", href: "/cowork?workspace=blender&target=blender&view=lab", icon: "LAB", label: "NX Lab" },
-      { id: "cli-agent", href: "/cowork?workspace=cli&target=cli", icon: "CLI", label: "CLI Agent" },
-      { id: "desktop-agent", href: "/cowork?workspace=desktop&target=desktop", icon: "APP", label: "Desktop Agent" },
-      { id: "browser-agent", href: "/cowork?workspace=browser&target=browser", icon: "WEB", label: "Browser Agent" },
+      { id: "documents", href: "/documents",                                                   icon: "DOC", label: "Documents" },
+      { id: "cad",       href: "/cad",                                                         icon: "CAD", label: "CAD" },
+      { id: "nx-agent",  href: "/cowork?workspace=blender&target=blender&view=agent",          icon: "NX",  label: "NX Agent" },
+      { id: "nx-lab",    href: "/cowork?workspace=blender&target=blender&view=lab",            icon: "LAB", label: "NX Lab" },
     ],
   },
   admin: {
     label: "Admin",
-    routes: ["/birthday", "/onboarding", "/timesheet/review", "/mail"],
+    routes: ["/employees", "/timesheet", "/finance", "/assistant", "/integrations", "/birthday", "/onboarding", "/mail"],
     items: [
-      { id: "birthdays", href: "/birthday", icon: "BD", label: "Birthdays" },
-      { id: "onboarding", href: "/onboarding", icon: "ON", label: "Onboarding" },
+      { id: "employees",         href: "/employees",        icon: "EMP", label: "Employees" },
+      { id: "timesheets",        href: "/timesheet",        icon: "TS",  label: "Timesheets" },
+      { id: "finance",           href: "/finance",          icon: "FIN", label: "Finance" },
+      { id: "assistant",         href: "/assistant",        icon: "AI",  label: "AI Assistant" },
+      { id: "integrations",      href: "/integrations",     icon: "N8N", label: "n8n / Integrations" },
+      { id: "birthdays",         href: "/birthday",         icon: "BD",  label: "Birthdays" },
+      { id: "onboarding",        href: "/onboarding",       icon: "ON",  label: "Onboarding" },
       { id: "timesheet-reports", href: "/timesheet/review", icon: "REP", label: "Timesheet Reports" },
-      { id: "mail", href: "/mail", icon: "ML", label: "Mail & Meetings" },
+      { id: "mail",              href: "/mail",             icon: "ML",  label: "Mail & Meetings" },
     ],
   },
 };
 
-function detectTab(pathname: string): TabId {
-  if (tabConfig.admin.routes.some((r) => pathname.startsWith(r))) return "admin";
-  if (tabConfig.mech.routes.some((r) => pathname.startsWith(r))) return "mech";
+function detectTab(pathname: string, workspace?: string | null): TabId {
+  // Admin routes take priority
+  if (tabConfig.admin.routes.some((route) => pathname.startsWith(route))) return "admin";
+  // Mech: documents and cad
+  if (tabConfig.mech.routes.some((route) => pathname.startsWith(route))) return "mech";
+  // /cowork — blender workspace → Mech, everything else → Software
+  if (pathname.startsWith("/cowork")) {
+    return workspace === "blender" ? "mech" : "software";
+  }
   return "software";
 }
 
@@ -63,11 +70,12 @@ export default function Sidebar() {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
   const [authLoaded, setAuthLoaded] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabId>(() => detectTab(pathname));
+  const workspace = searchParams.get("workspace");
+  const [activeTab, setActiveTab] = useState<TabId>(() => detectTab(pathname, workspace));
 
   useEffect(() => {
-    setActiveTab(detectTab(pathname));
-  }, [pathname]);
+    setActiveTab(detectTab(pathname, searchParams.get("workspace")));
+  }, [pathname, searchParams]);
 
   useEffect(() => {
     let mounted = true;
@@ -83,6 +91,7 @@ export default function Sidebar() {
         setIsAdmin(false);
         setAuthLoaded(true);
       });
+
     return () => {
       mounted = false;
     };
@@ -90,7 +99,7 @@ export default function Sidebar() {
 
   const handleTabClick = (tab: TabId) => {
     if (tab === "admin" && !isAdmin) {
-      router.push("/login?next=/birthday");
+      router.push("/login?next=/employees");
       return;
     }
     setActiveTab(tab);
@@ -138,7 +147,10 @@ export default function Sidebar() {
 
       <div className="sidebar-footer">
         <div className="sidebar-voice-bar">
-          <span className="sidebar-voice-label">🎤 Voice</span>
+          <div className="sidebar-voice-copy">
+            <span className="sidebar-voice-label">Voice</span>
+            <span className="sidebar-voice-sub">Say "Genius" to activate</span>
+          </div>
           <Suspense fallback={null}>
             <GlobalVoiceButton />
           </Suspense>
@@ -147,7 +159,7 @@ export default function Sidebar() {
           <LogoutButton />
         ) : (
           authLoaded && (
-            <Link href="/login?next=%2Fbirthday" className="nav-item logout-button">
+            <Link href="/login?next=%2Femployees" className="nav-item logout-button">
               <span className="nav-icon">AD</span>
               Admin Login
             </Link>
