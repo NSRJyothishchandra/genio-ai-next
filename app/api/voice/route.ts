@@ -125,6 +125,69 @@ const CONTEXT_SCHEMAS: Record<string, { description: string; actions: string }> 
   },
 };
 
+// ── Fast local pre-parser (no Claude needed) ────────────────────────────────
+const NAV_PATTERNS: Array<{ re: RegExp; path: string; label: string }> = [
+  { re: /\b(mail|email|inbox|messages?)\b/i, path: "mail", label: "Open Mail & Meetings" },
+  { re: /\b(birthday|birthdays)\b/i, path: "birthday", label: "Open Birthdays" },
+  { re: /\b(employee|employees|staff|team|people)\b/i, path: "employees", label: "Open Employees" },
+  { re: /\b(timesheet|time sheet|attendance|timer)\b/i, path: "timesheet", label: "Open Timesheets" },
+  { re: /\b(finance|invoices?|expenses?|budget)\b/i, path: "finance", label: "Open Finance" },
+  { re: /\b(document|documents|compare|diff|files?)\b/i, path: "documents", label: "Open Documents" },
+  { re: /\b(assistant|chat|ai|help)\b/i, path: "assistant", label: "Open AI Assistant" },
+  { re: /\b(cad|drawing|engineering|design)\b/i, path: "cad", label: "Open CAD" },
+  { re: /\b(onboard|onboarding|new hire|hires?)\b/i, path: "onboarding", label: "Open Onboarding" },
+  { re: /\b(cli|terminal|command line)\b/i, path: "cli-agent", label: "Open CLI Agent" },
+  { re: /\b(nx|blender|3d|cad agent|nx agent)\b/i, path: "nx-agent", label: "Open NX Agent" },
+  { re: /\b(desktop|desktop agent)\b/i, path: "desktop-agent", label: "Open Desktop Agent" },
+  { re: /\b(browser|web|chrome|browser agent)\b/i, path: "browser-agent", label: "Open Browser Agent" },
+];
+
+const CLEAR_CHAT_RE = /\b(clear|new|reset|start over|fresh)\b.*\b(chat|conversation|message)\b/i;
+const SUBMIT_LEAVE_RE = /\b(leave|time off|vacation|sick|apply leave|request leave)\b/i;
+const SEND_TODAY_RE = /\b(send|trigger|fire)\b.*\b(birthday|today|wishes)\b/i;
+const SEND_TEST_RE = /\b(test|preview)\b.*\b(birthday|email|mail)\b/i;
+
+function quickParse(
+  transcript: string,
+  context: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+
+  // Navigation — matches across all contexts
+  const isNavIntent = /\b(go to|open|show|take me to|navigate|switch to)\b/i.test(t);
+  if (isNavIntent || context === "general") {
+    for (const { re, path, label } of NAV_PATTERNS) {
+      if (re.test(t)) {
+        return { action: "navigate", params: { path }, humanReadable: label };
+      }
+    }
+  }
+
+  // Context-specific shortcuts
+  if (context === "assistant") {
+    if (CLEAR_CHAT_RE.test(t)) return { action: "clear_chat", params: {}, humanReadable: "Starting new conversation" };
+    if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
+    // Anything else → ask
+    return { action: "ask", params: { message: t }, humanReadable: `Ask: "${t.slice(0, 45)}${t.length > 45 ? "…" : ""}"` };
+  }
+
+  if (context === "birthday") {
+    if (SEND_TODAY_RE.test(t)) return { action: "send_today", params: {}, humanReadable: "Sending today's birthday emails" };
+    if (SEND_TEST_RE.test(t)) return { action: "send_test", params: {}, humanReadable: "Sending test birthday email" };
+  }
+
+  if (context === "timesheet") {
+    if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
+  }
+
+  // Cowork agents — pass full instruction
+  if (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(context)) {
+    return { action: "run_command", params: { command: t }, humanReadable: `Run: "${t.slice(0, 45)}${t.length > 45 ? "…" : ""}"` };
+  }
+
+  return null; // Let Claude handle it
+}
+
 export async function POST(request: Request) {
   try {
     const { transcript, context } = await request.json();
@@ -132,12 +195,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No transcript provided" }, { status: 400 });
     }
 
+    // Try the fast local parser first — no Claude API needed for common commands
+    const quick = quickParse(transcript, context);
+    if (quick) {
+      return NextResponse.json(quick);
+    }
+
     const schema = CONTEXT_SCHEMAS[context] || CONTEXT_SCHEMAS.general;
 
-    const msg = await client.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: 512,
-      system: `You are a voice command parser for a ${schema.description}.
+    let raw = "{}";
+    try {
+      const msg = await client.messages.create({
+        model: "claude-sonnet-4-6",
+        max_tokens: 512,
+        system: `You are a voice command parser for a ${schema.description}.
 Parse the user's spoken command and return a JSON object with this structure:
 {
   "action": "<action_name>",
@@ -154,15 +225,26 @@ Rules:
 - Be generous in interpretation — map natural language to the closest action
 - For run_command actions, pass the full natural-language instruction as the command`,
 
-      messages: [
-        {
-          role: "user",
-          content: `Voice command: "${transcript}"`,
-        },
-      ],
-    });
+        messages: [
+          {
+            role: "user",
+            content: `Voice command: "${transcript}"`,
+          },
+        ],
+      });
+      raw = msg.content[0].type === "text" ? msg.content[0].text.trim() : "{}";
+    } catch (claudeError) {
+      // Claude API unavailable — fall back to a generic unknown action so the
+      // UI shows a clear error rather than a silent failure.
+      console.error("[voice] Claude API error:", claudeError);
+      return NextResponse.json({
+        action: "unknown",
+        params: {},
+        humanReadable: "Voice service temporarily unavailable",
+        error: String(claudeError),
+      });
+    }
 
-    const raw = msg.content[0].type === "text" ? msg.content[0].text.trim() : "{}";
     const json = raw.replace(/^```json?\s*/i, "").replace(/\s*```$/, "");
 
     try {

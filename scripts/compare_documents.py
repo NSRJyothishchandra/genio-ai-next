@@ -216,30 +216,20 @@ def build_entries(left_text: str, right_text: str) -> List[dict]:
             right_block = right_lines[j1:j2]
             for left_line, right_line in zip_longest(left_block, right_block, fillvalue=""):
                 if left_line and right_line:
+                    # Always keep both sides on the same row so the table shows
+                    # original vs. updated values for every changed line.
                     if _lines_are_similar(left_line, right_line):
                         left_parts, right_parts = build_intraline_parts(left_line, right_line)
-                        entries.append({
-                            "kind": "replace",
-                            "leftLineNumber": left_number,
-                            "rightLineNumber": right_number,
-                            "leftParts": left_parts,
-                            "rightParts": right_parts,
-                        })
                     else:
-                        entries.append({
-                            "kind": "delete",
-                            "leftLineNumber": left_number,
-                            "rightLineNumber": None,
-                            "leftParts": [{"text": left_line, "type": "delete"}],
-                            "rightParts": [],
-                        })
-                        entries.append({
-                            "kind": "insert",
-                            "leftLineNumber": None,
-                            "rightLineNumber": right_number,
-                            "leftParts": [],
-                            "rightParts": [{"text": right_line, "type": "insert"}],
-                        })
+                        left_parts = [{"text": left_line, "type": "delete"}]
+                        right_parts = [{"text": right_line, "type": "insert"}]
+                    entries.append({
+                        "kind": "replace",
+                        "leftLineNumber": left_number,
+                        "rightLineNumber": right_number,
+                        "leftParts": left_parts,
+                        "rightParts": right_parts,
+                    })
                     left_number += 1
                     right_number += 1
                 elif left_line:
