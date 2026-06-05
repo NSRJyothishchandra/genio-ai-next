@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { getEmployees } from "@/lib/employees";
 
 const client = new Anthropic();
 
@@ -36,12 +37,16 @@ const CONTEXT_SCHEMAS: Record<string, { description: string; actions: string }> 
   "nx-agent": {
     description: "NX CAD / Blender agent for 3D modeling and engineering tasks",
     actions: `
-- run_command: { command: string }  — send a prompt/command to the NX agent`,
+- run_command: { command: string }  — send a prompt/command to the NX agent
+- enable_precision: { partType?: string, toothCount?: number, outerDiameter?: number, innerDiameter?: number, thickness?: number, length?: number, shaftDiameter?: number, units?: "mm"|"inch", material?: string, command?: string }  — turn on Precision Mode and prefill dimensions
+- disable_precision: {}  — turn Precision Mode off`,
   },
   "nx-lab": {
     description: "NX Lab for running Blender/NX scripts and training data",
     actions: `
-- run_command: { command: string }`,
+- run_command: { command: string }
+- enable_precision: { partType?: string, toothCount?: number, outerDiameter?: number, innerDiameter?: number, thickness?: number, length?: number, shaftDiameter?: number, units?: "mm"|"inch", material?: string, command?: string }  — turn on Precision Mode and prefill dimensions
+- disable_precision: {}  — turn Precision Mode off`,
   },
   "desktop-agent": {
     description: "Desktop automation agent that controls the computer",
@@ -137,7 +142,7 @@ const NAV_PATTERNS: Array<{ re: RegExp; path: string; label: string }> = [
   { re: /\b(cad|drawing|engineering|design)\b/i, path: "cad", label: "Open CAD" },
   { re: /\b(onboard|onboarding|new hire|hires?)\b/i, path: "onboarding", label: "Open Onboarding" },
   { re: /\b(cli|terminal|command line)\b/i, path: "cli-agent", label: "Open CLI Agent" },
-  { re: /\b(nx|blender|3d|cad agent|nx agent)\b/i, path: "nx-agent", label: "Open NX Agent" },
+  { re: /\b(nx\s*lab|nx lab|blender|3d|cad agent|nx agent|nx)\b/i, path: "nx-lab", label: "Open NX Lab" },
   { re: /\b(desktop|desktop agent)\b/i, path: "desktop-agent", label: "Open Desktop Agent" },
   { re: /\b(browser|web|chrome|browser agent)\b/i, path: "browser-agent", label: "Open Browser Agent" },
 ];
@@ -146,15 +151,652 @@ const CLEAR_CHAT_RE = /\b(clear|new|reset|start over|fresh)\b.*\b(chat|conversat
 const SUBMIT_LEAVE_RE = /\b(leave|time off|vacation|sick|apply leave|request leave)\b/i;
 const SEND_TODAY_RE = /\b(send|trigger|fire)\b.*\b(birthday|today|wishes)\b/i;
 const SEND_TEST_RE = /\b(test|preview)\b.*\b(birthday|email|mail)\b/i;
+const REFRESH_RE = /\b(refresh|reload|update|resync|re-sync)\b/i;
+const CLEAR_RE = /\b(clear|reset|remove|start over)\b/i;
+const NAV_INTENT_RE = /\b(go to|open|show|take me to|navigate|switch to)\b/i;
+const COMPOSE_INTENT_RE = /\b(write|draft|compose|send)\b.*\b(mail|email)\b/i;
+
+function trimMessage(value: string, max = 45) {
+  return value.length > max ? `${value.slice(0, max)}…` : value;
+}
+
+function normalizeName(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\b(the|employee|mail|email)\b/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function resolveEmployeeRecipient(query: string): { name: string; email: string } | null {
+  const cleaned = normalizeName(query);
+  if (!cleaned) return null;
+  if (query.includes("@")) {
+    return { name: query.trim(), email: query.trim() };
+  }
+
+  let best: { name: string; email: string } | null = null;
+  let bestScore = 0;
+
+  for (const employee of getEmployees()) {
+    if (!employee.email) continue;
+    const normalizedEmployee = normalizeName(employee.name);
+    const employeeTokens = normalizedEmployee.split(" ").filter(Boolean);
+    const queryTokens = cleaned.split(" ").filter(Boolean);
+
+    let score = 0;
+    if (normalizedEmployee === cleaned) score = 100;
+    else if (normalizedEmployee.startsWith(cleaned)) score = 92;
+    else if (normalizedEmployee.includes(cleaned)) score = 85;
+    else if (queryTokens.every((token) => employeeTokens.some((entry) => entry.startsWith(token)))) score = 78;
+    else if (queryTokens.some((token) => employeeTokens.includes(token))) score = 62;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = { name: employee.name, email: employee.email };
+    }
+  }
+
+  return bestScore >= 62 ? best : null;
+}
+
+function parseDestinationPhrase(phrase: string): { path: string; label: string } | null {
+  for (const entry of NAV_PATTERNS) {
+    if (entry.re.test(phrase)) return { path: entry.path, label: entry.label };
+  }
+  return null;
+}
+
+function getContextForPath(path: string): string {
+  switch (path) {
+    case "mail":
+    case "birthday":
+    case "employees":
+    case "timesheet":
+    case "timesheet-review":
+    case "finance":
+    case "documents":
+    case "assistant":
+    case "cad":
+    case "onboarding":
+    case "cli-agent":
+    case "nx-agent":
+    case "nx-lab":
+    case "desktop-agent":
+    case "browser-agent":
+      return path;
+    default:
+      return "general";
+  }
+}
+
+function extractTime(text: string): { hour: number; minute: number } | null {
+  const match = text.match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\b/i);
+  if (!match) return null;
+
+  let hour = Number(match[1]);
+  const minute = Number(match[2] ?? 0);
+  const meridiem = (match[3] ?? "").toLowerCase();
+
+  if (Number.isNaN(hour) || Number.isNaN(minute) || minute > 59) return null;
+  if (meridiem === "pm" && hour < 12) hour += 12;
+  if (meridiem === "am" && hour === 12) hour = 0;
+  if (hour > 23) return null;
+
+  return { hour, minute };
+}
+
+function extractAfterKeyword(text: string, keyword: string): string {
+  const index = text.toLowerCase().indexOf(keyword.toLowerCase());
+  if (index === -1) return "";
+  return text.slice(index + keyword.length).trim();
+}
+
+function extractComposeDraft(text: string) {
+  const toMatch = text.match(/\bto\s+(.+?)(?:\s+(?:about|regarding|subject|saying|that|body)\b|$)/i);
+  const subjectMatch = text.match(/\b(?:about|regarding|subject)\s+(.+?)(?:\s+(?:saying|that|body)\b|$)/i);
+  const bodyMatch = text.match(/\b(?:saying|that|body)\s+(.+)$/i);
+  const rawTo = (toMatch?.[1] ?? "").trim();
+  const resolved = resolveEmployeeRecipient(rawTo);
+  const subject = (subjectMatch?.[1] ?? "").trim();
+  const body = (bodyMatch?.[1] ?? "").trim() || subject || text;
+
+  return {
+    to: resolved?.email ?? rawTo,
+    recipientName: resolved?.name ?? rawTo,
+    subject,
+    body,
+  };
+}
+
+function parseBooleanIntent(text: string): boolean | null {
+  if (/\b(enable|start|turn on|activate)\b/i.test(text)) return true;
+  if (/\b(disable|stop|turn off|deactivate)\b/i.test(text)) return false;
+  return null;
+}
+
+function parseDurationMinutes(text: string): number {
+  if (/\bhalf\s+an?\s+hour\b/i.test(text)) return 30;
+  if (/\bquarter\s+hour\b/i.test(text)) return 15;
+  const hourMatch = text.match(/\b(\d+)\s*(hour|hr|hrs|hours)\b/i);
+  if (hourMatch) return Number(hourMatch[1]) * 60;
+  const minuteMatch = text.match(/\b(\d+)\s*(minute|min|mins|minutes)\b/i);
+  if (minuteMatch) return Number(minuteMatch[1]);
+  if (/\bquick\b/i.test(text)) return 15;
+  return 30;
+}
+
+function extractAttendees(text: string): string[] {
+  const withMatch = text.match(/\bwith\s+(.+?)(?:\s+(?:about|for|tomorrow|today|next|this|at|on|to)\b|$)/i);
+  if (!withMatch) return [];
+
+  return withMatch[1]
+    .split(/\s*(?:,| and )\s*/i)
+    .map((value) => value.trim())
+    .filter(Boolean)
+    .map((value) => value.replace(/^(the|a|an)\s+/i, ""))
+    .filter((value) => value.length > 1);
+}
+
+function extractMeetingTitle(text: string): string {
+  const aboutMatch = text.match(/\b(?:about|for|regarding)\s+(.+?)(?:\s+(?:with|tomorrow|today|next|this|at|on)\b|$)/i);
+  if (aboutMatch?.[1]) return trimMessage(aboutMatch[1].trim(), 60);
+  if (/\bsync\b/i.test(text)) return "Sync Meeting";
+  if (/\bonboarding\b/i.test(text)) return "Onboarding Sync";
+  if (/\breview\b/i.test(text)) return "Review Meeting";
+  if (/\bcatch up\b/i.test(text)) return "Catch-up Meeting";
+  return "Meeting";
+}
+
+const PRECISION_PART_TYPES = ["geartrain", "gear", "bolt", "shaft", "coupling", "planetary", "belt"] as const;
+
+function numAfter(text: string, re: RegExp): number | undefined {
+  const match = text.match(re);
+  if (!match) return undefined;
+  const value = Number(match[1]);
+  return Number.isFinite(value) ? value : undefined;
+}
+
+function extractPrecisionParams(text: string): Record<string, unknown> {
+  const params: Record<string, unknown> = {};
+
+  for (const part of PRECISION_PART_TYPES) {
+    if (new RegExp(`\\b${part === "geartrain" ? "gear ?train|gear assembly" : part}\\b`, "i").test(text)) {
+      params.partType = part === "geartrain" ? "geartrain" : part;
+      break;
+    }
+  }
+
+  if (/\binch(?:es)?\b/i.test(text)) params.units = "inch";
+  else if (/\b(mm|millimet)/i.test(text)) params.units = "mm";
+
+  const material = text.match(/\b(steel|alumin(?:i)?um|brass|dark)\b/i);
+  if (material) params.material = material[1].toLowerCase().startsWith("alumin") ? "aluminum" : material[1].toLowerCase();
+
+  const teeth = numAfter(text, /\b(\d+)\s*(?:teeth|tooth)\b/i);
+  if (teeth !== undefined) params.toothCount = teeth;
+
+  const outer = numAfter(text, /\bouter\s*(?:diameter|dia|d)?\s*(?:of\s*)?(\d+(?:\.\d+)?)/i);
+  if (outer !== undefined) params.outerDiameter = outer;
+  const inner = numAfter(text, /\b(?:inner|bore)\s*(?:diameter|dia|d)?\s*(?:of\s*)?(\d+(?:\.\d+)?)/i);
+  if (inner !== undefined) params.innerDiameter = inner;
+  const thickness = numAfter(text, /\bthick(?:ness)?\s*(?:of\s*)?(\d+(?:\.\d+)?)/i);
+  if (thickness !== undefined) params.thickness = thickness;
+  const length = numAfter(text, /\blength\s*(?:of\s*)?(\d+(?:\.\d+)?)/i);
+  if (length !== undefined) params.length = length;
+  const shaft = numAfter(text, /\bshaft\s*(?:diameter|dia)?\s*(?:of\s*)?(\d+(?:\.\d+)?)/i);
+  if (shaft !== undefined) params.shaftDiameter = shaft;
+
+  if (/\b(create|make|build|generate|model|export|design)\b/i.test(text)) {
+    params.command = text;
+  }
+
+  return params;
+}
+
+function parsePrecisionIntent(
+  text: string
+): { action: string; params: Record<string, unknown>; humanReadable: string; speech?: string } | null {
+  if (/\b(disable|turn off|switch off|deactivate|stop)\b/i.test(text)) {
+    return { action: "disable_precision", params: {}, humanReadable: "Turn off Precision Mode", speech: "Precision Mode is now off." };
+  }
+  return { action: "enable_precision", params: extractPrecisionParams(text), humanReadable: "Enable Precision Mode" };
+}
+
+function precisionSummary(params: Record<string, unknown>): string {
+  const parts: string[] = [];
+  if (params.partType && params.partType !== "auto") parts.push(`part type ${params.partType}`);
+  if (params.toothCount != null) parts.push(`${params.toothCount} teeth`);
+  if (params.outerDiameter != null) parts.push(`outer diameter ${params.outerDiameter}`);
+  if (params.innerDiameter != null) parts.push(`bore ${params.innerDiameter}`);
+  if (params.thickness != null) parts.push(`thickness ${params.thickness}`);
+  if (params.length != null) parts.push(`length ${params.length}`);
+  if (params.material) parts.push(`${params.material} material`);
+  const summary = parts.length ? ` with ${parts.join(", ")}` : "";
+  const build = params.command ? " Building it now." : " Tell me what to build next.";
+  return `Precision Mode is on${summary}.${build}`;
+}
+
+/** Returns a spoken follow-up question when an action is missing required info, else null. */
+function needsClarification(action: string, params: Record<string, unknown>, _context: string): string | null {
+  switch (action) {
+    case "compose_email":
+      if (!String(params.to ?? "").trim() && !String(params.recipientName ?? "").trim())
+        return "Who should I send the email to?";
+      return null;
+    case "schedule_meeting":
+      if (!Array.isArray(params.attendees) || params.attendees.length === 0)
+        return "Who should attend the meeting?";
+      return null;
+    case "filter_employee":
+      if (!String(params.query ?? "").trim())
+        return "Which employee should I filter by? You can tell me a name or an ID.";
+      return null;
+    case "approve":
+      if (!String(params.id ?? "").trim()) return "Which request ID should I approve?";
+      return null;
+    case "reject":
+      if (!String(params.id ?? "").trim()) return "Which request ID should I reject?";
+      return null;
+    case "enable_precision": {
+      const hasPart = params.partType && params.partType !== "auto";
+      const hasDimension = ["toothCount", "outerDiameter", "innerDiameter", "thickness", "length", "shaftDiameter"]
+        .some((key) => params[key] != null);
+      if (!hasPart && !hasDimension)
+        return "Precision Mode locks the model to exact dimensions. What part type should I use — for example a gear, shaft, or coupling — and any key sizes like tooth count or outer diameter?";
+      return null;
+    }
+    default:
+      return null;
+  }
+}
+
+interface VoiceResult {
+  action: string;
+  params: Record<string, unknown>;
+  humanReadable: string;
+  speech?: string;
+  [key: string]: unknown;
+}
+
+/** A natural sentence to speak when the action itself didn't supply one. */
+function deriveSpeech(result: VoiceResult): string {
+  switch (result.action) {
+    case "navigate":
+    case "navigate_with_action":
+      return String(result.params?.prompt ?? "") || result.humanReadable || "Opening that now.";
+    case "run_command":
+      return "Running that now.";
+    case "enable_precision":
+      return precisionSummary(result.params);
+    case "disable_precision":
+      return "Precision Mode is now off.";
+    case "unknown":
+      return "Sorry, I didn't catch that. Could you say it again?";
+    default:
+      return result.humanReadable || "Done.";
+  }
+}
+
+/** Ensure every response carries a `speech` sentence, then serialize it. */
+function respond(result: VoiceResult) {
+  if (result && result.action && !result.speech) {
+    result.speech = deriveSpeech(result);
+  }
+  return NextResponse.json(result);
+}
+
+function fallbackParse(
+  transcript: string,
+  context: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+
+  switch (context) {
+    case "mail": {
+      if (/\b(unread)\b/i.test(t)) return { action: "filter_unread", params: {}, humanReadable: "Filter unread emails" };
+      if (/\b(meeting|meetings)\b/i.test(t) && /\b(show|filter|only|list)\b/i.test(t)) {
+        return { action: "filter_meetings", params: {}, humanReadable: "Filter meeting emails" };
+      }
+      if (REFRESH_RE.test(t)) return { action: "refresh_inbox", params: {}, humanReadable: "Refresh inbox" };
+      if (/\b(acknowledge|receipt)\b/i.test(t)) return { action: "acknowledge", params: {}, humanReadable: "Draft acknowledgement" };
+      if (/\b(auto respond|auto reply|draft reply|respond)\b/i.test(t)) return { action: "auto_respond", params: {}, humanReadable: "Draft automatic response" };
+      if (/\breply\b/i.test(t)) {
+        return {
+          action: "reply",
+          params: { body: extractAfterKeyword(t, "reply") || "Please help me reply to this email." },
+          humanReadable: "Prepare email reply",
+        };
+      }
+      if (/\b(compose|send email|write email|draft email)\b/i.test(t)) {
+        const toMatch = t.match(/\bto\s+([^,]+?)(?:\s+subject\b|,|\s+about\b|\s+body\b|$)/i);
+        const subjectMatch = t.match(/\bsubject\s+(.+?)(?:\s+body\b|$)/i);
+        const body = extractAfterKeyword(t, "body");
+        return {
+          action: "compose_email",
+          params: {
+            to: (toMatch?.[1] ?? "").trim(),
+            subject: (subjectMatch?.[1] ?? "").trim(),
+            body: body || t,
+          },
+          humanReadable: "Open compose email",
+        };
+      }
+      if (/\b(schedule|book|arrange|set up|setup|plan)\b.*\b(meeting|call|sync|discussion|connect)\b/i.test(t) || /\b(sync|meeting|call)\b.*\bwith\b/i.test(t)) {
+        return {
+          action: "schedule_meeting",
+          params: {
+            title: extractMeetingTitle(t),
+            attendees: extractAttendees(t),
+            duration: parseDurationMinutes(t),
+            agenda: t,
+          },
+          humanReadable: "Prepare meeting details",
+        };
+      }
+      return null;
+    }
+
+    case "birthday": {
+      if (/\bn8n\b/i.test(t)) return { action: "trigger_n8n", params: {}, humanReadable: "Trigger birthday workflow" };
+      if (SEND_TODAY_RE.test(t)) return { action: "send_today", params: {}, humanReadable: "Sending today's birthday emails" };
+      if (SEND_TEST_RE.test(t)) return { action: "send_test", params: {}, humanReadable: "Sending test birthday email" };
+      const themeMatch = t.match(/\b(confetti|sunset|galaxy|garden|golden)\b/i);
+      if (themeMatch) {
+        return {
+          action: "set_theme",
+          params: { theme: themeMatch[1].toLowerCase() },
+          humanReadable: `Set theme to ${themeMatch[1]}`,
+        };
+      }
+      if (/\b(schedule|time)\b/i.test(t)) {
+        const parsedTime = extractTime(t);
+        if (parsedTime) {
+          return {
+            action: "set_schedule_time",
+            params: parsedTime,
+            humanReadable: `Set schedule to ${String(parsedTime.hour).padStart(2, "0")}:${String(parsedTime.minute).padStart(2, "0")}`,
+          };
+        }
+      }
+      if (/\b(schedule)\b/i.test(t)) {
+        const enabled = parseBooleanIntent(t);
+        if (enabled !== null) {
+          return {
+            action: "toggle_schedule",
+            params: { enabled },
+            humanReadable: enabled ? "Enable birthday schedule" : "Disable birthday schedule",
+          };
+        }
+      }
+      return null;
+    }
+
+    case "timesheet": {
+      if (/\b(attendance)\b/i.test(t)) return { action: "switch_tab", params: { tab: "attendance" }, humanReadable: "Open attendance tab" };
+      if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
+      if (/\b(automation|auto)\b/i.test(t)) return { action: "switch_tab", params: { tab: "automation" }, humanReadable: "Open automation tab" };
+      if (/\b(new|entry|manual)\b/i.test(t)) return { action: "switch_tab", params: { tab: "new" }, humanReadable: "Open new entry tab" };
+      if (/\b(excel|import)\b/i.test(t)) return { action: "switch_tab", params: { tab: "excel" }, humanReadable: "Open Excel import tab" };
+      if (/\b(filter|show)\b.*\b(employee)\b/i.test(t)) {
+        const query = extractAfterKeyword(t, "employee") || extractAfterKeyword(t, "show") || extractAfterKeyword(t, "filter");
+        return { action: "filter_employee", params: { query }, humanReadable: `Filter ${trimMessage(query || "employee")}` };
+      }
+      return null;
+    }
+
+    case "timesheet-review": {
+      if (/\b(activity)\b/i.test(t)) return { action: "switch_tab", params: { tab: "activity" }, humanReadable: "Open activity tab" };
+      if (/\b(timer)\b/i.test(t) && /\b(stop)\b/i.test(t)) return { action: "stop_timer", params: {}, humanReadable: "Stop timer" };
+      if (/\b(timer)\b/i.test(t) && /\b(start)\b/i.test(t)) {
+        return {
+          action: "start_timer",
+          params: { task: extractAfterKeyword(t, "for") || t },
+          humanReadable: "Start timer",
+        };
+      }
+      if (/\b(infer|analyze)\b/i.test(t)) return { action: "infer_tasks", params: {}, humanReadable: "Infer tasks" };
+      if (/\b(submit)\b.*\b(timesheet)\b/i.test(t)) return { action: "submit_timesheet", params: {}, humanReadable: "Submit timesheet" };
+      return null;
+    }
+
+    case "employees": {
+      if (/\b(add|new)\b.*\b(employee)\b/i.test(t)) return { action: "add_employee", params: {}, humanReadable: "Open add employee form" };
+      if (CLEAR_RE.test(t) && /\b(filter|search)\b/i.test(t)) return { action: "clear_filter", params: {}, humanReadable: "Clear employee filter" };
+      if (/\b(position|role|designation)\b/i.test(t)) {
+        const value = extractAfterKeyword(t, "position") || extractAfterKeyword(t, "role") || extractAfterKeyword(t, "designation");
+        if (value) return { action: "filter_position", params: { position: value }, humanReadable: `Filter ${trimMessage(value)}` };
+      }
+      if (/\b(show)\b/i.test(t) && /\bemployee\b/i.test(t)) {
+        const name = extractAfterKeyword(t, "employee");
+        if (name) return { action: "show_employee", params: { name }, humanReadable: `Show ${trimMessage(name)}` };
+      }
+      return { action: "search", params: { query: t }, humanReadable: `Search ${trimMessage(t)}` };
+    }
+
+    case "finance": {
+      if (REFRESH_RE.test(t)) return { action: "refresh", params: {}, humanReadable: "Refresh finance data" };
+      if (/\b(pending)\b/i.test(t)) return { action: "show_pending", params: {}, humanReadable: "Show pending approvals" };
+      if (/\b(submit|raise|new)\b.*\b(request|bill|expense)\b/i.test(t)) return { action: "submit_request", params: {}, humanReadable: "Open finance request form" };
+      const idMatch = t.match(/\b([A-Z]{2,}\d+|\d{3,})\b/i);
+      if (/\bapprove\b/i.test(t) && idMatch) return { action: "approve", params: { id: idMatch[1] }, humanReadable: `Approve ${idMatch[1]}` };
+      if (/\breject\b/i.test(t) && idMatch) return { action: "reject", params: { id: idMatch[1] }, humanReadable: `Reject ${idMatch[1]}` };
+      return null;
+    }
+
+    case "documents": {
+      if (/\b(show|toggle)\b.*\b(changed|differences only)\b/i.test(t)) {
+        return { action: "toggle_changed_only", params: {}, humanReadable: "Toggle changed-only view" };
+      }
+      if (CLEAR_RE.test(t)) return { action: "clear", params: {}, humanReadable: "Clear document comparison" };
+      return null;
+    }
+
+    case "cad": {
+      if (/\b(analyze|generate|create|make|draw|drawing|report)\b/i.test(t)) return { action: "analyze", params: {}, humanReadable: "Analyze CAD file" };
+      if (CLEAR_RE.test(t)) return { action: "clear", params: {}, humanReadable: "Clear CAD report" };
+      return null;
+    }
+
+    case "onboarding": {
+      if (REFRESH_RE.test(t)) return { action: "refresh", params: {}, humanReadable: "Refresh onboarding list" };
+      if (/\bpending\b/i.test(t)) return { action: "filter_status", params: { status: "pending" }, humanReadable: "Filter pending onboarding" };
+      if (/\b(in progress|ongoing)\b/i.test(t)) return { action: "filter_status", params: { status: "in_progress" }, humanReadable: "Filter in-progress onboarding" };
+      if (/\b(completed|done|finished)\b/i.test(t)) return { action: "filter_status", params: { status: "completed" }, humanReadable: "Filter completed onboarding" };
+      if (/\b(search|show|find)\b/i.test(t)) {
+        const query = extractAfterKeyword(t, "search") || extractAfterKeyword(t, "show") || extractAfterKeyword(t, "find");
+        if (query) return { action: "search", params: { query }, humanReadable: `Search ${trimMessage(query)}` };
+      }
+      return null;
+    }
+
+    default:
+      return null;
+  }
+}
+
+function parseContextAction(
+  transcript: string,
+  context: string,
+  isNavIntent = false
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+
+  if (context === "assistant") {
+    if (CLEAR_CHAT_RE.test(t)) return { action: "clear_chat", params: {}, humanReadable: "Starting new conversation" };
+    if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
+    if (isNavIntent) return null;
+    return { action: "ask", params: { message: t }, humanReadable: `Ask: "${trimMessage(t)}"` };
+  }
+
+  if (context === "birthday") {
+    if (SEND_TODAY_RE.test(t)) return { action: "send_today", params: {}, humanReadable: "Sending today's birthday emails" };
+    if (SEND_TEST_RE.test(t)) return { action: "send_test", params: {}, humanReadable: "Sending test birthday email" };
+  }
+
+  if (context === "timesheet" && SUBMIT_LEAVE_RE.test(t)) {
+    return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
+  }
+
+  if (context === "mail" && COMPOSE_INTENT_RE.test(t)) {
+    const draft = extractComposeDraft(t);
+    return {
+      action: "compose_email",
+      params: {
+        to: draft.to,
+        recipientName: draft.recipientName,
+        subject: draft.subject,
+        body: draft.body,
+      },
+      humanReadable: `Compose email to ${trimMessage(draft.recipientName || draft.to || "recipient")}`,
+    };
+  }
+
+  if (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(context)) {
+    if (isNavIntent) return null;
+    if ((context === "nx-lab" || context === "nx-agent") && /\bprecision\b/i.test(t)) {
+      const precisionAction = parsePrecisionIntent(t);
+      if (precisionAction) return precisionAction;
+    }
+    return { action: "run_command", params: { command: t }, humanReadable: `Run: "${trimMessage(t)}"` };
+  }
+
+  return fallbackParse(t, context);
+}
+
+function parseGlobalMailIntent(
+  transcript: string,
+  context: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+  if (!COMPOSE_INTENT_RE.test(t)) return null;
+
+  const draft = extractComposeDraft(t);
+  if (!draft.to && !draft.recipientName) return null;
+
+  const composeAction = {
+    action: "compose_email",
+    params: {
+      to: draft.to,
+      recipientName: draft.recipientName,
+      subject: draft.subject,
+      body: draft.body,
+    },
+    humanReadable: `Compose email to ${trimMessage(draft.recipientName || draft.to || "recipient")}`,
+  };
+
+  if (context === "mail") {
+    return composeAction;
+  }
+
+  return {
+    action: "navigate_with_action",
+    params: {
+      path: "mail",
+      prompt: "Opening Mail & Meetings and preparing your draft.",
+      followupAction: composeAction,
+    },
+    humanReadable: `Open mail for ${trimMessage(draft.recipientName || draft.to || "recipient")}`,
+  };
+}
+
+function parseGlobalEngineeringIntent(
+  transcript: string,
+  context: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+  const mechanicalIntent = /\b(gear|gears|shaft|coupling|planetary|belt drive|pulley|bolt|bearing|3d model|obj|stl|component)\b/i;
+  if (!mechanicalIntent.test(t)) return null;
+
+  const runAction = {
+    action: "run_command",
+    params: { command: t },
+    humanReadable: `Run: "${trimMessage(t)}"`,
+  };
+
+  if (context === "nx-lab" || context === "nx-agent") {
+    return runAction;
+  }
+
+  return {
+    action: "navigate_with_action",
+    params: {
+      path: "nx-lab",
+      prompt: "NX Lab is opened. Running your command now.",
+      followupAction: runAction,
+    },
+    humanReadable: "Open NX Lab and continue",
+  };
+}
+
+function parseNavigationIntent(
+  transcript: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const navigationMatch = transcript.match(/^\s*(?:please\s+)?(?:open|go to|navigate(?:\s+to)?|switch to|take me to|show)\s+(.+)$/i);
+  if (!navigationMatch) return null;
+
+  const destinationText = navigationMatch[1].trim();
+  const chainedMatch = destinationText.match(/^(.*?)(?:\s+(?:and then|then|and)\s+)(.+)$/i);
+  const destinationPhrase = (chainedMatch?.[1] ?? destinationText).trim();
+  const followupCommand = (chainedMatch?.[2] ?? "").trim();
+  const destination = parseDestinationPhrase(destinationPhrase);
+  if (!destination) return null;
+
+  if (followupCommand) {
+    const destinationContext = getContextForPath(destination.path);
+    const followupAction = parseContextAction(followupCommand, destinationContext, false)
+      ?? fallbackParse(followupCommand, destinationContext)
+      ?? (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(destinationContext)
+        ? {
+            action: "run_command",
+            params: { command: followupCommand },
+            humanReadable: `Run: "${trimMessage(followupCommand)}"`,
+          }
+        : null);
+
+    if (followupAction) {
+      return {
+        action: "navigate_with_action",
+        params: {
+          path: destination.path,
+          prompt: `${destination.label.replace(/^Open\s+/i, "")} is opened. Running your command now.`,
+          followupAction,
+        },
+        humanReadable: `${destination.label} and continue`,
+      };
+    }
+  }
+
+  return {
+    action: "navigate",
+    params: { path: destination.path },
+    humanReadable: destination.label,
+  };
+}
 
 function quickParse(
   transcript: string,
   context: string
 ): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
   const t = transcript.trim();
+  const isNavIntent = NAV_INTENT_RE.test(t);
+
+  // Precision Mode wins inside NX contexts so a follow-up like "gear, 18 teeth"
+  // isn't swallowed by the generic mechanical/run_command matcher below.
+  if (!isNavIntent && (context === "nx-lab" || context === "nx-agent") && /\bprecision\b/i.test(t)) {
+    const precisionAction = parsePrecisionIntent(t);
+    if (precisionAction) return precisionAction;
+  }
+
+  const globalMail = parseGlobalMailIntent(t, context);
+  if (globalMail) return globalMail;
+
+  const navigationAction = parseNavigationIntent(t);
+  if (navigationAction) return navigationAction;
+
+  const globalEngineering = parseGlobalEngineeringIntent(t, context);
+  if (globalEngineering) return globalEngineering;
+
+  const localContextMatch = parseContextAction(t, context, isNavIntent);
+  if (localContextMatch) return localContextMatch;
 
   // Navigation — matches across all contexts
-  const isNavIntent = /\b(go to|open|show|take me to|navigate|switch to)\b/i.test(t);
   if (isNavIntent || context === "general") {
     for (const { re, path, label } of NAV_PATTERNS) {
       if (re.test(t)) {
@@ -163,42 +805,41 @@ function quickParse(
     }
   }
 
-  // Context-specific shortcuts
-  if (context === "assistant") {
-    if (CLEAR_CHAT_RE.test(t)) return { action: "clear_chat", params: {}, humanReadable: "Starting new conversation" };
-    if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
-    // Anything else → ask
-    return { action: "ask", params: { message: t }, humanReadable: `Ask: "${t.slice(0, 45)}${t.length > 45 ? "…" : ""}"` };
-  }
-
-  if (context === "birthday") {
-    if (SEND_TODAY_RE.test(t)) return { action: "send_today", params: {}, humanReadable: "Sending today's birthday emails" };
-    if (SEND_TEST_RE.test(t)) return { action: "send_test", params: {}, humanReadable: "Sending test birthday email" };
-  }
-
-  if (context === "timesheet") {
-    if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
-  }
-
-  // Cowork agents — pass full instruction
-  if (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(context)) {
-    return { action: "run_command", params: { command: t }, humanReadable: `Run: "${t.slice(0, 45)}${t.length > 45 ? "…" : ""}"` };
-  }
-
-  return null; // Let Claude handle it
+  return null; // Let Claude handle it only if no local parse matched
 }
 
 export async function POST(request: Request) {
   try {
-    const { transcript, context } = await request.json();
+    const { transcript, context, clarifyContext } = await request.json();
     if (!transcript?.trim()) {
       return NextResponse.json({ error: "No transcript provided" }, { status: 400 });
     }
 
+    // If this is the answer to a clarifying question, merge it with the original
+    // command so "create a gear" + "18 teeth, steel" parse as one instruction.
+    const priorTranscript = String(clarifyContext?.priorTranscript ?? "").trim();
+    const isFollowup = priorTranscript.length > 0;
+    const effectiveTranscript = isFollowup ? `${priorTranscript}. ${transcript}` : transcript;
+
+    // Ask for missing info on the first pass only — avoids re-asking in a loop.
+    const maybeClarify = (result: VoiceResult): VoiceResult => {
+      if (isFollowup) return result;
+      const question = needsClarification(result.action, result.params, context);
+      if (question) {
+        return {
+          action: "clarify",
+          params: { resumeTranscript: effectiveTranscript },
+          humanReadable: "I need a bit more info",
+          speech: question,
+        };
+      }
+      return result;
+    };
+
     // Try the fast local parser first — no Claude API needed for common commands
-    const quick = quickParse(transcript, context);
+    const quick = quickParse(effectiveTranscript, context);
     if (quick) {
-      return NextResponse.json(quick);
+      return respond(maybeClarify(quick));
     }
 
     const schema = CONTEXT_SCHEMAS[context] || CONTEXT_SCHEMAS.general;
@@ -208,12 +849,13 @@ export async function POST(request: Request) {
       const msg = await client.messages.create({
         model: "claude-sonnet-4-6",
         max_tokens: 512,
-        system: `You are a voice command parser for a ${schema.description}.
+        system: `You are a friendly voice assistant for a ${schema.description}.
 Parse the user's spoken command and return a JSON object with this structure:
 {
   "action": "<action_name>",
   "params": { <action-specific params> },
-  "humanReadable": "<short description of what will happen, max 60 chars>"
+  "humanReadable": "<short description of what will happen, max 60 chars>",
+  "speech": "<one short, natural sentence to say back to the user>"
 }
 
 Available actions:
@@ -221,26 +863,32 @@ ${schema.actions}
 
 Rules:
 - Return ONLY valid JSON, no markdown, no extra text
-- If no action matches, return { "action": "unknown", "params": {}, "humanReadable": "Command not understood" }
+- Always include a "speech" field: a short, natural spoken confirmation or question
+- If a required parameter is missing or ambiguous, DO NOT guess. Instead return
+  { "action": "clarify", "params": {}, "humanReadable": "Need more info", "speech": "<the question to ask>" }
+- If no action matches, return { "action": "unknown", "params": {}, "humanReadable": "Command not understood", "speech": "Sorry, I didn't catch that. Could you say it again?" }
 - Be generous in interpretation — map natural language to the closest action
 - For run_command actions, pass the full natural-language instruction as the command`,
 
         messages: [
           {
             role: "user",
-            content: `Voice command: "${transcript}"`,
+            content: `Voice command: "${effectiveTranscript}"`,
           },
         ],
       });
       raw = msg.content[0].type === "text" ? msg.content[0].text.trim() : "{}";
     } catch (claudeError) {
-      // Claude API unavailable — fall back to a generic unknown action so the
-      // UI shows a clear error rather than a silent failure.
+      const fallback = fallbackParse(effectiveTranscript, context);
+      if (fallback) {
+        return respond(maybeClarify({ ...fallback, localFallback: true }));
+      }
+
       console.error("[voice] Claude API error:", claudeError);
-      return NextResponse.json({
+      return respond({
         action: "unknown",
         params: {},
-        humanReadable: "Voice service temporarily unavailable",
+        humanReadable: "Command not understood",
         error: String(claudeError),
       });
     }
@@ -248,8 +896,23 @@ Rules:
     const json = raw.replace(/^```json?\s*/i, "").replace(/\s*```$/, "");
 
     try {
-      const parsed = JSON.parse(json);
-      return NextResponse.json(parsed);
+      const parsed = JSON.parse(json) as VoiceResult;
+      if (parsed?.action === "unknown") {
+        const fallback = fallbackParse(effectiveTranscript, context);
+        if (fallback) {
+          return respond(maybeClarify({ ...fallback, localFallback: true }));
+        }
+      }
+      // Never re-ask once the user has already answered a clarifying question.
+      if (isFollowup && parsed?.action === "clarify") {
+        const fallback = fallbackParse(effectiveTranscript, context);
+        return respond(fallback ? { ...fallback, localFallback: true } : {
+          action: "unknown",
+          params: {},
+          humanReadable: "Command not understood",
+        });
+      }
+      return respond(parsed);
     } catch {
       return NextResponse.json({ error: "Could not parse AI response", raw }, { status: 500 });
     }

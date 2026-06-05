@@ -8,6 +8,21 @@ export interface VoiceAction {
   humanReadable: string;
 }
 
+export interface VoiceControlRequest {
+  channel?: string;
+  type: "speak" | "speak_and_listen";
+  message?: string;
+  silenceMs?: number;
+  maxDurationMs?: number;
+}
+
+export const VOICE_CONTROL_EVENT = "genio:voice-control";
+
+export function requestVoiceControl(request: VoiceControlRequest) {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent<VoiceControlRequest>(VOICE_CONTROL_EVENT, { detail: request }));
+}
+
 interface Props {
   context: string;
   onResult: (transcript: string, action: VoiceAction) => void;
@@ -19,6 +34,8 @@ interface Props {
   wakePhrases?: string[];
   wakeReply?: string;
   wakeSilenceMs?: number;
+  wakeCommandSilenceMs?: number;
+  controlChannel?: string;
 }
 
 interface SpeechRecognitionEvent extends Event {
@@ -47,8 +64,9 @@ declare global {
 
 type State = "idle" | "wake-listening" | "recording" | "processing" | "done" | "error" | "unsupported";
 
-const MANUAL_SILENCE_MS = 2000;
+const MANUAL_SILENCE_MS = 5000;
 const DEFAULT_WAKE_REPLY = "Yes master";
+const DEFAULT_WAKE_COMMAND_SILENCE_MS = 5000;
 
 function normalizePhrase(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
@@ -65,6 +83,8 @@ export default function VoiceButton({
   wakePhrases = ["genius"],
   wakeReply = DEFAULT_WAKE_REPLY,
   wakeSilenceMs = 60000,
+  wakeCommandSilenceMs = DEFAULT_WAKE_COMMAND_SILENCE_MS,
+  controlChannel,
 }: Props) {
   const [state, setState] = useState<State>("idle");
   const [transcript, setTranscript] = useState("");
@@ -78,9 +98,16 @@ export default function VoiceButton({
   const finalTranscriptRef = useRef("");
   const latestTranscriptRef = useRef("");
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const maxDurationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wakeRestartTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stateRef = useRef<State>("idle");
   const wakeHoldRef = useRef(false);
+  // True while a hands-free conversation is in progress (set on wake/manual start,
+  // cleared when a re-listen times out in silence). Drives whether we re-open the mic.
+  const conversationActiveRef = useRef(false);
+  // Holds the original command text while waiting for the answer to a clarifying question.
+  const pendingClarifyRef = useRef<{ priorTranscript: string } | null>(null);
+  const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
 
   const isSupported =
     typeof window !== "undefined" &&
@@ -104,9 +131,24 @@ export default function VoiceButton({
     }
   }
 
+  function clearMaxDurationTimer() {
+    if (maxDurationTimerRef.current) {
+      clearTimeout(maxDurationTimerRef.current);
+      maxDurationTimerRef.current = null;
+    }
+  }
+
   function resetSilenceTimer(timeoutMs: number) {
     clearSilenceTimer();
     silenceTimerRef.current = setTimeout(() => {
+      activeRecognitionRef.current?.stop();
+    }, timeoutMs);
+  }
+
+  function resetMaxDurationTimer(timeoutMs?: number) {
+    clearMaxDurationTimer();
+    if (!timeoutMs || timeoutMs <= 0) return;
+    maxDurationTimerRef.current = setTimeout(() => {
       activeRecognitionRef.current?.stop();
     }, timeoutMs);
   }
@@ -199,6 +241,7 @@ export default function VoiceButton({
 
   function stopRecording() {
     clearSilenceTimer();
+    clearMaxDurationTimer();
     activeRecognitionRef.current?.stop();
   }
 
@@ -209,22 +252,104 @@ export default function VoiceButton({
     setErrorMsg("");
   }
 
-  async function speakWakeReply(): Promise<void> {
-    if (typeof window === "undefined" || !wakeReply.trim() || !("speechSynthesis" in window)) {
+  function pickBestVoice(): SpeechSynthesisVoice | null {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    const english = voices.filter((v) => /^en[-_]/i.test(v.lang));
+    const pool = english.length ? english : voices;
+    // Prefer natural / neural voices, then well-known good defaults.
+    const ranked = [
+      (v: SpeechSynthesisVoice) => /natural|neural|online/i.test(v.name),
+      (v: SpeechSynthesisVoice) => /google us english/i.test(v.name),
+      (v: SpeechSynthesisVoice) => /google/i.test(v.name),
+      (v: SpeechSynthesisVoice) => /^en-US$/i.test(v.lang),
+      (v: SpeechSynthesisVoice) => v.default,
+    ];
+    for (const matches of ranked) {
+      const found = pool.find(matches);
+      if (found) return found;
+    }
+    return pool[0] ?? null;
+  }
+
+  // Chrome silently drops long utterances, so speak sentence-sized chunks in sequence.
+  function splitForSpeech(message: string): string[] {
+    const sentences = message.match(/[^.!?]+[.!?]*\s*/g) ?? [message];
+    const chunks: string[] = [];
+    let current = "";
+    for (const sentence of sentences) {
+      if (current && (current + sentence).length > 180) {
+        chunks.push(current.trim());
+        current = sentence;
+      } else {
+        current += sentence;
+      }
+    }
+    if (current.trim()) chunks.push(current.trim());
+    return chunks.length ? chunks : [message];
+  }
+
+  async function speakText(message: string): Promise<void> {
+    if (typeof window === "undefined" || !message.trim() || !("speechSynthesis" in window)) {
       return;
     }
 
-    await new Promise<void>((resolve) => {
-      const utterance = new SpeechSynthesisUtterance(wakeReply);
-      utterance.onend = () => resolve();
-      utterance.onerror = () => resolve();
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(utterance);
+    // Stop anything currently speaking, then speak each chunk back-to-back.
+    window.speechSynthesis.cancel();
+    for (const chunk of splitForSpeech(message)) {
+      await new Promise<void>((resolve) => {
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        const voice = selectedVoiceRef.current ?? pickBestVoice();
+        if (voice) {
+          selectedVoiceRef.current = voice;
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+        }
+        utterance.rate = 1.02;
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          resolve();
+        };
+        utterance.onend = finish;
+        utterance.onerror = finish;
+        // Chrome can auto-pause the queue; resume() keeps it playing.
+        window.speechSynthesis.resume();
+        window.speechSynthesis.speak(utterance);
+        // Safety net so the conversation never stalls if an event never fires.
+        setTimeout(finish, Math.max(4000, chunk.length * 90));
+      });
+    }
+  }
+
+  /** Speak a message, then re-open the mic to capture the user's next words. */
+  async function speakThenListen(message: string) {
+    resetUiState();
+    setState("wake-listening");
+    setInterimText(message);
+    await speakText(message);
+    startRecording({
+      silenceMs: wakeCommandSilenceMs,
+      maxDurationMs: wakeSilenceMs,
+      fromWakeWord: true,
     });
+  }
+
+  /** Reset to idle after a delay, but only if we're still showing a terminal bubble. */
+  function scheduleIdleReset(ms = 2500) {
+    setTimeout(() => {
+      if (stateRef.current === "done" || stateRef.current === "error") {
+        setState("idle");
+        resetUiState();
+      }
+    }, ms);
   }
 
   async function processTranscript(text: string) {
     if (!text.trim()) {
+      conversationActiveRef.current = false;
       setState("idle");
       queueWakeWordResume();
       return;
@@ -234,50 +359,75 @@ export default function VoiceButton({
     setTranscript(text);
     setInterimText("");
 
+    // Carry forward the original command if this is the answer to a clarifying question.
+    const clarifyContext = pendingClarifyRef.current;
+    pendingClarifyRef.current = null;
+
     try {
       const res = await fetch("/api/voice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ transcript: text, context }),
+        body: JSON.stringify({ transcript: text, context, clarifyContext: clarifyContext ?? undefined }),
       });
       const data = await res.json();
+
+      // The assistant needs more info — speak the question and listen for the answer.
+      if (data.action === "clarify") {
+        pendingClarifyRef.current = {
+          priorTranscript: clarifyContext ? `${clarifyContext.priorTranscript}. ${text}` : text,
+        };
+        conversationActiveRef.current = true;
+        setActionLabel(data.humanReadable || "Need more info");
+        await speakThenListen(data.speech || "Could you give me a little more detail?");
+        return;
+      }
+
       if (data.action && data.action !== "unknown") {
         setActionLabel(data.humanReadable || data.action);
         setState("done");
         onResult(text, data);
-        setTimeout(() => {
-          setState("idle");
-          resetUiState();
-        }, 3000);
-      } else if (data.action === "unknown") {
-        setErrorMsg(data.humanReadable || "Command not understood");
-        setState("error");
-        setTimeout(() => {
-          setState("idle");
-          resetUiState();
-        }, 3000);
+
+        // Navigation hands off to GlobalVoiceButton, which speaks the destination's
+        // capabilities and re-opens the mic after the route change — don't double up here.
+        if (data.action === "navigate" || data.action === "navigate_with_action") {
+          scheduleIdleReset();
+          return;
+        }
+
+        const confirmation = data.speech || data.humanReadable || "Done.";
+        if (conversationActiveRef.current) {
+          await speakThenListen(confirmation);
+        } else {
+          await speakText(confirmation);
+          scheduleIdleReset();
+          queueWakeWordResume();
+        }
+        return;
+      }
+
+      // Not understood — apologise and ask again, keeping the conversation open.
+      const retryMessage = data.speech || "Sorry, I didn't catch that. Could you say it again?";
+      setErrorMsg(data.humanReadable || data.error || "Command not understood");
+      if (conversationActiveRef.current) {
+        await speakThenListen(retryMessage);
       } else {
-        setErrorMsg(data.error || "Could not understand command");
         setState("error");
-        setTimeout(() => {
-          setState("idle");
-          resetUiState();
-        }, 3000);
+        await speakText(retryMessage);
+        scheduleIdleReset();
+        queueWakeWordResume();
       }
     } catch (e) {
+      conversationActiveRef.current = false;
       setErrorMsg(String(e));
       setState("error");
-      setTimeout(() => {
-        setState("idle");
-        resetUiState();
-      }, 3000);
-    } finally {
+      scheduleIdleReset();
       queueWakeWordResume();
     }
   }
 
-  function startRecording(options?: { silenceMs?: number; fromWakeWord?: boolean }) {
+  function startRecording(options?: { silenceMs?: number; maxDurationMs?: number; fromWakeWord?: boolean }) {
     const silenceMs = options?.silenceMs ?? MANUAL_SILENCE_MS;
+    const maxDurationMs = options?.maxDurationMs;
 
     if (!isSupported) {
       setState("unsupported");
@@ -325,6 +475,7 @@ export default function VoiceButton({
 
     rec.onerror = () => {
       clearSilenceTimer();
+      clearMaxDurationTimer();
       activeRecognitionRef.current = null;
       setState("error");
       setErrorMsg("Microphone error - check permissions");
@@ -337,11 +488,14 @@ export default function VoiceButton({
 
     rec.onend = () => {
       clearSilenceTimer();
+      clearMaxDurationTimer();
       activeRecognitionRef.current = null;
       const text = latestTranscriptRef.current.trim();
       if (text) {
         void processTranscript(text);
       } else {
+        // Silence ended the turn — close the conversation and listen for the wake word again.
+        conversationActiveRef.current = false;
         setState("idle");
         resetUiState();
         queueWakeWordResume();
@@ -356,27 +510,79 @@ export default function VoiceButton({
     setErrorMsg("");
     setInterimText(options?.fromWakeWord ? "Listening for your command..." : "");
     resetSilenceTimer(silenceMs);
+    resetMaxDurationTimer(maxDurationMs);
   }
 
   async function activateWakeCapture() {
+    conversationActiveRef.current = true;
     resetUiState();
     setState("wake-listening");
-    await speakWakeReply();
-    startRecording({ silenceMs: wakeSilenceMs, fromWakeWord: true });
+    await speakText(wakeReply);
+    startRecording({
+      silenceMs: wakeCommandSilenceMs,
+      maxDurationMs: wakeSilenceMs,
+      fromWakeWord: true,
+    });
   }
 
   function handleClick() {
     if (disabled) return;
     if (state === "recording") {
+      conversationActiveRef.current = false;
       stopRecording();
       return;
     }
+    conversationActiveRef.current = true;
     startRecording();
   }
 
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
+
+  // Voices can load asynchronously; cache the best one as soon as they're available.
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const updateVoice = () => {
+      const voice = pickBestVoice();
+      if (voice) selectedVoiceRef.current = voice;
+    };
+    updateVoice();
+    window.speechSynthesis.addEventListener?.("voiceschanged", updateVoice);
+    return () => window.speechSynthesis.removeEventListener?.("voiceschanged", updateVoice);
+  }, []);
+
+  useEffect(() => {
+    if (!controlChannel || !isSupported) return;
+
+    function onControl(event: Event) {
+      const detail = (event as CustomEvent<VoiceControlRequest>).detail;
+      if (!detail || detail.channel !== controlChannel || disabled) return;
+
+      if (detail.type === "speak") {
+        void speakText(detail.message ?? "");
+        return;
+      }
+
+      if (detail.type === "speak_and_listen") {
+        conversationActiveRef.current = true;
+        void (async () => {
+          resetUiState();
+          setState("wake-listening");
+          setInterimText(detail.message ?? "");
+          await speakText(detail.message ?? "");
+          startRecording({
+            silenceMs: detail.silenceMs ?? wakeCommandSilenceMs,
+            maxDurationMs: detail.maxDurationMs ?? wakeSilenceMs,
+            fromWakeWord: true,
+          });
+        })();
+      }
+    }
+
+    window.addEventListener(VOICE_CONTROL_EVENT, onControl);
+    return () => window.removeEventListener(VOICE_CONTROL_EVENT, onControl);
+  }, [controlChannel, disabled, isSupported, wakeCommandSilenceMs, wakeSilenceMs]);
 
   useEffect(() => {
     if (!isSupported) {
@@ -392,6 +598,7 @@ export default function VoiceButton({
 
     return () => {
       clearSilenceTimer();
+      clearMaxDurationTimer();
       clearWakeRestartTimer();
       wakeHoldRef.current = true;
       if (activeRecognitionRef.current) {
@@ -441,7 +648,7 @@ export default function VoiceButton({
   );
 
   const bubbleText =
-    state === "wake-listening" ? 'Waiting for "Genius"...'
+    state === "wake-listening" ? (interimText || 'Waiting for "Genius"...')
       : state === "recording" ? (interimText || "Listening...")
       : state === "processing" ? `Processing: "${transcript}"`
       : state === "done" ? `✓ ${actionLabel}`

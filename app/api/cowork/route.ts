@@ -1399,14 +1399,44 @@ function escapePowershellSingleQuoted(text: string) {
   return text.replace(/'/g, "''");
 }
 
-function launchVisibleClaudeTerminal(prompt: string, workdir: string | undefined) {
+function appendCliTerminalLog(logPath: string, text: string) {
+  fs.appendFileSync(logPath, `${text.replace(/\r?\n/g, os.EOL)}${os.EOL}`, "utf8");
+}
+
+function formatCliTerminalLine(data: Record<string, unknown>) {
+  switch (data.type) {
+    case "start":
+      return String(data.message ?? "Cowork execution started");
+    case "info":
+      return String(data.text ?? "");
+    case "text":
+      return String(data.text ?? "");
+    case "stderr":
+      return `[stderr] ${String(data.text ?? "")}`;
+    case "tool":
+      return `Tool: ${String(data.name ?? "unknown")}`;
+    case "error":
+      return `[error] ${String(data.message ?? "Unknown error")}`;
+    case "done":
+      return `Execution finished with exit code ${String(data.exitCode ?? "")}`;
+    default:
+      return "";
+  }
+}
+
+function launchVisibleClaudeTerminal(logPath: string, workdir: string | undefined) {
   const resolvedWorkdir = workdir && workdir.trim() ? workdir.trim() : process.cwd();
   const escapedWorkdir = escapePowershellSingleQuoted(resolvedWorkdir);
-  const escapedPrompt = escapePowershellSingleQuoted(prompt);
+  const escapedLogPath = escapePowershellSingleQuoted(logPath);
   const command = [
     `Set-Location -LiteralPath '${escapedWorkdir}'`,
-    "Write-Host 'Starting Claude CLI...' -ForegroundColor Cyan",
-    `claude -p '${escapedPrompt}'`,
+    `$Host.UI.RawUI.WindowTitle = 'Genio AI CLI Agent'`,
+    "Write-Host 'Genio AI CLI Agent' -ForegroundColor Cyan",
+    `Write-Host ('Working directory: ' + '${escapedWorkdir}') -ForegroundColor DarkGray`,
+    `Write-Host ('Streaming log: ' + '${escapedLogPath}') -ForegroundColor DarkGray`,
+    "Write-Host ''",
+    "while (-not (Test-Path -LiteralPath '" + escapedLogPath + "')) { Start-Sleep -Milliseconds 200 }",
+    `Get-Content -LiteralPath '${escapedLogPath}' -Wait`,
   ].join("; ");
 
   const child = spawn("powershell.exe", ["-NoExit", "-Command", command], {
@@ -1656,21 +1686,44 @@ export async function PUT(request: NextRequest) {
       }
 
       if (target === "cli") {
+        const cliLogPath = path.join(os.tmpdir(), `${sessionId}.log`);
+        const logAndSend = (data: Record<string, unknown>) => {
+          send(data);
+          const line = formatCliTerminalLine(data);
+          if (line) {
+            appendCliTerminalLog(cliLogPath, line);
+          }
+        };
+
         try {
-          const launched = launchVisibleClaudeTerminal(prompt, workdir);
-          send({ type: "info", text: "Opened a visible terminal for Claude CLI." });
-          send({ type: "text", text: `Workdir: ${launched.workdir}` });
-          send({ type: "text", text: `Prompt sent exactly: ${prompt}` });
-          send({ type: "done", exitCode: 0, sessionId });
-          try {
-            controller.close();
-          } catch {}
+          if (!checkCliAvailable()) {
+            throw new Error("Claude CLI is not available in PATH on this machine.");
+          }
+
+          fs.writeFileSync(cliLogPath, "", "utf8");
+          const launched = launchVisibleClaudeTerminal(cliLogPath, workdir);
+          logAndSend({ type: "info", text: "Opened a visible PowerShell window for CLI Agent." });
+          logAndSend({ type: "text", text: `Workdir: ${launched.workdir}` });
+          logAndSend({ type: "text", text: `Prompt sent exactly: ${prompt}` });
+          logAndSend({ type: "info", text: "Running Claude CLI now and streaming the real output..." });
+
+          const child = streamClaudeCli(prompt, workdir, sessionId, (line) => {
+            logAndSend(line as Record<string, unknown>);
+          });
+
+          child.on("close", (code) => {
+            runningProcesses.delete(sessionId);
+            logAndSend({ type: "done", exitCode: code, sessionId });
+            try {
+              controller.close();
+            } catch {}
+          });
         } catch (error) {
-          send({
+          logAndSend({
             type: "error",
             message: error instanceof Error ? error.message : String(error),
           });
-          send({ type: "done", exitCode: 1, sessionId });
+          logAndSend({ type: "done", exitCode: 1, sessionId });
           try {
             controller.close();
           } catch {}

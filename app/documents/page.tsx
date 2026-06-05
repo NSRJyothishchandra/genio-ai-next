@@ -34,6 +34,9 @@ interface CompareResult {
   summary: DiffSummary;
   entries: DiffEntry[];
   pdfUrl: string;
+  previewImages: string[];
+  pdfPageCount: number;
+  previewPageCount: number;
 }
 
 function DiffText({ parts }: { parts: DiffPart[] }) {
@@ -261,15 +264,37 @@ export default function DocumentsPage() {
               </div>
               <div className="card-body">
                 <div className="pdf-preview-wrap">
-                  <iframe
-                    key={result.pdfUrl}
-                    src={result.pdfUrl}
-                    title="Highlighted updated file preview"
-                    className="pdf-preview-frame"
-                  />
+                  {result.previewImages.length ? (
+                    <div className="pdf-page-preview-stack">
+                      {result.previewImages.map((imageUrl, index) => (
+                        <div key={imageUrl} className="pdf-page-preview-card">
+                          <div className="pdf-page-preview-meta">
+                            <span>Page {index + 1}</span>
+                            {result.pdfPageCount > result.previewPageCount && index === result.previewImages.length - 1 ? (
+                              <span>
+                                Showing {result.previewPageCount} of {result.pdfPageCount} pages
+                              </span>
+                            ) : null}
+                          </div>
+                          <img
+                            src={imageUrl}
+                            alt={`Highlighted updated file page ${index + 1}`}
+                            className="pdf-page-preview-image"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <iframe
+                      key={result.pdfUrl}
+                      src={result.pdfUrl}
+                      title="Highlighted updated file preview"
+                      className="pdf-preview-frame"
+                    />
+                  )}
                 </div>
                 <div className="form-hint" style={{ marginTop: 12 }}>
-                  This preview shows the generated updated PDF with highlights. Use the download button if you want to review it in your desktop PDF viewer.
+                  This preview shows the generated updated PDF with highlights directly inside the application. Use the download button if you want to review it in your desktop PDF viewer.
                 </div>
               </div>
             </div>

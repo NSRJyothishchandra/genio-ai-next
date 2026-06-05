@@ -116,7 +116,8 @@ export async function fetchInbox(limit = 25): Promise<InboxEmail[]> {
   try {
     const lock = await client.getMailboxLock("INBOX");
     try {
-      const total = client.mailbox?.exists ?? 0;
+      const mailbox = client.mailbox;
+      const total = mailbox && typeof mailbox === "object" ? mailbox.exists : 0;
       if (total === 0) return [];
 
       const start = Math.max(1, total - limit + 1);

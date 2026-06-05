@@ -14,7 +14,11 @@ except Exception:
 
 import numpy as np
 from PIL import Image, ImageChops, ImageFilter
-from rapidfuzz import fuzz
+
+try:
+    from rapidfuzz import fuzz
+except Exception:
+    fuzz = None
 
 try:
     from rapidocr_onnxruntime import RapidOCR
@@ -22,6 +26,12 @@ except Exception:
     RapidOCR = None
 
 OCR_ENGINE = None
+
+
+def similarity_ratio(left: str, right: str) -> float:
+    if fuzz is not None:
+        return float(fuzz.ratio(left, right))
+    return SequenceMatcher(None, left, right).ratio() * 100.0
 
 
 def pixmap_to_image(pix: fitz.Pixmap) -> Image.Image:
@@ -132,7 +142,7 @@ def find_best_original_match(updated_item: dict, original_items: list[dict]) -> 
         width_limit = max(updated_item["width"], original_item["width"]) * 2.2 + 24
         if x_gap > width_limit:
             continue
-        similarity = fuzz.ratio(updated_item["normalized"], original_item["normalized"])
+        similarity = similarity_ratio(updated_item["normalized"], original_item["normalized"])
         if similarity > best_score:
             best_score = similarity
             best_item = original_item | {"match_score": similarity}
@@ -376,6 +386,10 @@ def refine_rects(source_mask: np.ndarray, expanded_rects: list[tuple[int, int, i
 
                 if width < 4 or height < 4:
                     continue
+                if area > page_width * page_height * 0.14:
+                    continue
+                if width > page_width * 0.82 or height > page_height * 0.82:
+                    continue
                 if width > page_width * 0.70 and density < 0.10:
                     continue
                 if height > page_height * 0.30 and density < 0.07:
@@ -418,7 +432,11 @@ def refine_rects(source_mask: np.ndarray, expanded_rects: list[tuple[int, int, i
     return [
         item
         for item in merged
-        if (item["rect"][2] - item["rect"][0]) >= 4 and (item["rect"][3] - item["rect"][1]) >= 4
+        if (
+            (item["rect"][2] - item["rect"][0]) >= 4
+            and (item["rect"][3] - item["rect"][1]) >= 4
+            and (item["rect"][2] - item["rect"][0]) * (item["rect"][3] - item["rect"][1]) <= page_width * page_height * 0.16
+        )
     ]
 
 
@@ -457,7 +475,22 @@ def page_diff_rects(original_page: fitz.Page | None, updated_page: fitz.Page, zo
     expanded_mask = suppress_ocr_regions(expanded_mask, all_ocr_regions)
     coarse_rects = build_diff_rects(expanded_mask)
     refined = refine_rects(base_mask, coarse_rects, render_width, render_height)
-    return ([{"rect": item["rect"], "kind": item["kind"]} for item in changed_ocr_items] + refined), render_width, render_height
+    filtered = []
+    margin = 8
+    for item in refined:
+        x0, y0, x1, y1 = item["rect"]
+        width = x1 - x0
+        height = y1 - y0
+        if x0 <= margin and y0 <= margin and x1 >= render_width - margin and y1 >= render_height - margin:
+            continue
+        if (
+            item["kind"] == "geometry"
+            and (width >= render_width * 0.78 or height >= render_height * 0.78)
+        ):
+            continue
+        filtered.append(item)
+
+    return ([{"rect": item["rect"], "kind": item["kind"]} for item in changed_ocr_items] + filtered), render_width, render_height
 
 
 def highlight_pdf(original_pdf: Path, updated_pdf: Path, output_pdf: Path):
@@ -491,10 +524,10 @@ def highlight_pdf(original_pdf: Path, updated_pdf: Path, output_pdf: Path):
                 stroke = (0.047, 0.439, 0.271)
                 fill = (0.745, 0.965, 0.816)
             elif item["kind"] == "text":
-                stroke = (0.114, 0.427, 0.843)
-                fill = (0.769, 0.878, 0.992)
+                stroke = (0.886, 0.447, 0.016)
+                fill = (0.992, 0.906, 0.698)
             else:
-                stroke = (0.863, 0.149, 0.149)
+                stroke = (0.808, 0.333, 0.000)
                 fill = (0.992, 0.878, 0.278)
             updated_page.draw_rect(
                 pdf_rect,
@@ -503,7 +536,7 @@ def highlight_pdf(original_pdf: Path, updated_pdf: Path, output_pdf: Path):
                 width=max(0.8, min(page_width, page_height) * 0.0018),
                 overlay=True,
                 stroke_opacity=0.92,
-                fill_opacity=0.30 if item["kind"] in {"value", "text"} else 0.22,
+                fill_opacity=0.28 if item["kind"] == "value" else 0.18 if item["kind"] == "text" else 0.10,
             )
 
     output_pdf.parent.mkdir(parents=True, exist_ok=True)

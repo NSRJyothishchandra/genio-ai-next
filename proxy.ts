@@ -27,7 +27,6 @@ const PROTECTED_API_PREFIXES = [
   "/api/timesheet",
   "/api/finance",
   "/api/claude",
-  "/api/voice",
   "/api/integrations",
   "/api/requests",
 ];

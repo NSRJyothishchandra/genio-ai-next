@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
+import VoiceButton, { requestVoiceControl, type VoiceAction } from "@/app/components/VoiceButton";
 import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface InboxEmail {
@@ -44,6 +44,12 @@ interface MeetingDetails {
 
 interface TimeSlot { start: string; end: string }
 type Filter = "all" | "unread" | "meetings";
+
+interface EmployeeLookup {
+  id: string;
+  name: string;
+  email: string;
+}
 
 function fmtDate(iso: string) {
   const d = new Date(iso);
@@ -94,6 +100,7 @@ export default function MailPage() {
   const [composeBody, setComposeBody] = useState("");
   const [composing, setComposing] = useState(false);
   const [composeOk, setComposeOk] = useState(false);
+  const [employeeDirectory, setEmployeeDirectory] = useState<EmployeeLookup[]>([]);
 
   // ── Fetch inbox ──────────────────────────────────────────────────────────
   const fetchInbox = useCallback(async () => {
@@ -119,6 +126,64 @@ export default function MailPage() {
   }, []);
 
   useEffect(() => { fetchInbox(); }, [fetchInbox]);
+
+  useEffect(() => {
+    fetch("/api/employees")
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data?.employees)) {
+          setEmployeeDirectory(
+            data.employees
+              .filter((employee: EmployeeLookup) => Boolean(employee?.email))
+              .map((employee: EmployeeLookup) => ({
+                id: employee.id,
+                name: employee.name,
+                email: employee.email,
+              }))
+          );
+        }
+      })
+      .catch(() => null);
+  }, []);
+
+  function normalizeEmployeeName(value: string) {
+    return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\b(the|employee)\b/g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function resolveComposeRecipients(input: string) {
+    return input
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean)
+      .map((entry) => {
+        if (entry.includes("@")) return entry;
+
+        const normalizedEntry = normalizeEmployeeName(entry);
+        let bestMatch: EmployeeLookup | null = null;
+        let bestScore = 0;
+
+        for (const employee of employeeDirectory) {
+          const normalizedEmployee = normalizeEmployeeName(employee.name);
+          const employeeTokens = normalizedEmployee.split(" ").filter(Boolean);
+          const queryTokens = normalizedEntry.split(" ").filter(Boolean);
+
+          let score = 0;
+          if (normalizedEmployee === normalizedEntry) score = 100;
+          else if (normalizedEmployee.startsWith(normalizedEntry)) score = 92;
+          else if (normalizedEmployee.includes(normalizedEntry)) score = 84;
+          else if (queryTokens.every((token) => employeeTokens.some((candidate) => candidate.startsWith(token)))) score = 78;
+          else if (queryTokens.some((token) => employeeTokens.includes(token))) score = 62;
+
+          if (score > bestScore) {
+            bestScore = score;
+            bestMatch = employee;
+          }
+        }
+
+        return bestScore >= 62 && bestMatch ? bestMatch.email : entry;
+      })
+      .join(", ");
+  }
 
   // ── Select email & analyse ───────────────────────────────────────────────
   async function selectEmail(email: InboxEmail) {
@@ -272,13 +337,23 @@ export default function MailPage() {
     const p = action.params as Record<string, unknown>;
     switch (action.action) {
       case "compose_email":
-        setComposeTo(String(p.to || ""));
+        setComposeTo(resolveComposeRecipients(String(p.to || p.recipientName || "")));
         setComposeSubject(String(p.subject || ""));
         setComposeBody(String(p.body || ""));
         setShowCompose(true);
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: `Mail draft is ready${p.recipientName ? ` for ${String(p.recipientName)}` : ""}.`,
+        });
         break;
       case "reply":
         setDraft(String(p.body || ""));
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: "Reply draft is ready.",
+        });
         break;
       case "auto_respond":
         handleDraft();
@@ -295,6 +370,11 @@ export default function MailPage() {
           agenda: String(p.agenda || ""),
         });
         setShowMeeting(true);
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: "Meeting draft is opened. Waiting for your confirmation.",
+        });
         break;
       case "refresh_inbox":
         fetchInbox();

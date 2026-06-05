@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { requestVoiceControl } from "@/app/components/VoiceButton";
 import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface CadReport {
@@ -48,12 +49,24 @@ export default function CadPage() {
   useVoiceCommand(useCallback((action) => {
     switch (action.action) {
       case "analyze":
-        if (cadFile) document.querySelector<HTMLFormElement>("[data-cad-form]")?.requestSubmit();
+        if (cadFile) {
+          requestVoiceControl({
+            channel: "global",
+            type: "speak",
+            message: "Generating the CAD drawing report now.",
+          });
+          document.querySelector<HTMLFormElement>("[data-cad-form]")?.requestSubmit();
+        }
         break;
       case "clear":
         setCadFile(null);
         setReport(null);
         setError(null);
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: "CAD report is cleared.",
+        });
         break;
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,7 +136,7 @@ export default function CadPage() {
               </div>
             </div>
             <div className="card-body">
-              <form onSubmit={submitAnalyze} style={{ display: "grid", gap: 16 }}>
+              <form data-cad-form onSubmit={submitAnalyze} style={{ display: "grid", gap: 16 }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label">Mesh file</label>
                   <input

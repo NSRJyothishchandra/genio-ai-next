@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import VoiceButton, { type VoiceAction } from "@/app/components/VoiceButton";
+import VoiceButton, { requestVoiceControl, type VoiceAction } from "@/app/components/VoiceButton";
 import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface CLILine {
@@ -226,6 +226,9 @@ const CLI_AGENT_FLOW = [
 export default function CoworkPage() {
   const router = useRouter();
   const [workspaceTab, setWorkspaceTab] = useState<WorkspaceTab>("cli");
+  // When opened with ?workspace=cli/desktop/browser/blender, lock to that agent
+  // and hide the tab switcher so the page is focused on just that agent.
+  const [lockedWorkspace, setLockedWorkspace] = useState<WorkspaceTab | "">("");
   const [prompt, setPrompt] = useState("");
   const [blenderImageDataUrl, setBlenderImageDataUrl] = useState<string | null>(null);
   const [blenderImageName, setBlenderImageName] = useState<string | null>(null);
@@ -263,6 +266,8 @@ export default function CoworkPage() {
   const [promptHistory, setPromptHistory] = useState<string[]>([]);
   const abortRef = useRef<AbortController | null>(null);
   const outputRef = useRef<HTMLDivElement>(null);
+  // Set when a run is kicked off by voice, so the assistant narrates its completion out loud.
+  const voiceRunRef = useRef(false);
 
   function activateWorkspace(next: WorkspaceTab, syncUrl = true) {
     setWorkspaceTab(next);
@@ -286,39 +291,39 @@ export default function CoworkPage() {
     fetch("/api/cowork").then((response) => response.json()).then(setStatus).catch(() => null);
   }, []);
 
-  function buildPrecisionPayload() {
-    if (!precision.enabled) return undefined;
+  function buildPrecisionPayload(state: PrecisionFormState = precision) {
+    if (!state.enabled) return undefined;
     const parseField = (value: string) => {
       const parsed = Number(value);
       return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
     };
-    const extraCounts = precision.additionalToothCounts
+    const extraCounts = state.additionalToothCounts
       .split(",")
       .map((value) => Number(value.trim()))
       .filter((value) => Number.isFinite(value) && value > 0);
 
     return {
       enabled: true,
-      partType: precision.partType,
-      units: precision.units,
-      qualityPreset: precision.qualityPreset,
-      materialPreset: precision.materialPreset,
-      symmetry: precision.symmetry,
-      centerOrigin: precision.centerOrigin,
-      smoothShading: precision.smoothShading,
-      primaryToothCount: parseField(precision.primaryToothCount),
+      partType: state.partType,
+      units: state.units,
+      qualityPreset: state.qualityPreset,
+      materialPreset: state.materialPreset,
+      symmetry: state.symmetry,
+      centerOrigin: state.centerOrigin,
+      smoothShading: state.smoothShading,
+      primaryToothCount: parseField(state.primaryToothCount),
       additionalToothCounts: extraCounts,
-      planetCount: parseField(precision.planetCount),
-      shaftSpacing: parseField(precision.shaftSpacing),
-      stageCount: parseField(precision.stageCount),
-      outerDiameter: parseField(precision.outerDiameter),
-      innerDiameter: parseField(precision.innerDiameter),
-      thickness: parseField(precision.thickness),
-      length: parseField(precision.length),
-      shaftDiameter: parseField(precision.shaftDiameter),
-      headDiameter: parseField(precision.headDiameter),
-      headHeight: parseField(precision.headHeight),
-      tolerance: parseField(precision.tolerance),
+      planetCount: parseField(state.planetCount),
+      shaftSpacing: parseField(state.shaftSpacing),
+      stageCount: parseField(state.stageCount),
+      outerDiameter: parseField(state.outerDiameter),
+      innerDiameter: parseField(state.innerDiameter),
+      thickness: parseField(state.thickness),
+      length: parseField(state.length),
+      shaftDiameter: parseField(state.shaftDiameter),
+      headDiameter: parseField(state.headDiameter),
+      headHeight: parseField(state.headHeight),
+      tolerance: parseField(state.tolerance),
     };
   }
 
@@ -339,11 +344,13 @@ export default function CoworkPage() {
       workspace === "browser" ||
       workspace === "blender"
     ) {
+      setLockedWorkspace(workspace);
       activateWorkspace(workspace, false);
       return;
     }
 
     if (requestedTarget === "cli" || requestedTarget === "desktop" || requestedTarget === "browser" || requestedTarget === "blender") {
+      setLockedWorkspace(requestedTarget);
       activateWorkspace(requestedTarget, false);
       return;
     }
@@ -401,12 +408,20 @@ export default function CoworkPage() {
     }
   }
 
-  async function send(targetOverride?: "cli" | "desktop" | "browser" | "blender" | "all", promptOverride?: string) {
+  async function send(
+    targetOverride?: "cli" | "desktop" | "browser" | "blender" | "all",
+    promptOverride?: string,
+    precisionOverride?: PrecisionFormState,
+  ) {
     const trimmedPrompt = (promptOverride ?? prompt).trim();
     if (!trimmedPrompt || running) return;
     if (promptOverride) setPrompt(promptOverride);
 
     const selectedTarget = targetOverride ?? target;
+    const voiceInitiated = voiceRunRef.current;
+    voiceRunRef.current = false;
+    let runError = false;
+    let aborted = false;
     setPromptHistory((history) => [trimmedPrompt, ...history.slice(0, 49)]);
     setHistoryIdx(-1);
     setCliOutput([
@@ -429,7 +444,7 @@ export default function CoworkPage() {
           workdir: workdir || undefined,
           target: selectedTarget,
           imageDataUrl: selectedTarget === "blender" ? blenderImageDataUrl : undefined,
-          precisionSpec: selectedTarget === "blender" ? buildPrecisionPayload() : undefined,
+          precisionSpec: selectedTarget === "blender" ? buildPrecisionPayload(precisionOverride ?? precision) : undefined,
         }),
         signal: abortRef.current.signal,
       });
@@ -440,36 +455,40 @@ export default function CoworkPage() {
           ...previous,
           { type: "error", message: `HTTP ${response.status}: ${errorText}` },
         ]);
-        setRunning(false);
-        return;
-      }
+        runError = true;
+      } else {
+        const sessionId = response.headers.get("X-Session-Id");
+        if (sessionId) {
+          setCurrentSessionId(sessionId);
+        }
 
-      const sessionId = response.headers.get("X-Session-Id");
-      if (sessionId) {
-        setCurrentSessionId(sessionId);
-      }
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
 
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
+        while (reader) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const chunks = buffer.split("\n\n");
+          buffer = chunks.pop() ?? "";
 
-      while (reader) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const chunks = buffer.split("\n\n");
-        buffer = chunks.pop() ?? "";
-
-        for (const chunk of chunks) {
-          if (!chunk.startsWith("data: ")) continue;
-          try {
-            const parsed: CLILine = JSON.parse(chunk.slice(6));
-            setCliOutput((previous) => [...previous, parsed]);
-          } catch {}
+          for (const chunk of chunks) {
+            if (!chunk.startsWith("data: ")) continue;
+            try {
+              const parsed: CLILine = JSON.parse(chunk.slice(6));
+              setCliOutput((previous) => [...previous, parsed]);
+              if (parsed.type === "error" || parsed.type === "timeout") runError = true;
+              if (parsed.type === "done" && typeof parsed.exitCode === "number" && parsed.exitCode !== 0) runError = true;
+            } catch {}
+          }
         }
       }
     } catch (error: unknown) {
-      if ((error as Error).name !== "AbortError") {
+      if ((error as Error).name === "AbortError") {
+        aborted = true;
+      } else {
+        runError = true;
         setCliOutput((previous) => [
           ...previous,
           { type: "error", message: String(error) },
@@ -480,6 +499,28 @@ export default function CoworkPage() {
     setRunning(false);
     setCurrentSessionId(null);
     refreshStatus();
+
+    // Narrate the outcome so the assistant talks back when each execution finishes.
+    if (voiceInitiated && !aborted) {
+      const agentLabel =
+        selectedTarget === "blender" ? "NX Lab"
+        : selectedTarget === "cli" ? "the CLI agent"
+        : selectedTarget === "desktop" ? "the desktop agent"
+        : selectedTarget === "browser" ? "the browser agent"
+        : "the agents";
+      const message = runError
+        ? `${agentLabel} finished, but it ran into an error. Want me to try again?`
+        : selectedTarget === "blender"
+          ? "Done. The 3D model was generated and exported as an OBJ file. What would you like to do next?"
+          : `Done. ${agentLabel} finished the task. What would you like to do next?`;
+      requestVoiceControl({
+        channel: "global",
+        type: "speak_and_listen",
+        message,
+        silenceMs: 6000,
+        maxDurationMs: 60000,
+      });
+    }
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
@@ -647,10 +688,49 @@ export default function CoworkPage() {
     : workspaceTab === "desktop" ? "desktop-agent"
     : "browser-agent";
 
+  function applyPrecisionParams(base: PrecisionFormState, params: Record<string, unknown>): PrecisionFormState {
+    const next: PrecisionFormState = { ...base, enabled: true };
+    const validParts: PrecisionFormState["partType"][] = ["auto", "gear", "geartrain", "bolt", "shaft", "coupling", "planetary", "belt", "custom"];
+    if (typeof params.partType === "string" && validParts.includes(params.partType as PrecisionFormState["partType"])) {
+      next.partType = params.partType as PrecisionFormState["partType"];
+    }
+    if (params.units === "mm" || params.units === "inch") next.units = params.units;
+    const validMaterials: PrecisionFormState["materialPreset"][] = ["steel", "aluminum", "brass", "dark"];
+    if (typeof params.material === "string" && validMaterials.includes(params.material as PrecisionFormState["materialPreset"])) {
+      next.materialPreset = params.material as PrecisionFormState["materialPreset"];
+    }
+    if (params.toothCount != null) next.primaryToothCount = String(params.toothCount);
+    if (params.outerDiameter != null) next.outerDiameter = String(params.outerDiameter);
+    if (params.innerDiameter != null) next.innerDiameter = String(params.innerDiameter);
+    if (params.thickness != null) next.thickness = String(params.thickness);
+    if (params.length != null) next.length = String(params.length);
+    if (params.shaftDiameter != null) next.shaftDiameter = String(params.shaftDiameter);
+    return next;
+  }
+
   function handleVoiceResult(_transcript: string, action: VoiceAction) {
+    // VoiceButton already speaks the response's `speech`, so these handlers only act.
+    if (action.action === "enable_precision" || action.action === "configure_precision") {
+      const next = applyPrecisionParams(precision, action.params);
+      setPrecision(next);
+      if (workspaceTab !== "blender") activateWorkspace("blender");
+      const cmd = String(action.params.command ?? "").trim();
+      if (cmd) {
+        voiceRunRef.current = true;
+        void send("blender", cmd, next);
+      }
+      return;
+    }
+    if (action.action === "disable_precision") {
+      setPrecision((current) => ({ ...current, enabled: false }));
+      return;
+    }
     if (action.action === "run_command") {
       const cmd = String(action.params.command ?? "").trim();
-      if (cmd) void send(activeTarget as "cli" | "desktop" | "browser" | "blender", cmd);
+      if (cmd) {
+        voiceRunRef.current = true;
+        void send(activeTarget as "cli" | "desktop" | "browser" | "blender", cmd);
+      }
     }
   }
 
@@ -725,40 +805,43 @@ export default function CoworkPage() {
       </div>
 
       <div className="page-content" style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 64px)" }}>
-        <div className="card mb-4">
-          <div className="card-body" style={{ padding: "10px 20px", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)" }}>Workspace:</span>
-            <button
-              onClick={() => activateWorkspace("cli")}
-              className={`btn btn-sm ${workspaceTab === "cli" ? "btn-primary" : "btn-outline"}`}
-            >
-              CLI Agent
-            </button>
-            <button
-              onClick={() => activateWorkspace("desktop")}
-              className={`btn btn-sm ${workspaceTab === "desktop" ? "btn-primary" : "btn-outline"}`}
-            >
-              Desktop Agent
-            </button>
-            <button
-              onClick={() => activateWorkspace("browser")}
-              className={`btn btn-sm ${workspaceTab === "browser" ? "btn-primary" : "btn-outline"}`}
-            >
-              Browser Agent
-            </button>
-            <button
-              onClick={() => activateWorkspace("blender")}
-              className={`btn btn-sm ${workspaceTab === "blender" ? "btn-primary" : "btn-outline"}`}
-            >
-              NX Lab
-            </button>
-            <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
-              {workspaceTab === "blender"
-                ? "Use Cowork for local NX-style workflows, generated scenes, and 3D prompt presets"
-                : `${workspaceConfig?.title ?? "Agent"} workspace with dedicated prompts, status, and execution flow`}
+        {/* Only show the workspace switcher when no specific workspace is locked via URL */}
+        {!lockedWorkspace && (
+          <div className="card mb-4">
+            <div className="card-body" style={{ padding: "10px 20px", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+              <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)" }}>Workspace:</span>
+              <button
+                onClick={() => activateWorkspace("cli")}
+                className={`btn btn-sm ${workspaceTab === "cli" ? "btn-primary" : "btn-outline"}`}
+              >
+                CLI Agent
+              </button>
+              <button
+                onClick={() => activateWorkspace("desktop")}
+                className={`btn btn-sm ${workspaceTab === "desktop" ? "btn-primary" : "btn-outline"}`}
+              >
+                Desktop Agent
+              </button>
+              <button
+                onClick={() => activateWorkspace("browser")}
+                className={`btn btn-sm ${workspaceTab === "browser" ? "btn-primary" : "btn-outline"}`}
+              >
+                Browser Agent
+              </button>
+              <button
+                onClick={() => activateWorkspace("blender")}
+                className={`btn btn-sm ${workspaceTab === "blender" ? "btn-primary" : "btn-outline"}`}
+              >
+                NX Lab
+              </button>
+              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                {workspaceTab === "blender"
+                  ? "Use Cowork for local NX-style workflows, generated scenes, and 3D prompt presets"
+                  : `${workspaceConfig?.title ?? "Agent"} workspace with dedicated prompts, status, and execution flow`}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {workspaceTab === "cli" && workspaceConfig ? (
           <div className="grid-2" style={{ gap: 20, marginBottom: 20 }}>
