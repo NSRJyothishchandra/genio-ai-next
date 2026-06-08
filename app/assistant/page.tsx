@@ -33,6 +33,8 @@ export default function AssistantPage() {
     endDate: "",
     reason: "",
   });
+  const [speakReplies, setSpeakReplies] = useState(true);
+  const [speaking, setSpeaking] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
@@ -43,13 +45,60 @@ export default function AssistantPage() {
       .then((data) => setEmployees(data.employees ?? []));
   }, []);
 
+  // Stop any speech when leaving the page
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  // Turn a chat reply into something natural to read aloud (strip markdown/bullets)
+  function cleanForSpeech(text: string): string {
+    return text
+      .replace(/```[\s\S]*?```/g, " (code snippet) ")
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\*\*([^*]+)\*\*/g, "$1")
+      .replace(/\*([^*]+)\*/g, "$1")
+      .replace(/^#{1,6}\s+/gm, "")
+      .replace(/^[\s]*[•\-\*]\s+/gm, ". ")
+      .replace(/\n{2,}/g, ". ")
+      .replace(/\n/g, " ")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+  }
+
+  function speak(text: string) {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const clean = cleanForSpeech(text);
+    if (!clean) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(clean);
+    utterance.rate = 1.02;
+    utterance.pitch = 1;
+    utterance.onstart = () => setSpeaking(true);
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function stopSpeaking() {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setSpeaking(false);
+  }
+
   useVoiceCommand(useCallback((action) => {
     const p = action.params;
     switch (action.action) {
       case "ask":
-        void send(String(p.message ?? ""));
+        // Voice-asked questions always speak the answer back
+        void send(String(p.message ?? ""), { spoken: true });
         break;
       case "clear_chat":
+        stopSpeaking();
         setMessages([{ role: "assistant", content: "New conversation started. How can I help you?" }]);
         setHistory([]);
         break;
@@ -65,23 +114,34 @@ export default function AssistantPage() {
     setTimeout(() => setToast(null), 3000);
   }
 
-  async function send(text?: string) {
+  async function send(text?: string, options?: { spoken?: boolean }) {
     const msg = text ?? input.trim();
     if (!msg || loading) return;
     setInput("");
     setMessages((previous) => [...previous, { role: "user", content: msg }]);
     setLoading(true);
 
-    const response = await fetch("/api/claude", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: msg, conversationHistory: history }),
-    });
-    const data = await response.json();
-    const reply = data.response ?? "Sorry, I couldn't get a response.";
-    setMessages((previous) => [...previous, { role: "assistant", content: reply }]);
-    setHistory(data.history ?? [...history, { role: "user", content: msg }, { role: "assistant", content: reply }]);
-    setLoading(false);
+    try {
+      const response = await fetch("/api/claude", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg, conversationHistory: history }),
+      });
+      const data = await response.json();
+      const reply = data.response ?? "Sorry, I couldn't get a response.";
+      setMessages((previous) => [...previous, { role: "assistant", content: reply }]);
+      setHistory(data.history ?? [...history, { role: "user", content: msg }, { role: "assistant", content: reply }]);
+      // Speak the answer when asked by voice, or whenever spoken replies are enabled
+      if (options?.spoken || speakReplies) {
+        speak(reply);
+      }
+    } catch {
+      const reply = "Sorry, I ran into a problem reaching the assistant. Please try again.";
+      setMessages((previous) => [...previous, { role: "assistant", content: reply }]);
+      if (options?.spoken || speakReplies) speak(reply);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function submitLeaveRequest(event: React.FormEvent) {
@@ -144,10 +204,22 @@ export default function AssistantPage() {
           <div style={{ fontSize: 12, color: "var(--text-muted)" }}>Powered by Claude AI</div>
         </div>
         <div className="topbar-right">
+          {speaking ? (
+            <button onClick={stopSpeaking} className="btn btn-outline btn-sm" title="Stop the spoken reply">
+              ⏹ Stop voice
+            </button>
+          ) : null}
+          <button
+            onClick={() => { if (speakReplies) stopSpeaking(); setSpeakReplies((v) => !v); }}
+            className={`btn btn-sm ${speakReplies ? "btn-primary" : "btn-outline"}`}
+            title="When on, the assistant reads its answers aloud"
+          >
+            {speakReplies ? "🔊 Voice replies: On" : "🔈 Voice replies: Off"}
+          </button>
           <button onClick={() => setShowLeaveForm((previous) => !previous)} className="btn btn-primary btn-sm">
             {showLeaveForm ? "Close Leave Form" : "Apply Leave"}
           </button>
-          <button onClick={() => { setMessages([{ role: "assistant", content: "New conversation started. How can I help you?" }]); setHistory([]); }} className="btn btn-outline btn-sm">Clear Chat</button>
+          <button onClick={() => { stopSpeaking(); setMessages([{ role: "assistant", content: "New conversation started. How can I help you?" }]); setHistory([]); }} className="btn btn-outline btn-sm">Clear Chat</button>
         </div>
       </div>
 

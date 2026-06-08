@@ -102,7 +102,14 @@ export default function Sidebar() {
       router.push("/login?next=/employees");
       return;
     }
+    // Switching a tab should actually take the user into that section, not just
+    // swap the nav list while leaving them on the old page. Navigate to the
+    // tab's first page so the content always matches the selected tab.
     setActiveTab(tab);
+    if (tab !== activeTab) {
+      const landing = tabConfig[tab].items[0]?.href;
+      if (landing) router.push(landing);
+    }
   };
 
   const currentHref = searchParams.toString()

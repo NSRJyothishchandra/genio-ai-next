@@ -13,7 +13,7 @@ const CONTEXT_SCHEMAS: Record<string, { description: string; actions: string }> 
 - reply: { body: string }
 - auto_respond: {}
 - acknowledge: {}
-- schedule_meeting: { title: string, attendees: string[], duration: number, agenda: string }
+- schedule_meeting: { title: string, attendees: string[], duration: number, agenda: string, startDateTime?: string }
 - refresh_inbox: {}
 - filter_unread: {}
 - filter_meetings: {}`,
@@ -84,6 +84,7 @@ const CONTEXT_SCHEMAS: Record<string, { description: string; actions: string }> 
 - filter_position: { position: string }
 - show_employee: { name: string }
 - add_employee: {}   — open the add employee form
+- create_employee: { id?: string, name: string, email: string, phone: string, position: string, gender?: string, dob: string, dateOfJoining: string, address: string }   — create and save a new employee
 - clear_filter: {}`,
   },
   finance: {
@@ -126,13 +127,15 @@ const CONTEXT_SCHEMAS: Record<string, { description: string; actions: string }> 
     actions: `
 - navigate: { path: string }   — go to a page. path can be a route like /timesheet or a name like "mail", "employees", "finance", "birthday", "assistant", "documents", "cad", "cowork", "onboarding"
 - search: { query: string }
-- run_command: { command: string }`,
+- run_command: { command: string }
+- describe_capabilities: { topic?: "identity"|"capabilities" }
+- answer_question: { answer: string, topic?: string }`,
   },
 };
 
 // ── Fast local pre-parser (no Claude needed) ────────────────────────────────
 const NAV_PATTERNS: Array<{ re: RegExp; path: string; label: string }> = [
-  { re: /\b(mail|email|inbox|messages?)\b/i, path: "mail", label: "Open Mail & Meetings" },
+  { re: /\b(mail(?:s)?(?:\s+and\s+meetings?)?|email|emails|inbox|messages?)\b/i, path: "mail", label: "Open Mail & Meetings" },
   { re: /\b(birthday|birthdays)\b/i, path: "birthday", label: "Open Birthdays" },
   { re: /\b(employee|employees|staff|team|people)\b/i, path: "employees", label: "Open Employees" },
   { re: /\b(timesheet|time sheet|attendance|timer)\b/i, path: "timesheet", label: "Open Timesheets" },
@@ -141,8 +144,9 @@ const NAV_PATTERNS: Array<{ re: RegExp; path: string; label: string }> = [
   { re: /\b(assistant|chat|ai|help)\b/i, path: "assistant", label: "Open AI Assistant" },
   { re: /\b(cad|drawing|engineering|design)\b/i, path: "cad", label: "Open CAD" },
   { re: /\b(onboard|onboarding|new hire|hires?)\b/i, path: "onboarding", label: "Open Onboarding" },
-  { re: /\b(cli|terminal|command line)\b/i, path: "cli-agent", label: "Open CLI Agent" },
-  { re: /\b(nx\s*lab|nx lab|blender|3d|cad agent|nx agent|nx)\b/i, path: "nx-lab", label: "Open NX Lab" },
+  { re: /\b(cli|clia|c\s*l\s*i|terminal|command line)\b/i, path: "cli-agent", label: "Open CLI Agent" },
+  { re: /\b(nx\s*agent|next\s*agent)\b/i, path: "nx-agent", label: "Open NX Agent" },
+  { re: /\b(nx\s*lab|next\s*lab|blender|3d|cad agent|nx tab|next tab|nx|next)\b/i, path: "nx-lab", label: "Open NX Lab" },
   { re: /\b(desktop|desktop agent)\b/i, path: "desktop-agent", label: "Open Desktop Agent" },
   { re: /\b(browser|web|chrome|browser agent)\b/i, path: "browser-agent", label: "Open Browser Agent" },
 ];
@@ -155,6 +159,17 @@ const REFRESH_RE = /\b(refresh|reload|update|resync|re-sync)\b/i;
 const CLEAR_RE = /\b(clear|reset|remove|start over)\b/i;
 const NAV_INTENT_RE = /\b(go to|open|show|take me to|navigate|switch to)\b/i;
 const COMPOSE_INTENT_RE = /\b(write|draft|compose|send)\b.*\b(mail|email)\b/i;
+const TAB_KEYWORD_RE = /\btab\b/i;
+const EXECUTE_INTENT_RE = /\b(create|run|write|build|generate|make|draft|compose|send|analyze)\b/i;
+const MECHANICAL_INTENT_RE = /\b(gear|gears|shaft|coupling|planetary|belt drive|pulley|bolt|bearing|3d model|obj|stl|component)\b/i;
+const SELF_INTENT_RE = /\b(who are you|what are you|what can you do|what do you do|your capabilities|what is your capabilities|capabilities)\b/i;
+const QUESTION_RE = /^(who|what|when|where|why|how|which|can you|could you|would you|do you|is|are|tell me)\b/i;
+
+const GENIO_IDENTITY_SPEECH =
+  "I am Genius AI, a Bonfiglioli Next.js copilot for internal automation and engineering workflows.";
+
+const GENIO_CAPABILITIES_SPEECH =
+  "I can switch tabs when you say tab, handle mail and meetings, birthday automation, employee management, onboarding, timesheets, finance requests, PDF comparison, CAD drawing, and local agents for CLI, desktop, browser, NX Agent, and NX Lab with precision mode and reference-image guided modeling.";
 
 function trimMessage(value: string, max = 45) {
   return value.length > max ? `${value.slice(0, max)}…` : value;
@@ -196,10 +211,167 @@ function resolveEmployeeRecipient(query: string): { name: string; email: string 
   return bestScore >= 62 ? best : null;
 }
 
-function parseDestinationPhrase(phrase: string): { path: string; label: string } | null {
-  for (const entry of NAV_PATTERNS) {
-    if (entry.re.test(phrase)) return { path: entry.path, label: entry.label };
+function resolveEmployeeRecipients(queries: string[]) {
+  const emails: string[] = [];
+  const names: string[] = [];
+
+  for (const query of queries) {
+    const trimmed = query.trim();
+    if (!trimmed) continue;
+
+    const resolved = resolveEmployeeRecipient(trimmed);
+    if (resolved) {
+      emails.push(resolved.email);
+      names.push(resolved.name);
+      continue;
+    }
+
+    if (trimmed.includes("@")) {
+      emails.push(trimmed);
+      names.push(trimmed);
+    }
   }
+
+  return {
+    emails: Array.from(new Set(emails)),
+    names: Array.from(new Set(names)),
+  };
+}
+
+function parseDestinationPhrase(phrase: string): { path: string; label: string } | null {
+  const normalized = phrase
+    .toLowerCase()
+    .replace(/\bclia\b/g, "cli")
+    .replace(/\bnext\b/g, "nx")
+    .replace(/\bpage\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  for (const entry of NAV_PATTERNS) {
+    if (entry.re.test(normalized)) return { path: entry.path, label: entry.label };
+  }
+  return null;
+}
+
+function parseSelfIntent(transcript: string): VoiceResult | null {
+  const t = transcript.trim().toLowerCase();
+  if (!SELF_INTENT_RE.test(t)) return null;
+
+  const topic = /\b(who are you|what are you)\b/i.test(t) ? "identity" : "capabilities";
+  return {
+    action: "describe_capabilities",
+    params: { topic },
+    humanReadable: topic === "identity" ? "Describe Genius AI" : "List capabilities",
+    speech: topic === "identity"
+      ? `${GENIO_IDENTITY_SPEECH} ${GENIO_CAPABILITIES_SPEECH}`
+      : `${GENIO_CAPABILITIES_SPEECH} ${GENIO_IDENTITY_SPEECH}`,
+  };
+}
+
+function normalizeSpokenDate(value: string): string {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+
+  const slash = trimmed.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+  if (slash) {
+    const first = Number(slash[1]);
+    const second = Number(slash[2]);
+    const year = Number(slash[3]);
+    if (first > 12) return `${year}-${String(second).padStart(2, "0")}-${String(first).padStart(2, "0")}`;
+    return `${year}-${String(first).padStart(2, "0")}-${String(second).padStart(2, "0")}`;
+  }
+
+  const parsed = new Date(trimmed);
+  if (Number.isNaN(parsed.getTime())) return "";
+  return parsed.toISOString().slice(0, 10);
+}
+
+function cleanupSpokenValue(value: string): string {
+  return value.replace(/\s+/g, " ").replace(/[.,;]+$/g, "").trim();
+}
+
+function extractEmployeePayload(text: string): Record<string, unknown> {
+  const payload: Record<string, unknown> = {};
+
+  const idMatch = text.match(/\b(?:employee\s*id|id)\s+(?:is\s+)?([A-Z0-9-]+)\b/i);
+  if (idMatch) payload.id = cleanupSpokenValue(idMatch[1]).toUpperCase();
+
+  const emailMatch = text.match(/\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})\b/i);
+  if (emailMatch) payload.email = cleanupSpokenValue(emailMatch[1]).toLowerCase();
+
+  const phoneMatch = text.match(/\b(?:phone|mobile|number)\s+(?:is\s+)?([0-9+\-\s]{7,20})\b/i);
+  if (phoneMatch) payload.phone = cleanupSpokenValue(phoneMatch[1]).replace(/\s+/g, "");
+
+  const genderMatch = text.match(/\b(male|female|other)\b/i);
+  if (genderMatch) payload.gender = cleanupSpokenValue(genderMatch[1]);
+
+  const nameMatch = text.match(/\bname\s+(?:is\s+)?([a-z][a-z\s.'-]{1,80}?)(?:\s+(?:employee\s*id|id|email|phone|mobile|position|role|gender|date of birth|dob|birthday|date of joining|doj|address)\b|$)/i);
+  if (nameMatch) payload.name = cleanupSpokenValue(nameMatch[1]).replace(/\b(employee|name)\b/gi, "").trim();
+
+  const positionMatch = text.match(/\b(?:position|role)\s+(?:is\s+)?([a-z][a-z0-9\s/&.'-]{1,80}?)(?:\s+(?:gender|date of birth|dob|birthday|date of joining|doj|address|phone|email)\b|$)/i);
+  if (positionMatch) payload.position = cleanupSpokenValue(positionMatch[1]);
+
+  const addressMatch = text.match(/\baddress\s+(?:is\s+)?(.+)$/i);
+  if (addressMatch) payload.address = cleanupSpokenValue(addressMatch[1]);
+
+  const dobMatch = text.match(/\b(?:date of birth|dob|birthday)\s+(?:is\s+)?([a-z0-9,\/\-\s]+?)(?:\s+(?:date of joining|doj|address|phone|email|position|role)\b|$)/i);
+  if (dobMatch) {
+    const normalized = normalizeSpokenDate(cleanupSpokenValue(dobMatch[1]));
+    if (normalized) payload.dob = normalized;
+  }
+
+  const dojMatch = text.match(/\b(?:date of joining|doj|joining date)\s+(?:is\s+)?([a-z0-9,\/\-\s]+?)(?:\s+(?:address|phone|email|position|role)\b|$)/i);
+  if (dojMatch) {
+    const normalized = normalizeSpokenDate(cleanupSpokenValue(dojMatch[1]));
+    if (normalized) payload.dateOfJoining = normalized;
+  }
+
+  return payload;
+}
+
+function parseUtilityQuestion(transcript: string): VoiceResult | null {
+  const t = transcript.trim();
+  const now = new Date();
+
+  if (/\b(today('|’)s date|date today|current date|what day is it)\b/i.test(t)) {
+    const answer = now.toLocaleDateString("en-IN", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    return {
+      action: "answer_question",
+      params: { answer, topic: "date" },
+      humanReadable: "Tell today's date",
+      speech: `Today's date is ${answer}.`,
+    };
+  }
+
+  if (/\b(current time|what time is it|time now)\b/i.test(t)) {
+    const answer = now.toLocaleTimeString("en-IN", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    return {
+      action: "answer_question",
+      params: { answer, topic: "time" },
+      humanReadable: "Tell current time",
+      speech: `The current time is ${answer}.`,
+    };
+  }
+
+  if (/\b(today|current)\s+day\b/i.test(t)) {
+    const answer = now.toLocaleDateString("en-IN", { weekday: "long" });
+    return {
+      action: "answer_question",
+      params: { answer, topic: "day" },
+      humanReadable: "Tell current day",
+      speech: `Today is ${answer}.`,
+    };
+  }
+
   return null;
 }
 
@@ -304,6 +476,37 @@ function extractMeetingTitle(text: string): string {
   return "Meeting";
 }
 
+function extractMeetingStartDateTime(text: string): string | null {
+  const parsedTime = extractTime(text);
+  const hasDayHint = /\b(today|tomorrow|tonight|morning|afternoon|evening|night)\b/i.test(text);
+  if (!parsedTime && !hasDayHint) return null;
+
+  const now = new Date();
+  const start = new Date(now);
+
+  if (/\btomorrow\b/i.test(text)) {
+    start.setDate(start.getDate() + 1);
+  }
+
+  if (parsedTime) {
+    start.setHours(parsedTime.hour, parsedTime.minute, 0, 0);
+  } else if (/\bmorning\b/i.test(text)) {
+    start.setHours(10, 0, 0, 0);
+  } else if (/\bafternoon\b/i.test(text)) {
+    start.setHours(14, 0, 0, 0);
+  } else if (/\bevening|night|tonight\b/i.test(text)) {
+    start.setHours(18, 0, 0, 0);
+  } else {
+    return null;
+  }
+
+  if (!/\btomorrow\b/i.test(text) && start.getTime() <= now.getTime()) {
+    start.setDate(start.getDate() + 1);
+  }
+
+  return start.toISOString();
+}
+
 const PRECISION_PART_TYPES = ["geartrain", "gear", "bolt", "shaft", "coupling", "planetary", "belt"] as const;
 
 function numAfter(text: string, re: RegExp): number | undefined {
@@ -381,8 +584,12 @@ function needsClarification(action: string, params: Record<string, unknown>, _co
         return "Who should I send the email to?";
       return null;
     case "schedule_meeting":
+      if ((!Array.isArray(params.attendees) || params.attendees.length === 0) && Array.isArray(params.requestedAttendees) && params.requestedAttendees.length > 0)
+        return `I couldn't find ${String(params.requestedAttendees[0])} in the employee list. Please say the employee name again or give me the email address.`;
       if (!Array.isArray(params.attendees) || params.attendees.length === 0)
         return "Who should attend the meeting?";
+      if (!String(params.startDateTime ?? "").trim())
+        return "What time should I schedule the meeting?";
       return null;
     case "filter_employee":
       if (!String(params.query ?? "").trim())
@@ -402,6 +609,12 @@ function needsClarification(action: string, params: Record<string, unknown>, _co
         return "Precision Mode locks the model to exact dimensions. What part type should I use — for example a gear, shaft, or coupling — and any key sizes like tooth count or outer diameter?";
       return null;
     }
+    case "create_employee": {
+      const missing = ["name", "email", "phone", "position", "dob", "dateOfJoining", "address"]
+        .filter((field) => !String(params[field] ?? "").trim());
+      if (!missing.length) return null;
+      return `I need ${missing.join(", ")} to create the employee.`;
+    }
     default:
       return null;
   }
@@ -415,12 +628,37 @@ interface VoiceResult {
   [key: string]: unknown;
 }
 
+async function answerGeneralQuestion(transcript: string): Promise<VoiceResult> {
+  const msg = await client.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 220,
+    system:
+      "You are Genius AI, a Bonfiglioli voice assistant inside a Next.js application. " +
+      "Answer the user's spoken question directly in 1 to 3 short sentences. " +
+      "For live date or time questions, do not guess, but those should normally be handled elsewhere. " +
+      "Keep the answer concise, helpful, and spoken-language friendly.",
+    messages: [{ role: "user", content: transcript }],
+  });
+
+  const answer = msg.content[0]?.type === "text" ? msg.content[0].text.trim() : "I couldn't answer that right now.";
+  return {
+    action: "answer_question",
+    params: { answer, topic: "general" },
+    humanReadable: "Answer question",
+    speech: answer,
+  };
+}
+
 /** A natural sentence to speak when the action itself didn't supply one. */
 function deriveSpeech(result: VoiceResult): string {
   switch (result.action) {
     case "navigate":
     case "navigate_with_action":
       return String(result.params?.prompt ?? "") || result.humanReadable || "Opening that now.";
+    case "describe_capabilities":
+      return String(result.speech ?? "") || GENIO_CAPABILITIES_SPEECH;
+    case "answer_question":
+      return String(result.params?.answer ?? result.speech ?? result.humanReadable ?? "Here is the answer.");
     case "run_command":
       return "Running that now.";
     case "enable_precision":
@@ -478,14 +716,18 @@ function fallbackParse(
           humanReadable: "Open compose email",
         };
       }
-      if (/\b(schedule|book|arrange|set up|setup|plan)\b.*\b(meeting|call|sync|discussion|connect)\b/i.test(t) || /\b(sync|meeting|call)\b.*\bwith\b/i.test(t)) {
+      if (/\b(create|schedule|book|arrange|set up|setup|plan)\b.*\b(meeting|call|sync|discussion|connect)\b/i.test(t) || /\b(sync|meeting|call)\b.*\bwith\b/i.test(t)) {
+        const attendeeResolution = resolveEmployeeRecipients(extractAttendees(t));
         return {
           action: "schedule_meeting",
           params: {
             title: extractMeetingTitle(t),
-            attendees: extractAttendees(t),
+            attendees: attendeeResolution.emails,
+            attendeeNames: attendeeResolution.names,
+            requestedAttendees: extractAttendees(t),
             duration: parseDurationMinutes(t),
             agenda: t,
+            startDateTime: extractMeetingStartDateTime(t),
           },
           humanReadable: "Prepare meeting details",
         };
@@ -557,7 +799,15 @@ function fallbackParse(
     }
 
     case "employees": {
-      if (/\b(add|new)\b.*\b(employee)\b/i.test(t)) return { action: "add_employee", params: {}, humanReadable: "Open add employee form" };
+      if (/\b(add|new|create)\b.*\b(employee)\b/i.test(t)) {
+        const payload = extractEmployeePayload(t);
+        const hasDetails = ["name", "email", "phone", "position", "dob", "dateOfJoining", "address"]
+          .some((field) => String(payload[field] ?? "").trim());
+        if (hasDetails) {
+          return { action: "create_employee", params: payload, humanReadable: `Create employee ${trimMessage(String(payload.name ?? "record"))}` };
+        }
+        return { action: "add_employee", params: {}, humanReadable: "Open add employee form" };
+      }
       if (CLEAR_RE.test(t) && /\b(filter|search)\b/i.test(t)) return { action: "clear_filter", params: {}, humanReadable: "Clear employee filter" };
       if (/\b(position|role|designation)\b/i.test(t)) {
         const value = extractAfterKeyword(t, "position") || extractAfterKeyword(t, "role") || extractAfterKeyword(t, "designation");
@@ -621,7 +871,8 @@ function parseContextAction(
   if (context === "assistant") {
     if (CLEAR_CHAT_RE.test(t)) return { action: "clear_chat", params: {}, humanReadable: "Starting new conversation" };
     if (SUBMIT_LEAVE_RE.test(t)) return { action: "submit_leave", params: {}, humanReadable: "Open leave request form" };
-    if (isNavIntent) return null;
+    // On the AI Assistant tab, treat EVERYTHING else as a question to answer
+    // (and speak back), even if it contains words like "show" or "tell me".
     return { action: "ask", params: { message: t }, humanReadable: `Ask: "${trimMessage(t)}"` };
   }
 
@@ -648,13 +899,32 @@ function parseContextAction(
     };
   }
 
+  if (context === "employees" && /\b(add|new|create)\b.*\b(employee)\b/i.test(t)) {
+    const payload = extractEmployeePayload(t);
+    const hasDetails = ["name", "email", "phone", "position", "dob", "dateOfJoining", "address"]
+      .some((field) => String(payload[field] ?? "").trim());
+    if (hasDetails) {
+      return {
+        action: "create_employee",
+        params: payload,
+        humanReadable: `Create employee ${trimMessage(String(payload.name ?? "record"))}`,
+      };
+    }
+  }
+
   if (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(context)) {
     if (isNavIntent) return null;
+    if (QUESTION_RE.test(t) && !EXECUTE_INTENT_RE.test(t)) return null;
     if ((context === "nx-lab" || context === "nx-agent") && /\bprecision\b/i.test(t)) {
       const precisionAction = parsePrecisionIntent(t);
       if (precisionAction) return precisionAction;
     }
-    return { action: "run_command", params: { command: t }, humanReadable: `Run: "${trimMessage(t)}"` };
+    const target =
+      context === "nx-agent" || context === "nx-lab" ? "blender"
+      : context === "desktop-agent" ? "desktop"
+      : context === "browser-agent" ? "browser"
+      : "cli";
+    return { action: "run_command", params: { command: t, target }, humanReadable: `Run: "${trimMessage(t)}"` };
   }
 
   return fallbackParse(t, context);
@@ -701,12 +971,11 @@ function parseGlobalEngineeringIntent(
   context: string
 ): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
   const t = transcript.trim();
-  const mechanicalIntent = /\b(gear|gears|shaft|coupling|planetary|belt drive|pulley|bolt|bearing|3d model|obj|stl|component)\b/i;
-  if (!mechanicalIntent.test(t)) return null;
+  if (!MECHANICAL_INTENT_RE.test(t)) return null;
 
   const runAction = {
     action: "run_command",
-    params: { command: t },
+    params: { command: t, target: "blender" },
     humanReadable: `Run: "${trimMessage(t)}"`,
   };
 
@@ -714,27 +983,66 @@ function parseGlobalEngineeringIntent(
     return runAction;
   }
 
+  return null;
+}
+
+function parseGlobalEmployeeIntent(
+  transcript: string,
+  context: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const t = transcript.trim();
+  if (!/\b(add|new|create)\b.*\b(employee)\b/i.test(t)) return null;
+
+  const payload = extractEmployeePayload(t);
+  const hasDetails = ["name", "email", "phone", "position", "dob", "dateOfJoining", "address"]
+    .some((field) => String(payload[field] ?? "").trim());
+  const followupAction = hasDetails
+    ? {
+        action: "create_employee",
+        params: payload,
+        humanReadable: `Create employee ${trimMessage(String(payload.name ?? "record"))}`,
+      }
+    : {
+        action: "add_employee",
+        params: {},
+        humanReadable: "Open add employee form",
+      };
+
+  if (context === "employees") return followupAction;
+
   return {
     action: "navigate_with_action",
     params: {
-      path: "nx-lab",
-      prompt: "NX Lab is opened. Running your command now.",
-      followupAction: runAction,
+      path: "employees",
+      prompt: hasDetails ? "Employees is open. Creating the new employee now." : "Employees is open. You can add the new employee now.",
+      followupAction,
     },
-    humanReadable: "Open NX Lab and continue",
+    humanReadable: "Open Employees and continue",
   };
 }
 
-function parseNavigationIntent(
+function parseTabNavigationIntent(
   transcript: string
 ): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
-  const navigationMatch = transcript.match(/^\s*(?:please\s+)?(?:open|go to|navigate(?:\s+to)?|switch to|take me to|show)\s+(.+)$/i);
-  if (!navigationMatch) return null;
+  if (!TAB_KEYWORD_RE.test(transcript)) return null;
 
-  const destinationText = navigationMatch[1].trim();
-  const chainedMatch = destinationText.match(/^(.*?)(?:\s+(?:and then|then|and)\s+)(.+)$/i);
-  const destinationPhrase = (chainedMatch?.[1] ?? destinationText).trim();
-  const followupCommand = (chainedMatch?.[2] ?? "").trim();
+  const destinationFirstMatch = transcript.match(/^\s*(?:please\s+)?(?:(?:open|go to|navigate(?:\s+to)?|switch(?:\s+to)?|take me to|show)\s+)?(.+?)\s+tab\b(.*)$/i);
+  const commandFirstMatch = transcript.match(/^\s*(.+?)\s+(?:in|on)\s+(?:the\s+)?(.+?)\s+tab\s*$/i);
+
+  let destinationPhrase = "";
+  let followupCommand = "";
+
+  if (commandFirstMatch) {
+    followupCommand = commandFirstMatch[1].trim();
+    destinationPhrase = commandFirstMatch[2].trim();
+  } else if (destinationFirstMatch) {
+    destinationPhrase = destinationFirstMatch[1].trim();
+    followupCommand = destinationFirstMatch[2].trim();
+  } else {
+    return null;
+  }
+
+  followupCommand = followupCommand.replace(/^(?:and then|then|and)\s+/i, "").trim();
   const destination = parseDestinationPhrase(destinationPhrase);
   if (!destination) return null;
 
@@ -745,7 +1053,14 @@ function parseNavigationIntent(
       ?? (["cli-agent", "nx-agent", "nx-lab", "desktop-agent", "browser-agent"].includes(destinationContext)
         ? {
             action: "run_command",
-            params: { command: followupCommand },
+            params: {
+              command: followupCommand,
+              target:
+                destinationContext === "nx-agent" || destinationContext === "nx-lab" ? "blender"
+                : destinationContext === "desktop-agent" ? "desktop"
+                : destinationContext === "browser-agent" ? "browser"
+                : "cli",
+            },
             humanReadable: `Run: "${trimMessage(followupCommand)}"`,
           }
         : null);
@@ -770,34 +1085,78 @@ function parseNavigationIntent(
   };
 }
 
+function parseNavigationIntent(
+  transcript: string
+): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+  const navigationMatch = transcript.match(/^\s*(?:please\s+)?(?:open|go to|navigate(?:\s+to)?|switch to|take me to|show)\s+(.+)$/i);
+  if (!navigationMatch) return null;
+
+  const destinationText = navigationMatch[1].trim();
+  const destination = parseDestinationPhrase(destinationText);
+  if (!destination) return null;
+
+  return {
+    action: "navigate",
+    params: { path: destination.path },
+    humanReadable: destination.label,
+  };
+}
+
 function quickParse(
   transcript: string,
   context: string
-): { action: string; params: Record<string, unknown>; humanReadable: string } | null {
+): VoiceResult | null {
   const t = transcript.trim();
   const isNavIntent = NAV_INTENT_RE.test(t);
+  const isTabIntent = TAB_KEYWORD_RE.test(t);
+  const hasExecuteIntent = EXECUTE_INTENT_RE.test(t);
+
+  const tabNavigationAction = parseTabNavigationIntent(t);
+  if (tabNavigationAction) return tabNavigationAction;
+
+  const selfIntentAction = parseSelfIntent(t);
+  if (selfIntentAction) return selfIntentAction;
+
+  const utilityQuestionAction = parseUtilityQuestion(t);
+  if (utilityQuestionAction) return utilityQuestionAction;
 
   // Precision Mode wins inside NX contexts so a follow-up like "gear, 18 teeth"
   // isn't swallowed by the generic mechanical/run_command matcher below.
-  if (!isNavIntent && (context === "nx-lab" || context === "nx-agent") && /\bprecision\b/i.test(t)) {
+  if (!isNavIntent && !isTabIntent && (context === "nx-lab" || context === "nx-agent") && /\bprecision\b/i.test(t)) {
     const precisionAction = parsePrecisionIntent(t);
     if (precisionAction) return precisionAction;
+  }
+
+  if (!isTabIntent) {
+    const localContextMatch = parseContextAction(t, context, false);
+    if (localContextMatch) return localContextMatch;
   }
 
   const globalMail = parseGlobalMailIntent(t, context);
   if (globalMail) return globalMail;
 
-  const navigationAction = parseNavigationIntent(t);
-  if (navigationAction) return navigationAction;
+  const globalEmployee = parseGlobalEmployeeIntent(t, context);
+  if (globalEmployee) return globalEmployee;
 
-  const globalEngineering = parseGlobalEngineeringIntent(t, context);
-  if (globalEngineering) return globalEngineering;
+  if (context === "general" && MECHANICAL_INTENT_RE.test(t) && !isTabIntent) {
+    return {
+      action: "unknown",
+      params: {},
+      humanReadable: "Say NX tab first",
+      speech: "Say NX tab first, then tell me what to create.",
+    };
+  }
 
-  const localContextMatch = parseContextAction(t, context, isNavIntent);
-  if (localContextMatch) return localContextMatch;
+  if (context === "general") {
+    const navigationAction = parseNavigationIntent(t);
+    if (navigationAction) return navigationAction;
+
+    const globalEngineering = parseGlobalEngineeringIntent(t, context);
+    if (globalEngineering) return globalEngineering;
+  }
 
   // Navigation — matches across all contexts
-  if (isNavIntent || context === "general") {
+  if (!hasExecuteIntent && context === "general") {
     for (const { re, path, label } of NAV_PATTERNS) {
       if (re.test(t)) {
         return { action: "navigate", params: { path }, humanReadable: label };
@@ -840,6 +1199,14 @@ export async function POST(request: Request) {
     const quick = quickParse(effectiveTranscript, context);
     if (quick) {
       return respond(maybeClarify(quick));
+    }
+
+    if (QUESTION_RE.test(effectiveTranscript.trim())) {
+      try {
+        return respond(await answerGeneralQuestion(effectiveTranscript.trim()));
+      } catch (generalAnswerError) {
+        console.error("[voice] General answer error:", generalAnswerError);
+      }
     }
 
     const schema = CONTEXT_SCHEMAS[context] || CONTEXT_SCHEMAS.general;

@@ -1,5 +1,187 @@
 [
   {
+    "id": "AUTO-1780639170377",
+    "action": "probation_reminder",
+    "title": "Probation Reminder",
+    "summary": "No probation reminders today",
+    "status": "completed",
+    "details": [
+      "No 30/60/90-day probation milestones today."
+    ],
+    "createdAt": "2026-06-05T05:59:30.377Z"
+  },
+  {
+    "id": "AUTO-1780639169301",
+    "action": "exit_process",
+    "title": "Exit Process Automation",
+    "summary": "No active exit cases",
+    "status": "completed",
+    "details": [
+      "Exit checklist is idle until a resignation or offboarding request appears."
+    ],
+    "createdAt": "2026-06-05T05:59:29.301Z"
+  },
+  {
+    "id": "AUTO-1780639168127",
+    "action": "festival_mailer",
+    "title": "Festival / Event Mailer",
+    "summary": "Independence Day draft ready for 57 employees",
+    "status": "completed",
+    "details": [
+      "Upcoming event: Independence Day",
+      "Planned send date: 2026-08-15",
+      "Recipient count: 57"
+    ],
+    "createdAt": "2026-06-05T05:59:28.127Z"
+  },
+  {
+    "id": "AUTO-1780639166659",
+    "action": "monthly_hr_report",
+    "title": "Monthly HR Report",
+    "summary": "0 requests, 0 onboarding cases, 57 active employees",
+    "status": "completed",
+    "details": [
+      "Requests this month: 0",
+      "Approved requests: 0",
+      "Rejected requests: 0",
+      "Onboarding cases started this month: 0",
+      "Total employees tracked: 57"
+    ],
+    "createdAt": "2026-06-05T05:59:26.659Z"
+  },
+  {
+    "id": "AUTO-1780639165525",
+    "action": "document_chase",
+    "title": "Document Chase Automation",
+    "summary": "4 onboarding records need document reminders",
+    "status": "attention",
+    "details": [
+      "jyothish is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "sravan is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "chandra is missing: aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup",
+      "Demo Onboard User is missing: photo, aadhaar, pan, bankDetails, offerLetterSigned, ndaSigned, backgroundVerification, itSetup"
+    ],
+    "createdAt": "2026-06-05T05:59:25.526Z"
+  },
+  {
+    "id": "AUTO-1780639164285",
+    "action": "attendance_correction",
+    "title": "Attendance Correction Automation",
+    "summary": "No pending attendance corrections",
+    "status": "completed",
+    "details": [
+      "No attendance correction backlog."
+    ],
+    "createdAt": "2026-06-05T05:59:24.285Z"
+  },
+  {
+    "id": "AUTO-1780639163060",
+    "action": "day_zero_onboarding",
+    "title": "Day-Zero Onboarding",
+    "summary": "No day-zero onboarding actions today",
+    "status": "completed",
+    "details": [
+      "No new joiners scheduled for today."
+    ],
+    "createdAt": "2026-06-05T05:59:23.060Z"
+  },
+  {
+    "id": "AUTO-1780639161752",
+    "action": "work_anniversary",
+    "title": "Work Anniversary Automation",
+    "summary": "1 work anniversaries today",
+    "status": "completed",
+    "details": [
+      "Pooja Sharma completes 3 year(s) at Bonfiglioli today."
+    ],
+    "createdAt": "2026-06-05T05:59:21.752Z"
+  },
+  {
+    "id": "AUTO-1780639159694",
+    "action": "absence_summary",
+    "title": "Auto Absence Summary",
+    "summary": "0 checked in, 0 on leave, 57 absent",
+    "status": "completed",
+    "details": [
+      "Checked in: 0",
+      "Approved leave: 0",
+      "Absent without approved leave: 57",
+      "Aarav Sharma is absent and needs follow-up.",
+      "Diya Patel is absent and needs follow-up.",
+      "Rohan Mehta is absent and needs follow-up.",
+      "Ananya Reddy is absent and needs follow-up.",
+      "Karan Singh is absent and needs follow-up."
+    ],
+    "createdAt": "2026-06-05T05:59:19.694Z"
+  },
+  {
+    "id": "AUTO-1780639158444",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "57 employees missed check-in, 0 checked in late",
+    "status": "attention",
+    "details": [
+      "Aarav Sharma has not checked in and is not on approved leave.",
+      "Diya Patel has not checked in and is not on approved leave.",
+      "Rohan Mehta has not checked in and is not on approved leave.",
+      "Ananya Reddy has not checked in and is not on approved leave.",
+      "Karan Singh has not checked in and is not on approved leave.",
+      "Meera Nair has not checked in and is not on approved leave.",
+      "Vikram Joshi has not checked in and is not on approved leave.",
+      "Pooja Iyer has not checked in and is not on approved leave.",
+      "Arjun Verma has not checked in and is not on approved leave.",
+      "Neha Kapoor has not checked in and is not on approved leave.",
+      "Rahul Sharma has not checked in and is not on approved leave.",
+      "Sneha Reddy has not checked in and is not on approved leave.",
+      "Aditya Nair has not checked in and is not on approved leave.",
+      "Kavya Patel has not checked in and is not on approved leave.",
+      "Sai Kumar has not checked in and is not on approved leave.",
+      "Isha Mehta has not checked in and is not on approved leave.",
+      "Krishna Verma has not checked in and is not on approved leave.",
+      "Riya Singh has not checked in and is not on approved leave.",
+      "Vihaan Joshi has not checked in and is not on approved leave.",
+      "Priya Kapoor has not checked in and is not on approved leave.",
+      "Aarav Reddy has not checked in and is not on approved leave.",
+      "Diya Sharma has not checked in and is not on approved leave.",
+      "Rohan Patel has not checked in and is not on approved leave.",
+      "Ananya Singh has not checked in and is not on approved leave.",
+      "Karan Mehta has not checked in and is not on approved leave.",
+      "Meera Kapoor has not checked in and is not on approved leave.",
+      "Vikram Verma has not checked in and is not on approved leave.",
+      "Pooja Sharma has not checked in and is not on approved leave.",
+      "Arjun Patel has not checked in and is not on approved leave.",
+      "Neha Reddy has not checked in and is not on approved leave.",
+      "Rahul Singh has not checked in and is not on approved leave.",
+      "Sneha Kapoor has not checked in and is not on approved leave.",
+      "Aditya Sharma has not checked in and is not on approved leave.",
+      "Kavya Nair has not checked in and is not on approved leave.",
+      "Sai Verma has not checked in and is not on approved leave.",
+      "Isha Patel has not checked in and is not on approved leave.",
+      "Krishna Sharma has not checked in and is not on approved leave.",
+      "Riya Kapoor has not checked in and is not on approved leave.",
+      "Vihaan Mehta has not checked in and is not on approved leave.",
+      "Priya Reddy has not checked in and is not on approved leave.",
+      "Aarav Singh has not checked in and is not on approved leave.",
+      "Diya Kapoor has not checked in and is not on approved leave.",
+      "Rohan Sharma has not checked in and is not on approved leave.",
+      "Ananya Patel has not checked in and is not on approved leave.",
+      "Karan Verma has not checked in and is not on approved leave.",
+      "Meera Singh has not checked in and is not on approved leave.",
+      "Vikram Sharma has not checked in and is not on approved leave.",
+      "Pooja Kapoor has not checked in and is not on approved leave.",
+      "Arjun Singh has not checked in and is not on approved leave.",
+      "Neha Patel has not checked in and is not on approved leave.",
+      "asalm has not checked in and is not on approved leave.",
+      "Saravanan has not checked in and is not on approved leave.",
+      "Mounika has not checked in and is not on approved leave.",
+      "chandra has not checked in and is not on approved leave.",
+      "Dhanush has not checked in and is not on approved leave.",
+      "sravan has not checked in and is not on approved leave.",
+      "jyothish has not checked in and is not on approved leave."
+    ],
+    "createdAt": "2026-06-05T05:59:18.444Z"
+  },
+  {
     "id": "AUTO-1777294271028",
     "action": "exit_process",
     "title": "Exit Process Automation",

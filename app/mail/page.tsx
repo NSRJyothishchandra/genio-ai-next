@@ -185,6 +185,72 @@ export default function MailPage() {
       .join(", ");
   }
 
+  function resolveMeetingAttendees(attendees: string[]) {
+    return attendees
+      .map((entry) => resolveComposeRecipients(entry))
+      .flatMap((entry) => entry.split(","))
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+  }
+
+  function toDateTimeLocalValue(iso: string) {
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return "";
+    const offset = date.getTimezoneOffset();
+    const local = new Date(date.getTime() - offset * 60000);
+    return local.toISOString().slice(0, 16);
+  }
+
+  async function createMeetingInviteFromVoice(details: {
+    title: string;
+    attendees: string[];
+    duration: number;
+    agenda: string;
+    startDateTime: string;
+  }) {
+    const startIso = details.startDateTime;
+    const start = new Date(startIso);
+    const endIso = new Date(start.getTime() + details.duration * 60000).toISOString();
+
+    setCreatingMeeting(true);
+    try {
+      const res = await fetch("/api/mail/meeting", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject: details.title,
+          startDateTime: startIso,
+          endDateTime: endIso,
+          attendees: details.attendees,
+          agenda: details.agenda,
+        }),
+      });
+      const data = await res.json();
+      if (data?.invited) {
+        setMeetingDone(true);
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: "Meeting invite sent successfully.",
+        });
+      } else {
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: "I couldn't send the meeting invite. Please check the details.",
+        });
+      }
+    } catch {
+      requestVoiceControl({
+        channel: "global",
+        type: "speak",
+        message: "I couldn't send the meeting invite. Please try again.",
+      });
+    } finally {
+      setCreatingMeeting(false);
+    }
+  }
+
   // ── Select email & analyse ───────────────────────────────────────────────
   async function selectEmail(email: InboxEmail) {
     setSelected({ ...email, bodyHtml: "", bodyText: email.bodyPreview, contentType: "text" });
@@ -362,19 +428,41 @@ export default function MailPage() {
         handleDraft("Write a polite brief acknowledgement of receipt");
         break;
       case "schedule_meeting":
-        setMeetingDetails({
+        const resolvedAttendees = resolveMeetingAttendees(Array.isArray(p.attendees) ? p.attendees.map(String) : []);
+        const startDateTime = String(p.startDateTime || "");
+        const duration = Number(p.duration) || 60;
+        const voiceMeetingDetails = {
           title: String(p.title || ""),
-          attendees: Array.isArray(p.attendees) ? p.attendees.map(String) : [],
+          attendees: resolvedAttendees,
           preferredDates: [],
-          duration: Number(p.duration) || 60,
+          duration,
           agenda: String(p.agenda || ""),
-        });
+        };
+        setMeetingDetails(voiceMeetingDetails);
         setShowMeeting(true);
-        requestVoiceControl({
-          channel: "global",
-          type: "speak",
-          message: "Meeting draft is opened. Waiting for your confirmation.",
-        });
+        setMeetingDone(false);
+        if (startDateTime && resolvedAttendees.length) {
+          setSelectedSlot(null);
+          setManualStart(toDateTimeLocalValue(startDateTime));
+          requestVoiceControl({
+            channel: "global",
+            type: "speak",
+            message: "Creating the meeting invite now.",
+          });
+          void createMeetingInviteFromVoice({
+            title: voiceMeetingDetails.title || "Meeting",
+            attendees: resolvedAttendees,
+            duration,
+            agenda: voiceMeetingDetails.agenda,
+            startDateTime,
+          });
+        } else {
+          requestVoiceControl({
+            channel: "global",
+            type: "speak",
+            message: "Meeting draft is opened. Waiting for your confirmation.",
+          });
+        }
         break;
       case "refresh_inbox":
         fetchInbox();

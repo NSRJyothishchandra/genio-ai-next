@@ -83,5 +83,21 @@
     "adminDecisionAt": null,
     "createdAt": "2026-05-06T09:54:58.043Z",
     "updatedAt": "2026-05-06T09:54:58.043Z"
+  },
+  {
+    "id": "REQ-1780858508269",
+    "employeeId": "EMP998",
+    "employeeName": "Voice Test",
+    "employeeEmail": "voice.test@example.com",
+    "kind": "other",
+    "title": "Need laptop stand",
+    "reason": "Demo request for QA",
+    "startDate": null,
+    "endDate": null,
+    "status": "pending_manager",
+    "managerDecisionAt": null,
+    "adminDecisionAt": null,
+    "createdAt": "2026-06-07T18:55:08.269Z",
+    "updatedAt": "2026-06-07T18:55:08.269Z"
   }
 ]

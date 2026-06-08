@@ -36,6 +36,18 @@
   ],
   "expenses": [
     {
+      "id": "EXP-1780858508295",
+      "employeeId": "EMP998",
+      "employeeName": "Voice Test",
+      "department": "Analyst",
+      "amount": 2500,
+      "currency": "INR",
+      "submittedAt": "2026-06-07T18:55:08.295Z",
+      "type": "Travel",
+      "status": "pending",
+      "notes": "Taxi reimbursement"
+    },
+    {
       "id": "EXP-1778061208039",
       "employeeId": "EMP442668",
       "employeeName": "jyothish",

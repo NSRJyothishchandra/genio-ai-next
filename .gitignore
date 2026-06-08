@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python build artifacts
+__pycache__/
+*.pyc
+
+# local dev logs and scratch files
+dev-*.log
+dev-output.log
+tmp-*
+/.claude/
+
+# generated runtime outputs
+/public/cad-reports/
+/public/document-diffs/
+/data/cad-reports/
+/data/document-comparisons/

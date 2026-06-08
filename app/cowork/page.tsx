@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import VoiceButton, { requestVoiceControl, type VoiceAction } from "@/app/components/VoiceButton";
 import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
@@ -223,8 +223,9 @@ const CLI_AGENT_FLOW = [
   "Review the visible terminal and the streamed execution log here",
 ];
 
-export default function CoworkPage() {
+function CoworkPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [workspaceTab, setWorkspaceTab] = useState<WorkspaceTab>("cli");
   // When opened with ?workspace=cli/desktop/browser/blender, lock to that agent
   // and hide the tab switcher so the page is focused on just that agent.
@@ -277,6 +278,7 @@ export default function CoworkPage() {
       const params = new URLSearchParams();
       params.set("workspace", next);
       params.set("target", next === "blender" ? "blender" : next);
+      params.set("source", "cowork");
       if (view) params.set("view", view);
       router.replace(`/cowork?${params.toString()}`, { scroll: false });
     }
@@ -334,31 +336,30 @@ export default function CoworkPage() {
   }, [refreshStatus]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const workspace = params.get("workspace");
-    const requestedTarget = params.get("target");
+    const workspace = searchParams.get("workspace");
+    const requestedTarget = searchParams.get("target");
+    const source = searchParams.get("source");
 
-    if (
-      workspace === "cli" ||
-      workspace === "desktop" ||
-      workspace === "browser" ||
-      workspace === "blender"
-    ) {
-      setLockedWorkspace(workspace);
-      activateWorkspace(workspace, false);
+    const nextWorkspace =
+      workspace === "cli" || workspace === "desktop" || workspace === "browser" || workspace === "blender"
+        ? workspace
+        : requestedTarget === "cli" || requestedTarget === "desktop" || requestedTarget === "browser" || requestedTarget === "blender"
+          ? requestedTarget
+          : null;
+
+    if (nextWorkspace) {
+      setLockedWorkspace(source === "cowork" ? "" : nextWorkspace);
+      if (workspaceTab !== nextWorkspace) {
+        activateWorkspace(nextWorkspace, false);
+      }
       return;
     }
 
-    if (requestedTarget === "cli" || requestedTarget === "desktop" || requestedTarget === "browser" || requestedTarget === "blender") {
-      setLockedWorkspace(requestedTarget);
-      activateWorkspace(requestedTarget, false);
-      return;
-    }
-
+    setLockedWorkspace("");
     if (requestedTarget === "all") {
       setTarget("all");
     }
-  }, []);
+  }, [searchParams, workspaceTab]);
 
   useEffect(() => {
     outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight, behavior: "smooth" });
@@ -727,9 +728,13 @@ export default function CoworkPage() {
     }
     if (action.action === "run_command") {
       const cmd = String(action.params.command ?? "").trim();
+      const explicitTarget =
+        action.params.target === "cli" || action.params.target === "desktop" || action.params.target === "browser" || action.params.target === "blender"
+          ? action.params.target as "cli" | "desktop" | "browser" | "blender"
+          : null;
       if (cmd) {
         voiceRunRef.current = true;
-        void send(activeTarget as "cli" | "desktop" | "browser" | "blender", cmd);
+        void send((explicitTarget ?? activeTarget) as "cli" | "desktop" | "browser" | "blender", cmd);
       }
     }
   }
@@ -1679,5 +1684,13 @@ export default function CoworkPage() {
 
       <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }`}</style>
     </>
+  );
+}
+
+export default function CoworkPage() {
+  return (
+    <Suspense fallback={<div className="page-content" style={{ padding: 24 }}>Loading cowork workspace...</div>}>
+      <CoworkPageContent />
+    </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
+import { requestVoiceControl } from "@/app/components/VoiceButton";
 import { useVoiceCommand } from "@/app/hooks/useVoiceCommand";
 
 interface Employee {
@@ -165,6 +166,44 @@ export default function EmployeesPage() {
     toastTimer.current = setTimeout(() => setToast(null), 3000);
   }
 
+  async function createEmployeeFromVoice(payload: Record<string, unknown>) {
+    const fd = new FormData();
+    for (const field of ["id", "name", "dob", "gender", "email", "phone", "position", "dateOfJoining", "address"]) {
+      const value = String(payload[field] ?? "").trim();
+      if (value) fd.append(field, value);
+    }
+
+    try {
+      const res = await fetch("/api/employees", { method: "POST", body: fd });
+      const data = await res.json();
+      if (!res.ok) {
+        requestVoiceControl({
+          channel: "global",
+          type: "speak",
+          message: data.error ?? "I couldn't create the employee.",
+        });
+        if (data.error) setFormError(data.error);
+        return;
+      }
+
+      setShowAddForm(false);
+      resetAddForm();
+      loadEmployees();
+      showToast(`${data.employee.name} added successfully`);
+      requestVoiceControl({
+        channel: "global",
+        type: "speak",
+        message: `${data.employee.name} was added successfully.`,
+      });
+    } catch {
+      requestVoiceControl({
+        channel: "global",
+        type: "speak",
+        message: "I couldn't create the employee right now.",
+      });
+    }
+  }
+
   function loadEmployees() {
     setLoading(true);
     const params = new URLSearchParams();
@@ -193,6 +232,22 @@ export default function EmployeesPage() {
         break;
       case "add_employee":
         setShowAddForm(true);
+        break;
+      case "create_employee":
+        setShowAddForm(true);
+        setForm((previous) => ({
+          ...previous,
+          id: String(p.id ?? previous.id ?? ""),
+          name: String(p.name ?? previous.name ?? ""),
+          dob: String(p.dob ?? previous.dob ?? ""),
+          gender: String(p.gender ?? previous.gender ?? "Male"),
+          email: String(p.email ?? previous.email ?? ""),
+          phone: String(p.phone ?? previous.phone ?? ""),
+          position: String(p.position ?? previous.position ?? ""),
+          dateOfJoining: String(p.dateOfJoining ?? previous.dateOfJoining ?? ""),
+          address: String(p.address ?? previous.address ?? ""),
+        }));
+        void createEmployeeFromVoice(p as Record<string, unknown>);
         break;
       case "clear_filter":
         setSearch("");

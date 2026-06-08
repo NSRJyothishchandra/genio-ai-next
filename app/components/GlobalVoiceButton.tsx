@@ -108,6 +108,16 @@ function writePendingTask(task: VoiceNavigationTask) {
   window.sessionStorage.setItem(VOICE_NAV_TASK_KEY, JSON.stringify(task));
 }
 
+function normalizeVoiceHref(href: string): string {
+  if (!href.startsWith("/")) return href;
+  const [pathname, query = ""] = href.split("?", 2);
+  const params = new URLSearchParams(query);
+  params.delete("source");
+  const entries = Array.from(params.entries()).sort(([left], [right]) => left.localeCompare(right));
+  const normalizedQuery = new URLSearchParams(entries).toString();
+  return normalizedQuery ? `${pathname}?${normalizedQuery}` : pathname;
+}
+
 export default function GlobalVoiceButton() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -120,7 +130,7 @@ export default function GlobalVoiceButton() {
 
   useEffect(() => {
     const task = readPendingTask();
-    if (!task || task.path !== currentHref) return;
+    if (!task || normalizeVoiceHref(task.path) !== normalizeVoiceHref(currentHref)) return;
 
     window.sessionStorage.removeItem(VOICE_NAV_TASK_KEY);
 
@@ -168,6 +178,33 @@ export default function GlobalVoiceButton() {
             params: record.params as Record<string, unknown>,
           } satisfies VoiceAction;
         })();
+
+        if (normalizeVoiceHref(mapped) === normalizeVoiceHref(currentHref)) {
+          if (followupAction) {
+            if (prompt) {
+              requestVoiceControl({
+                channel: "global",
+                type: "speak",
+                message: prompt,
+              });
+            }
+            window.setTimeout(() => {
+              dispatchVoiceAction(followupAction);
+            }, prompt ? 1200 : 0);
+            return;
+          }
+
+          if (prompt) {
+            requestVoiceControl({
+              channel: "global",
+              type: "speak_and_listen",
+              message: prompt,
+              silenceMs: 5000,
+              maxDurationMs: 60000,
+            });
+            return;
+          }
+        }
 
         writePendingTask({
           path: mapped,

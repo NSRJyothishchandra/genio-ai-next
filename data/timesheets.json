@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399125",
+    "description": "Development",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399144-2qo3x"
+  },
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399154",
+    "description": "AI Assistant",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399169-l3lmd"
+  },
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399178",
+    "description": "Browsing",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399193-q411p"
+  },
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399203",
+    "description": "Other",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399220-iwxwa"
+  },
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399230",
+    "description": "Terminal",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399244-vb0lk"
+  },
+  {
+    "employeeId": "SELF",
+    "employeeName": "Me",
+    "taskNo": "AUTO-1780639399253",
+    "description": "Communication",
+    "status": "Completed",
+    "estimatedHours": 0,
+    "actualHours": 0,
+    "date": "2026-06-05",
+    "month": "June",
+    "year": 2026,
+    "id": "TS-1780639399269-gfenb"
+  }
+]
