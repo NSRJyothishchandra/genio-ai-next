@@ -1,0 +1,28 @@
+[
+  {
+    "id": "CAL-1781065808771-v8gqkz",
+    "title": "Meeting",
+    "date": "2026-06-10",
+    "startDateTime": "2026-06-10T11:30:00.000Z",
+    "endDateTime": "2026-06-10T12:00:00.000Z",
+    "attendees": [
+      "dhanushdk2026@gmail.com"
+    ],
+    "agenda": "Schedule a meeting with Dhanush at 5:00 PM.",
+    "source": "voice",
+    "createdAt": "2026-06-10T04:30:08.771Z"
+  },
+  {
+    "id": "CAL-1781066977461-ts2lfx",
+    "title": "Meeting",
+    "date": "2026-06-10",
+    "startDateTime": "2026-06-10T15:30:00.000Z",
+    "endDateTime": "2026-06-10T16:00:00.000Z",
+    "attendees": [
+      "dhanushdk2026@gmail.com"
+    ],
+    "agenda": "Schedule a meeting with Dhanush today, 9:00 PM. If.",
+    "source": "voice",
+    "createdAt": "2026-06-10T04:49:37.462Z"
+  }
+]

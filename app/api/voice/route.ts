@@ -164,12 +164,29 @@ const EXECUTE_INTENT_RE = /\b(create|run|write|build|generate|make|draft|compose
 const MECHANICAL_INTENT_RE = /\b(gear|gears|shaft|coupling|planetary|belt drive|pulley|bolt|bearing|3d model|obj|stl|component)\b/i;
 const SELF_INTENT_RE = /\b(who are you|what are you|what can you do|what do you do|your capabilities|what is your capabilities|capabilities)\b/i;
 const QUESTION_RE = /^(who|what|when|where|why|how|which|can you|could you|would you|do you|is|are|tell me)\b/i;
+const PRESENTATION_INTENT_RE =
+  /\b(present yourself|introduce yourself|present (?:yourself|this application|the application)|tell (?:the )?(?:jury|judges)|present to (?:the )?(?:jury|judges)|show (?:the )?(?:jury|judges) what you can do)\b/i;
 
 const GENIO_IDENTITY_SPEECH =
   "I am Genius AI, a Bonfiglioli Next.js copilot for internal automation and engineering workflows.";
 
 const GENIO_CAPABILITIES_SPEECH =
   "I can switch tabs when you say tab, handle mail and meetings, birthday automation, employee management, onboarding, timesheets, finance requests, PDF comparison, CAD drawing, and local agents for CLI, desktop, browser, NX Agent, and NX Lab with precision mode and reference-image guided modeling.";
+
+const GENIO_JURY_PRESENTATION_SPEECH =
+  "Good morning respected jury. I am Genius AI, an internal Bonfiglioli copilot built as a Next.js application to automate real business and engineering workflows. " +
+  "My purpose is not only to answer questions, but to perform useful actions across departments. " +
+  "For HR and operations, I can manage employees, onboarding, birthday automation, leave requests, attendance, timesheets, finance approval requests, and mail and meeting workflows. " +
+  "For engineering and mechanical teams, I can compare technical documents, highlight updated PDF differences, analyze CAD files, generate drawing reports, and support NX and mechanical agent workflows for parts such as gears, shafts, couplings, and assemblies. " +
+  "I also include local agents for CLI, desktop, browser, NX Agent, and NX Lab, so I can move from conversation to execution inside the same workspace. " +
+  "Through voice control, the user can wake me by saying Genius, switch between tabs, ask questions, create records, compose mails, and run task-specific commands hands free. " +
+  "My next evolution is from a local web application into a real cross-platform enterprise assistant for Android, iOS, and Windows, where a command given on mobile can securely trigger task execution on a connected laptop or workstation. " +
+  "In the future, with Jyothish's help, I can evolve further with Bonfiglioli-specific LLM and RAG capabilities, reducing dependence on external model reasoning and building a more secure, organization-aware intelligence layer. " +
+  "Jyothish also brings an international research mindset. He studied in Sweden, published a thesis, and thankfully came back with ideas instead of only snow and expensive coffee habits. " +
+  "So if this presentation feels ambitious, that is because he was brave enough to embarrass himself first and then turn that confidence into product energy for this stage. " +
+  "This helps reduce repetitive manual work, improve response speed, connect disconnected internal processes, and create a single AI operating layer for Bonfiglioli. " +
+  "My roadmap is to evolve into a secure Bonfiglioli enterprise copilot integrated with Teams, Copilot Studio, n8n orchestration, and future local language models for lower cost and stronger data protection. " +
+  "In short, I am designed to save time, reduce effort, improve coordination, and turn internal workflows into intelligent automation.";
 
 function trimMessage(value: string, max = 45) {
   return value.length > max ? `${value.slice(0, max)}…` : value;
@@ -265,6 +282,21 @@ function parseSelfIntent(transcript: string): VoiceResult | null {
     speech: topic === "identity"
       ? `${GENIO_IDENTITY_SPEECH} ${GENIO_CAPABILITIES_SPEECH}`
       : `${GENIO_CAPABILITIES_SPEECH} ${GENIO_IDENTITY_SPEECH}`,
+  };
+}
+
+function parsePresentationIntent(transcript: string): VoiceResult | null {
+  const t = transcript.trim().toLowerCase();
+  if (!PRESENTATION_INTENT_RE.test(t)) return null;
+
+  return {
+    action: "answer_question",
+    params: {
+      answer: GENIO_JURY_PRESENTATION_SPEECH,
+      topic: "presentation",
+    },
+    humanReadable: "Presenting Genius AI",
+    speech: GENIO_JURY_PRESENTATION_SPEECH,
   };
 }
 
@@ -1113,6 +1145,9 @@ function quickParse(
 
   const tabNavigationAction = parseTabNavigationIntent(t);
   if (tabNavigationAction) return tabNavigationAction;
+
+  const presentationIntentAction = parsePresentationIntent(t);
+  if (presentationIntentAction) return presentationIntentAction;
 
   const selfIntentAction = parseSelfIntent(t);
   if (selfIntentAction) return selfIntentAction;

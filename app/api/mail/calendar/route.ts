@@ -1,12 +1,46 @@
 import { NextResponse } from "next/server";
+import { createCalendarNote, listCalendarNotes } from "@/lib/mail-calendar";
 
 // Returns pre-generated free business-hour slots for the next 7 days.
 // No external calendar API needed — use the manual picker or upgrade to
 // MS Graph / Google Calendar when those integrations are configured.
 
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const month = searchParams.get("month") || undefined;
+    const notes = listCalendarNotes(month);
+    return NextResponse.json({ notes });
+  } catch (e) {
+    return NextResponse.json({ error: String(e) }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
   try {
-    const { startTime, endTime, duration = 60 } = await request.json();
+    const body = await request.json();
+
+    if (body.action === "create_note") {
+      if (!body.title) {
+        return NextResponse.json({ error: "title is required" }, { status: 400 });
+      }
+      const note = createCalendarNote({
+        title: body.title,
+        date: body.date,
+        startDateTime: body.startDateTime,
+        endDateTime: body.endDateTime,
+        attendees: body.attendees,
+        agenda: body.agenda,
+        meetingUrl: body.meetingUrl,
+        source: body.source,
+      });
+      return NextResponse.json({
+        note,
+        notes: listCalendarNotes(note.date.slice(0, 7)),
+      });
+    }
+
+    const { startTime, endTime, duration = 60 } = body;
 
     const start = startTime ? new Date(startTime) : new Date();
     const end = endTime ? new Date(endTime) : new Date(start.getTime() + 7 * 86400000);

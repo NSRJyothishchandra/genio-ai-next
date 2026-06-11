@@ -157,7 +157,7 @@ const TARGET_INFO = {
   },
   desktop: {
     label: "Desktop Agent",
-    desc: "Uses Claude planning plus local Windows automation for desktop apps",
+    desc: "Routes desktop-style tasks through the Python Claude bridge and Claude CLI",
   },
   browser: {
     label: "Browser Agent",
@@ -187,9 +187,9 @@ const AGENT_WORKSPACE_CONFIG = {
   },
   desktop: {
     title: "Desktop Agent",
-    subtitle: "Windows desktop actions for local applications such as Claude Desktop, Amazon Music, Notepad, and more.",
+    subtitle: "Desktop-oriented task execution through the Python Claude bridge and Claude CLI.",
     description:
-      "Use this when the task has to happen inside a local desktop app instead of a browser. Include the app name and the exact task you want completed.",
+      "Use this when the task should be interpreted as a desktop or local-machine workflow. The prompt is routed through the Python bridge into Claude CLI with desktop-agent instructions.",
     placeholder:
       "Describe the desktop task...\n\nExamples:\n- Play Ghost from Amazon Music\n- Open Notepad and write a project summary\n- Send this prompt into Claude Desktop: summarize the onboarding flow",
     prompts: DESKTOP_PROMPTS,
@@ -211,7 +211,7 @@ const AGENT_WORKSPACE_CONFIG = {
 
 const CLI_AGENT_CAPABILITIES = [
   "Opens a visible PowerShell window on the local machine",
-  "Runs the exact prompt through Claude CLI with claude -p",
+  "Runs the exact prompt through the Python Claude bridge into Claude CLI",
   "Uses the selected local folder as the working directory",
   "Best for coding, file generation, debugging, and local reviews",
 ];

@@ -51,6 +51,19 @@ interface EmployeeLookup {
   email: string;
 }
 
+interface CalendarNote {
+  id: string;
+  title: string;
+  date: string;
+  startDateTime?: string;
+  endDateTime?: string;
+  attendees: string[];
+  agenda: string;
+  meetingUrl?: string;
+  source: "manual" | "voice" | "invite";
+  createdAt: string;
+}
+
 function fmtDate(iso: string) {
   const d = new Date(iso);
   const now = new Date();
@@ -101,6 +114,10 @@ export default function MailPage() {
   const [composing, setComposing] = useState(false);
   const [composeOk, setComposeOk] = useState(false);
   const [employeeDirectory, setEmployeeDirectory] = useState<EmployeeLookup[]>([]);
+  const [calendarNotes, setCalendarNotes] = useState<CalendarNote[]>([]);
+  const [calendarLoading, setCalendarLoading] = useState(false);
+  const [calendarMonth, setCalendarMonth] = useState(() => new Date().toISOString().slice(0, 7));
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState(() => new Date().toISOString().slice(0, 10));
 
   // ── Fetch inbox ──────────────────────────────────────────────────────────
   const fetchInbox = useCallback(async () => {
@@ -145,6 +162,10 @@ export default function MailPage() {
       })
       .catch(() => null);
   }, []);
+
+  useEffect(() => {
+    void loadCalendar(calendarMonth);
+  }, [calendarMonth]);
 
   function normalizeEmployeeName(value: string) {
     return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\b(the|employee)\b/g, " ").replace(/\s+/g, " ").trim();
@@ -201,6 +222,59 @@ export default function MailPage() {
     return local.toISOString().slice(0, 16);
   }
 
+  function shiftCalendarMonth(offset: number) {
+    const [year, month] = calendarMonth.split("-").map(Number);
+    const next = new Date(year, month - 1 + offset, 1);
+    setCalendarMonth(`${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}`);
+  }
+
+  async function loadCalendar(month = calendarMonth) {
+    setCalendarLoading(true);
+    try {
+      const res = await fetch(`/api/mail/calendar?month=${month}`);
+      const data = await res.json();
+      setCalendarNotes(Array.isArray(data.notes) ? data.notes : []);
+    } catch {
+      setCalendarNotes([]);
+    } finally {
+      setCalendarLoading(false);
+    }
+  }
+
+  async function createCalendarNoteEntry(details: {
+    title: string;
+    startDateTime: string;
+    endDateTime: string;
+    attendees: string[];
+    agenda: string;
+    meetingUrl?: string;
+    source: "manual" | "voice" | "invite";
+  }) {
+    try {
+      const res = await fetch("/api/mail/calendar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "create_note",
+          title: details.title,
+          startDateTime: details.startDateTime,
+          endDateTime: details.endDateTime,
+          attendees: details.attendees,
+          agenda: details.agenda,
+          meetingUrl: details.meetingUrl,
+          source: details.source,
+        }),
+      });
+      const data = await res.json();
+      if (Array.isArray(data.notes)) {
+        setCalendarNotes(data.notes);
+      } else {
+        await loadCalendar((details.startDateTime || "").slice(0, 7) || calendarMonth);
+      }
+      setSelectedCalendarDate((details.startDateTime || "").slice(0, 10));
+    } catch {}
+  }
+
   async function createMeetingInviteFromVoice(details: {
     title: string;
     attendees: string[];
@@ -228,6 +302,14 @@ export default function MailPage() {
       const data = await res.json();
       if (data?.invited) {
         setMeetingDone(true);
+        await createCalendarNoteEntry({
+          title: details.title,
+          startDateTime: startIso,
+          endDateTime: endIso,
+          attendees: details.attendees,
+          agenda: details.agenda,
+          source: "voice",
+        });
         requestVoiceControl({
           channel: "global",
           type: "speak",
@@ -393,7 +475,18 @@ export default function MailPage() {
           meetingUrl: meetingUrl || undefined,
         }),
       });
-      if ((await res.json()).invited) setMeetingDone(true);
+      if ((await res.json()).invited) {
+        setMeetingDone(true);
+        await createCalendarNoteEntry({
+          title: meetingDetails.title,
+          startDateTime: startIso,
+          endDateTime: endIso,
+          attendees: meetingDetails.attendees,
+          agenda: meetingDetails.agenda,
+          meetingUrl: meetingUrl || undefined,
+          source: "invite",
+        });
+      }
     } catch {}
     setCreatingMeeting(false);
   }
@@ -507,6 +600,28 @@ export default function MailPage() {
     if (filter === "meetings") return /meet|schedul|call|standup|sync/i.test(e.subject);
     return true;
   });
+  const selectedDayNotes = calendarNotes.filter((note) => note.date === selectedCalendarDate);
+  const monthTitle = new Date(`${calendarMonth}-01`).toLocaleDateString("en-IN", {
+    month: "long",
+    year: "numeric",
+  });
+  const monthStart = new Date(`${calendarMonth}-01T00:00:00`);
+  const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
+  const startPadding = (monthStart.getDay() + 6) % 7;
+  const calendarCells: Array<{ date: string; day: number; inMonth: boolean }> = [];
+  for (let index = 0; index < startPadding; index++) {
+    const date = new Date(monthStart);
+    date.setDate(date.getDate() - (startPadding - index));
+    calendarCells.push({ date: date.toISOString().slice(0, 10), day: date.getDate(), inMonth: false });
+  }
+  for (let day = 1; day <= monthEnd.getDate(); day++) {
+    calendarCells.push({ date: `${calendarMonth}-${String(day).padStart(2, "0")}`, day, inMonth: true });
+  }
+  while (calendarCells.length % 7 !== 0) {
+    const date = new Date(monthEnd);
+    date.setDate(date.getDate() + (calendarCells.length % 7));
+    calendarCells.push({ date: date.toISOString().slice(0, 10), day: date.getDate(), inMonth: false });
+  }
 
   // ── Not configured ───────────────────────────────────────────────────────
   if (!configured) {
@@ -577,6 +692,109 @@ OUTLOOK_SMTP_PASS=your-password`}
             {f === "all" ? `All (${emails.length})` : f === "unread" ? `Unread (${emails.filter((e) => !e.isRead).length})` : "Meetings"}
           </button>
         ))}
+      </div>
+
+      <div style={{ padding: 16, borderBottom: "1px solid var(--border)", background: "var(--bg-secondary)", flexShrink: 0 }}>
+        <div className="card">
+          <div className="card-header">
+            <div>
+              <div className="card-title">Calendar Notes</div>
+              <div className="card-subtitle">Outlook-style meeting notes created from invites and voice commands</div>
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <button className="btn btn-outline btn-sm" onClick={() => shiftCalendarMonth(-1)}>Prev</button>
+              <strong style={{ minWidth: 160, textAlign: "center" }}>{monthTitle}</strong>
+              <button className="btn btn-outline btn-sm" onClick={() => shiftCalendarMonth(1)}>Next</button>
+            </div>
+          </div>
+          <div className="card-body" style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 16 }}>
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(7, minmax(0, 1fr))", gap: 8, marginBottom: 8 }}>
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+                  <div
+                    key={day}
+                    style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", textAlign: "center" }}
+                  >
+                    {day}
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(7, minmax(0, 1fr))", gap: 8 }}>
+                {calendarCells.map((cell) => {
+                  const noteCount = calendarNotes.filter((note) => note.date === cell.date).length;
+                  const selectedCell = selectedCalendarDate === cell.date;
+                  return (
+                    <button
+                      key={cell.date}
+                      onClick={() => setSelectedCalendarDate(cell.date)}
+                      style={{
+                        border: selectedCell ? "1px solid var(--primary)" : "1px solid var(--border)",
+                        background: selectedCell ? "var(--primary-light)" : "var(--card)",
+                        borderRadius: 12,
+                        minHeight: 68,
+                        padding: 8,
+                        cursor: "pointer",
+                        textAlign: "left",
+                        opacity: cell.inMonth ? 1 : 0.45,
+                      }}
+                    >
+                      <div style={{ fontSize: 13, fontWeight: 700 }}>{cell.day}</div>
+                      {noteCount > 0 ? (
+                        <div style={{ fontSize: 11, color: "var(--primary)", marginTop: 6 }}>
+                          {noteCount} note{noteCount > 1 ? "s" : ""}
+                        </div>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <div style={{ border: "1px solid var(--border)", borderRadius: 14, padding: 14, minHeight: 260 }}>
+              <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 6 }}>
+                {new Date(`${selectedCalendarDate}T00:00:00`).toLocaleDateString("en-IN", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </div>
+              {calendarLoading ? (
+                <div style={{ display: "flex", gap: 8, alignItems: "center", color: "var(--text-muted)", fontSize: 13 }}>
+                  <span className="spinner spinner-dark" /> Loading calendar...
+                </div>
+              ) : selectedDayNotes.length === 0 ? (
+                <div style={{ fontSize: 13, color: "var(--text-muted)" }}>No meeting notes for this date.</div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {selectedDayNotes.map((note) => (
+                    <div
+                      key={note.id}
+                      style={{ border: "1px solid var(--border)", borderRadius: 12, padding: 12, background: "var(--card)" }}
+                    >
+                      <div style={{ fontWeight: 700, fontSize: 13 }}>{note.title}</div>
+                      {note.startDateTime ? (
+                        <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>
+                          {new Date(note.startDateTime).toLocaleTimeString("en-IN", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })} IST
+                        </div>
+                      ) : null}
+                      {note.attendees.length > 0 ? (
+                        <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>
+                          {note.attendees.join(", ")}
+                        </div>
+                      ) : null}
+                      {note.agenda ? (
+                        <div style={{ fontSize: 12, marginTop: 6 }}>{note.agenda}</div>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Split pane */}

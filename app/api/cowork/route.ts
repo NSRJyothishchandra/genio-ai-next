@@ -27,6 +27,11 @@ const BLENDER_PATHS = [
 const BLENDER_OUTPUT_DIR = "C:\\Users\\Projecta0003\\Downloads\\blender-output";
 const TRELLIS_SPACE_URL = "https://prithivmlmods-trellis-2-text-to-3d.hf.space";
 const FROGLEO_SPACE_URL = "https://frogleo-image-to-3d.hf.space";
+const CLAUDE_BRIDGE_SCRIPT_PATH = path.join(process.cwd(), "scripts", "claude_agent_bridge.py");
+const PYTHON_CANDIDATES = [
+  "C:\\Users\\Projecta0003\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "python",
+];
 const anthropic = process.env.ANTHROPIC_API_KEY
   ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   : null;
@@ -62,6 +67,14 @@ function resolveBlenderExecutable() {
     if (fs.existsSync(candidate)) return candidate;
   }
   return null;
+}
+
+function resolvePythonExecutable() {
+  for (const candidate of PYTHON_CANDIDATES) {
+    if (candidate === "python") return candidate;
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return "python";
 }
 
 function ensureBlenderOutputDir() {
@@ -1337,13 +1350,29 @@ export async function DELETE(request: NextRequest) {
   return Response.json({ killed: false, message: "Process not found" }, { status: 404 });
 }
 
-function streamClaudeCli(prompt: string, workdir: string | undefined, sessionId: string, send: (data: object) => void) {
+function streamClaudeAgentBridge(
+  prompt: string,
+  workdir: string | undefined,
+  sessionId: string,
+  send: (data: object) => void,
+  target: "cli" | "desktop"
+) {
+  const python = resolvePythonExecutable();
+  const resolvedWorkdir = workdir && workdir.trim() ? workdir.trim() : process.cwd();
   const child = spawn(
-    "claude",
-    ["-p", "--output-format", "stream-json", "--verbose", prompt],
+    python,
+    [
+      CLAUDE_BRIDGE_SCRIPT_PATH,
+      "--prompt",
+      prompt,
+      "--workdir",
+      resolvedWorkdir,
+      "--target",
+      target,
+    ],
     {
-      cwd: workdir && workdir.trim() ? workdir.trim() : process.cwd(),
-      shell: true,
+      cwd: process.cwd(),
+      shell: python === "python",
       windowsHide: true,
       env: { ...process.env },
     }
@@ -1381,6 +1410,62 @@ function streamClaudeCli(prompt: string, workdir: string | undefined, sessionId:
         } else {
           send({ type: "data", payload: parsed });
         }
+      } catch {
+        send({ type: "text", text: trimmed });
+      }
+    }
+  });
+
+  child.stderr.on("data", (data: Buffer) => {
+    const text = data.toString().trim();
+    if (text) send({ type: "stderr", text });
+  });
+
+  return child;
+}
+
+function streamClaudeBridgeProcess(
+  prompt: string,
+  workdir: string | undefined,
+  sessionId: string,
+  send: (data: object) => void,
+  target: "cli" | "desktop"
+) {
+  const python = resolvePythonExecutable();
+  const resolvedWorkdir = workdir && workdir.trim() ? workdir.trim() : process.cwd();
+  const child = spawn(
+    python,
+    [
+      CLAUDE_BRIDGE_SCRIPT_PATH,
+      "--prompt",
+      prompt,
+      "--workdir",
+      resolvedWorkdir,
+      "--target",
+      target,
+    ],
+    {
+      cwd: process.cwd(),
+      shell: python === "python",
+      windowsHide: true,
+      env: { ...process.env },
+    }
+  );
+
+  runningProcesses.set(sessionId, child);
+  let buffer = "";
+
+  child.stdout.on("data", (data: Buffer) => {
+    buffer += data.toString();
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      try {
+        send(JSON.parse(trimmed));
       } catch {
         send({ type: "text", text: trimmed });
       }
@@ -1685,7 +1770,7 @@ export async function PUT(request: NextRequest) {
         return;
       }
 
-      if (target === "cli") {
+      if (target === "cli" || target === "desktop") {
         const cliLogPath = path.join(os.tmpdir(), `${sessionId}.log`);
         const logAndSend = (data: Record<string, unknown>) => {
           send(data);
@@ -1699,21 +1784,24 @@ export async function PUT(request: NextRequest) {
           if (!checkCliAvailable()) {
             throw new Error("Claude CLI is not available in PATH on this machine.");
           }
+          if (!fs.existsSync(CLAUDE_BRIDGE_SCRIPT_PATH)) {
+            throw new Error("Claude bridge script is missing from scripts/claude_agent_bridge.py.");
+          }
 
           fs.writeFileSync(cliLogPath, "", "utf8");
           const launched = launchVisibleClaudeTerminal(cliLogPath, workdir);
-          logAndSend({ type: "info", text: "Opened a visible PowerShell window for CLI Agent." });
+          logAndSend({ type: "info", text: `Opened a visible PowerShell window for ${target === "desktop" ? "Desktop Agent" : "CLI Agent"}.` });
           logAndSend({ type: "text", text: `Workdir: ${launched.workdir}` });
           logAndSend({ type: "text", text: `Prompt sent exactly: ${prompt}` });
-          logAndSend({ type: "info", text: "Running Claude CLI now and streaming the real output..." });
+          logAndSend({ type: "info", text: `Running Claude CLI through the Python bridge for ${target} and streaming the real output...` });
 
-          const child = streamClaudeCli(prompt, workdir, sessionId, (line) => {
+          const child = streamClaudeBridgeProcess(prompt, workdir, sessionId, (line) => {
             logAndSend(line as Record<string, unknown>);
-          });
+          }, target);
 
           child.on("close", (code) => {
             runningProcesses.delete(sessionId);
-            logAndSend({ type: "done", exitCode: code, sessionId });
+            logAndSend({ type: "info", text: `Bridge process closed with exit code ${code ?? 0}` });
             try {
               controller.close();
             } catch {}
@@ -1735,7 +1823,7 @@ export async function PUT(request: NextRequest) {
       send({ type: "info", text: `🧠 Automation plan (${plan.planner}): ${describePlan(plan)}` });
 
       try {
-        if ((target === "desktop" || target === "all") && plan.desktop) {
+        if (target === "all" && plan.desktop) {
           await executeDesktopAutomation(plan.desktop, (line) => send(line));
         }
 
@@ -1745,11 +1833,11 @@ export async function PUT(request: NextRequest) {
 
         if (target === "all") {
           send({ type: "info", text: "💻 Running the full Claude CLI after desktop/browser execution" });
-          const child = streamClaudeCli(prompt, workdir, sessionId, send);
+          const child = streamClaudeBridgeProcess(prompt, workdir, sessionId, send, "cli");
 
           child.on("close", (code) => {
             runningProcesses.delete(sessionId);
-            send({ type: "done", exitCode: code, sessionId });
+            send({ type: "info", text: `Bridge process closed with exit code ${code ?? 0}` });
             try {
               controller.close();
             } catch {}

@@ -1,5 +1,27 @@
 [
   {
+    "id": "AUTO-1781094500269",
+    "action": "work_anniversary",
+    "title": "Work Anniversary Automation",
+    "summary": "No work anniversaries today",
+    "status": "completed",
+    "details": [
+      "No anniversary wishes required today."
+    ],
+    "createdAt": "2026-06-10T12:28:20.269Z"
+  },
+  {
+    "id": "AUTO-1781094477474",
+    "action": "missed_checkin_followup",
+    "title": "Missed Check-In Follow-up",
+    "summary": "All employees are checked in on time today",
+    "status": "completed",
+    "details": [
+      "No follow-up required today."
+    ],
+    "createdAt": "2026-06-10T12:27:57.474Z"
+  },
+  {
     "id": "AUTO-1780639170377",
     "action": "probation_reminder",
     "title": "Probation Reminder",
